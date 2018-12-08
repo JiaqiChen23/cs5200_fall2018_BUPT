@@ -2,11 +2,14 @@ package edu.northeastern.cs5200.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Boss extends Person{
@@ -15,6 +18,7 @@ public class Boss extends Person{
 	   (strategy=GenerationType.IDENTITY)
 	private int id;
 	private String name;
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Team team;
 	@OneToMany(mappedBy="boss")
 	private List<Report> ReportCollection;
