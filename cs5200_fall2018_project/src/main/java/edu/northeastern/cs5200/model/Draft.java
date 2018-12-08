@@ -58,9 +58,12 @@ public class Draft {
 		this.order = order;
 	}
 
-	public Draft(int id, String name, String description, Date created, Date updated, int visits) {
+	public Draft(int id, String name, Team team, String year, int order) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.team = team;
+		this.year = year;
+		this.order = order;
 	}
 }

@@ -1,11 +1,12 @@
 package edu.northeastern.cs5200.model;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 public class Player {
 	@Id
 	@GeneratedValue
@@ -15,6 +16,32 @@ public class Player {
 	@JsonIgnore
 	private Fan fans;
 	
+	@ManyToOne()
+	@JsonIgnore
+	private Team team;
+	
+	@OneToMany(mappedBy="player")
+	private List<Allstar> voted;
+	public void voted(Allstar allstar)
+	{    this.voted.add(allstar);
+	     if(allstar.getPlayer() != this) {
+	        allstar.setPlayer(this);
+	}}
+	
+	public List<Allstar> getVoted() {
+		return voted;
+	}
+
+	public void setVoted(List<Allstar> voted) {
+		this.voted = voted;
+	}
+
+	public Team getTeam() {
+		return team;
+	}
+	public void setTeam(Team team) {
+		this.team = team;
+	}
 	public int getId() {
 		return id;
 	}
@@ -33,11 +60,13 @@ public class Player {
 	public void setFans(Fan fans) {
 		this.fans = fans;
 	}
-	public Player(int id, String name, int width, int height, String cssclass, String cssstyle,
-			String text, int ordernum, Team page)
+	public Player(int id, String name, Fan fan, Team team, List<Allstar> voted)
 	{
 		this.id = id;
 		this.name = name;
+		this.voted = voted;
+		this.fans = fan;
+		this.team = team;
 	}
 		
 		 

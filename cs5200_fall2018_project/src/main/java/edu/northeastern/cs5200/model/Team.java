@@ -15,6 +15,7 @@ public class Team {
 	private int id;
 	private String title;
 	private String description;
+	private int sponsorAmount;
 	@OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL, 
 	        mappedBy = "team")
 	private Sponsor spon;
@@ -24,9 +25,6 @@ public class Team {
 	@OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL, 
 	        mappedBy = "team")
 	private Stadium stadium;
-	@ManyToOne()
-	@JsonIgnore
-	private Fan fans;
 	
 	@OneToMany(mappedBy="team")
 	private List<Draft> drafts;
@@ -34,6 +32,14 @@ public class Team {
 	{    this.drafts.add(draft);
 	     if(draft.getTeam() != this) {
 	        draft.setTeam(this);
+	}}
+	
+	@OneToMany(mappedBy="team")
+	private List<Player> TeamPlayer;
+	public void TeamPlayer(Player player)
+	{    this.TeamPlayer.add(player);
+	     if(player.getTeam() != this) {
+	        player.setTeam(this);
 	}}
 
 	public int getId() {
@@ -53,12 +59,6 @@ public class Team {
 	}
 	public void setDescription(String description) {
 		this.description = description;
-	}
-	public Fan getFans() {
-		return fans;
-	}
-	public void setFans(Fan fans) {
-		this.fans = fans;
 	}
 
 	public Sponsor getSpon() {
@@ -84,13 +84,44 @@ public class Team {
 	public void setStadium(Stadium stadium) {
 		this.stadium = stadium;
 	}
+
+	public int getSponsorAmount() {
+		return sponsorAmount;
+	}
+
+	public void setSponsorAmount(int sponsorAmount) {
+		this.sponsorAmount = sponsorAmount;
+	}
 	
-	public Team(Draft website, int id, Fan fans, String description, 
-			Date created, Date updated, int views) {
+	public List<Draft> getDrafts() {
+		return drafts;
+	}
+
+	public void setDrafts(List<Draft> drafts) {
+		this.drafts = drafts;
+	}
+
+	public List<Player> getTeamPlayer() {
+		return TeamPlayer;
+	}
+
+	public void setTeamPlayer(List<Player> teamPlayer) {
+		this.TeamPlayer = teamPlayer;
+	}
+
+	public Team(Draft website, int id, Fan fans, String title, String description, Sponsor spon,
+			Boss boss, Stadium stadium, int sponsorAmount, 
+			List<Draft> drafts, List<Player> teamPlayer) {
 		super();
 		this.id = id;
-		this.fans = fans;
 		this.title = title;
 		this.description = description;
+		this.spon = spon;
+		this.boss = boss;
+		this.stadium = stadium;
+		this.sponsorAmount = sponsorAmount;
+		this.drafts = drafts;
+		this.TeamPlayer = teamPlayer;
 	}
+
 }
