@@ -15,8 +15,14 @@ public class Team {
 	private int id;
 	private String title;
 	private String description;
+	@OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL, 
+	        mappedBy = "team")
 	private Sponsor spon;
+	@OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL, 
+	        mappedBy = "team")
 	private Boss boss;
+	@OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL, 
+	        mappedBy = "team")
 	private Stadium stadium;
 	@ManyToOne()
 	@JsonIgnore
