@@ -1,14 +1,11 @@
 package edu.northeastern.cs5200.model;
-
-import javax.persistence.Entity;
+ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-@Entity
+ import com.fasterxml.jackson.annotation.JsonIgnore;
+ @Entity
 public class Allstar {
 	
 	@Id
@@ -22,12 +19,10 @@ public class Allstar {
 	@ManyToOne()
 	@JsonIgnore
 	private Player player;
-
-	public int getId() {
+ 	public int getId() {
 		return id;
 	}
-
-	public void setId(int id) {
+ 	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -35,15 +30,22 @@ public class Allstar {
 		return fans;
 	}
 
-	public void setFans(Fan fan) {
-		this.fans = fan;
+	public void setFans(Fan fans) {
+		this.fans = fans;
 	}
+	
+ 	public Fan getFan() {
+		return fans;
+	}
+ 	
+ 	public void setFan(Fan fan) {
+		this.fans = fan;
 
-	public Player getPlayer() {
+ 	}
+ 	public Player getPlayer() {
 		return player;
 	}
-
-	public void setPlayer(Player player) {
+ 	public void setPlayer(Player player) {
 		this.player = player;
 	}
 	
