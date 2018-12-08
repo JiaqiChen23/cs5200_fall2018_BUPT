@@ -5,9 +5,9 @@ import java.sql.Date;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "person")
+@Table(name = "Person")
 @Inheritance(strategy=InheritanceType.JOINED)
-public class person {
+public class Person {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	protected int id;
@@ -64,7 +64,7 @@ public class person {
 	public void setDob(Date dob) {
 		this.dob = dob;
 	}
-	public person(int id, String firstname, String lastname, 
+	public Person(int id, String firstname, String lastname, 
 			String username, String password, String email, Date dob) {
 		super();
 		this.id = id;
@@ -75,7 +75,7 @@ public class person {
 		this.email = email;
 		this.dob = dob;
 	}
-	public person() {
+	public Person() {
 		super();
 	}
 	

@@ -16,11 +16,11 @@ import edu.northeastern.cs5200.dao.PageImpl;
 import edu.northeastern.cs5200.dao.RoleImpl;
 import edu.northeastern.cs5200.dao.WebsiteImpl;
 import edu.northeastern.cs5200.dao.WidgetImpl;
-import edu.northeastern.cs5200.model.Fans;
+import edu.northeastern.cs5200.model.Fan;
 import edu.northeastern.cs5200.model.Team;
 import edu.northeastern.cs5200.model.Draft;
 import edu.northeastern.cs5200.model.Player;
-import edu.northeastern.cs5200.model.person;
+import edu.northeastern.cs5200.model.Person;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

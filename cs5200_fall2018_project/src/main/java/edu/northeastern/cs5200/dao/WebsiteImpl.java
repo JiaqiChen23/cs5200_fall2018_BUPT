@@ -12,7 +12,7 @@ import java.util.Collection;
 import java.util.List;
 
 import edu.northeastern.cs5200.Connect;
-import edu.northeastern.cs5200.model.Fans;
+import edu.northeastern.cs5200.model.Fan;
 import edu.northeastern.cs5200.model.Draft;
 
 public class WebsiteImpl implements WebsiteDao{

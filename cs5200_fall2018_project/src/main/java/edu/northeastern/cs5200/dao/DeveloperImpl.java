@@ -16,14 +16,14 @@ import java.util.Collection;
 import java.util.List;
 
 import edu.northeastern.cs5200.Connect;
-import edu.northeastern.cs5200.model.Fans;
+import edu.northeastern.cs5200.model.Fan;
 
 public class DeveloperImpl implements DeveloperDao {
 	Connection connect = Connect.getConnection();
 
 	@Override
-	public void createDeveloper(Fans developer) {
-		String findAllDevelopersSql = "INSERT INTO person (firstname,lastname,username,password,email,dob,id) VALUES (?,?,?,?,?,?,?);";
+	public void createDeveloper(Fan developer) {
+		String findAllDevelopersSql = "INSERT INTO Person (firstname,lastname,username,password,email,dob,id) VALUES (?,?,?,?,?,?,?);";
 		String forDev = "INSERT INTO developer (id, developerkey) VALUES (?,?);";
 		
 		try {
@@ -49,9 +49,9 @@ public class DeveloperImpl implements DeveloperDao {
 	}
 
 	@Override
-	public Collection<Fans> findAllDevelopers() {
-		String findAllDevelopersSql = "SELECT * FROM person, developer WHERE person.id = developer.id";
-		List<Fans> developers = new ArrayList<Fans>();
+	public Collection<Fan> findAllDevelopers() {
+		String findAllDevelopersSql = "SELECT * FROM Person, developer WHERE Person.id = developer.id";
+		List<Fan> developers = new ArrayList<Fan>();
 						Statement statement = null;
 						ResultSet results = null;
 						try {
@@ -68,7 +68,7 @@ public class DeveloperImpl implements DeveloperDao {
 								String key = results.getString("developerKey");
 								int id = Integer.parseInt(idS);
 								Date dob = java.sql.Date.valueOf(date);
-								Fans developer = new Fans(id, firstname, lastname, username, password, email, dob, key);
+								Fan developer = new Fan(id, firstname, lastname, username, password, email, dob, key);
 								developers.add(developer);
 							}
 						
@@ -79,11 +79,11 @@ return developers;
 	}
 
 	@Override
-	public Fans findDeveloperById(int developerId) {
-		String findAllDevelopersSql = "SELECT * FROM Fans WHERE id = "+developerId;
+	public Fan findDeveloperById(int developerId) {
+		String findAllDevelopersSql = "SELECT * FROM Fan WHERE id = "+developerId;
 		Statement statement = null;
 		ResultSet results = null;
-		Fans developer = null;
+		Fan developer = null;
 		try {
 			statement = connect.createStatement();
 			results = statement.executeQuery(findAllDevelopersSql);
@@ -98,7 +98,7 @@ return developers;
 				String key = results.getString("developerKey");
 				int id = Integer.parseInt(idS);
 				Date dob = java.sql.Date.valueOf(date);
-				developer = new Fans(id, firstname, lastname, username, password, email, dob, key);			
+				developer = new Fan(id, firstname, lastname, username, password, email, dob, key);			
 			}
 			return developer;
 		} catch (SQLException e2) {
@@ -109,8 +109,8 @@ return developers;
 
 
 	@Override
-	public Fans findDeveloperByUsername(String username) {
-		String findAllDevelopersSql = "SELECT * FROM person WHERE username = "+username;
+	public Fan findDeveloperByUsername(String username) {
+		String findAllDevelopersSql = "SELECT * FROM Person WHERE username = "+username;
 		Statement statement = null;
 		ResultSet results = null;
 		
@@ -128,7 +128,7 @@ return developers;
 			int id = Integer.parseInt(idS);
 			String key = results.getString("developerKey");
 			Date dob = java.sql.Date.valueOf(date);
-			Fans developer = new Fans(id, firstname, lastname, usernameL, password, email, dob, key);
+			Fan developer = new Fan(id, firstname, lastname, usernameL, password, email, dob, key);
 			return developer;
 		} catch (SQLException e2) {
 			// TODO Auto-generated catch block
@@ -137,9 +137,9 @@ return developers;
 		}	}
 
 	@Override
-	public Fans findDeveloperByCredentials(String username, String password) {
+	public Fan findDeveloperByCredentials(String username, String password) {
 		// TODO Auto-generated method stub
-		String findAllDevelopersSql = "SELECT * FROM person WHERE username = "+username+"AND password = "+password;
+		String findAllDevelopersSql = "SELECT * FROM Person WHERE username = "+username+"AND password = "+password;
 		Statement statement = null;
 		ResultSet results = null;
 		
@@ -157,7 +157,7 @@ return developers;
 			int id = Integer.parseInt(idS);
 			String key = results.getString("developerKey");
 			Date dob = java.sql.Date.valueOf(date);
-			Fans developer = new Fans(id, firstname, lastname, usernameL, passwordL, email, dob, key);
+			Fan developer = new Fan(id, firstname, lastname, usernameL, passwordL, email, dob, key);
 			return developer;
 		} catch (SQLException e2) {
 			// TODO Auto-generated catch block
@@ -167,10 +167,10 @@ return developers;
 	}
 
 	@Override
-	public int updateDeveloper(int developerId, Fans developer) {
+	public int updateDeveloper(int developerId, Fan developer) {
 		// TODO Auto-generated method stub
 		
-		String findAllDevelopersSql = "UPDATE person SET firstname =?, lastname =?, username =?, password =?,"+
+		String findAllDevelopersSql = "UPDATE Person SET firstname =?, lastname =?, username =?, password =?,"+
 				"email =?, dob =?  WHERE id =?";
 		
 		try {
@@ -201,7 +201,7 @@ return developers;
 	@Override
 	public int deleteDeveloper(int developerId) {
 		// TODO Auto-generated method stub
-		String findAllDevelopersSql = "DELETE FROM person WHERE id = ?";		
+		String findAllDevelopersSql = "DELETE FROM Person WHERE id = ?";		
 		try {
 			PreparedStatement statement = connect.prepareStatement(findAllDevelopersSql);
 			statement.setInt(1,developerId);

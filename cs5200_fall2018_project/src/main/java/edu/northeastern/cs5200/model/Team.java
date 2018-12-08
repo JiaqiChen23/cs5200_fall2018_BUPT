@@ -15,9 +15,12 @@ public class Team {
 	private int id;
 	private String title;
 	private String description;
+	private Sponsor spon;
+	private Boss boss;
+	private Stadium stadium;
 	@ManyToOne()
 	@JsonIgnore
-	private Fans fans;
+	private Fan fans;
 	
 	@OneToMany(mappedBy="team")
 	private List<Draft> drafts;
@@ -45,26 +48,43 @@ public class Team {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Fans getFans() {
+	public Fan getFans() {
 		return fans;
 	}
-	public void setFans(Fans fans) {
+	public void setFans(Fan fans) {
 		this.fans = fans;
 	}
-	public Team(Draft website, int id, Fans fans, String description, 
-			Date created, Date updated, int views) {
-		super();
-		this.id = id;
-		this.fans = fans;
-		this.title = title;
-		this.description = description;
+
+	public Sponsor getSpon() {
+		return spon;
 	}
-	public Team(int id, String title, String description, 
-			Date created, Date updated, int views) {
-		super();
-		this.id = id;
-		this.title = title;
-		this.description = description;
+
+	public void setSpon(Sponsor spon) {
+		this.spon = spon;
+	}
+
+	public Boss getBoss() {
+		return boss;
+	}
+
+	public void setBoss(Boss boss) {
+		this.boss = boss;
+	}
+
+	public Stadium getStadium() {
+		return stadium;
+	}
+
+	public void setStadium(Stadium stadium) {
+		this.stadium = stadium;
 	}
 	
+	public Team(Draft website, int id, Fan fans, String description, 
+			Date created, Date updated, int views) {
+		super();
+		this.id = id;
+		this.fans = fans;
+		this.title = title;
+		this.description = description;
+	}
 }
