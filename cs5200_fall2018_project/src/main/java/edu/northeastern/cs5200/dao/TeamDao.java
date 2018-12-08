@@ -12,6 +12,10 @@ public interface TeamDao {
 	
 	public Team findTeamById(int id);
 	
+	public Team findTeamByBossId(int id);
+	
+	public Team findTeamBySponsorId(int id);
+	
 	public void updateTeamById(int id, Team team);
 	
 	public void deleteTeamById(int id);
