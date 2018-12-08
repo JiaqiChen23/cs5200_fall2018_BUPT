@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Website {
 	@ManyToOne()
 	@JsonIgnore
-	private Developer developer;
+	private Fans developer;
 	@Id  
 	@GeneratedValue
 	private int id;
@@ -21,18 +21,18 @@ public class Website {
 	private int visits;
 	
 	@OneToMany(mappedBy="website")
-	private List<Page> containPage;
-	public void containPage(Page page)
+	private List<Team> containPage;
+	public void containPage(Team page)
 	{    this.containPage.add(page);
 	     if(page.getWebsite() != this) {
 	        page.setWebsite(this);
 	}}
 	
-	public List<Page> getContainPage() {
+	public List<Team> getContainPage() {
 		return containPage;
 	}
 
-	public void setContainPage(List<Page> containPage) {
+	public void setContainPage(List<Team> containPage) {
 		this.containPage = containPage;
 	}
 
@@ -42,10 +42,10 @@ public class Website {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Developer getDeveloper() {
+	public Fans getDeveloper() {
 		return developer;
 	}
-	public void setDeveloper(Developer developer) {
+	public void setDeveloper(Fans developer) {
 		if(!developer.getImplementWeb().contains(this))
 			developer.getImplementWeb().add(this);
 	}
@@ -79,7 +79,7 @@ public class Website {
 	public void setVisits(int visits) {
 		this.visits = visits;
 	}
-	public Website(Developer developer, int id, String name, String description, 
+	public Website(Fans developer, int id, String name, String description, 
 			Date created, Date updated, int visits) {
 		super();
 		this.id = id;

@@ -15,7 +15,7 @@ import edu.northeastern.cs5200.Connect;
 import edu.northeastern.cs5200.model.HeadingWidget;
 import edu.northeastern.cs5200.model.HtmlWidget;
 import edu.northeastern.cs5200.model.ImageWidget;
-import edu.northeastern.cs5200.model.Page;
+import edu.northeastern.cs5200.model.Team;
 import edu.northeastern.cs5200.model.Widget;
 import edu.northeastern.cs5200.model.YouTubeWidget;
 

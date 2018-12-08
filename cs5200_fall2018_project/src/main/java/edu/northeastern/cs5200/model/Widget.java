@@ -20,15 +20,15 @@ public class Widget {
 	private int ordernum;
 	@ManyToOne()
 	@JsonIgnore
-	private Page page;
+	private Team page;
     public enum Type {youtube, image, heading, html}
 
 	
 	
-	public Page getPage() {
+	public Team getPage() {
 		return page;
 	}
-	public void setPage(Page page) {
+	public void setPage(Team page) {
 		if(!page.getContainWidget().contains(this))
 			page.getContainWidget().add(this);
 	}
@@ -88,7 +88,7 @@ public class Widget {
 		Type = dtype;
 	}
 	public Widget(int id, String name, int width, int height, String cssclass, String cssstyle,
-			String text, int ordernum, Page page)
+			String text, int ordernum, Team page)
 	{
 		this.id = id;
 		this.name = name;

@@ -11,14 +11,14 @@ import java.util.Collection;
 import java.util.List;
 
 import edu.northeastern.cs5200.Connect;
-import edu.northeastern.cs5200.model.Page;
+import edu.northeastern.cs5200.model.Team;
 import edu.northeastern.cs5200.model.Website;
 
 public class PageImpl implements PageDao{
 	Connection connect = Connect.getConnection();
 
 	@Override
-	public void createPageForWebsite(int websiteId, Page page) {
+	public void createPageForWebsite(int websiteId, Team page) {
 		String findAllDevelopersSql = "INSERT INTO page (id,title,description,created,updated,views,website_id) VALUES (?,?,?,?,?,?,?);";		
 		try {
 			PreparedStatement statement1 = 
@@ -38,9 +38,9 @@ public class PageImpl implements PageDao{
 	}
 
 	@Override
-	public Collection<Page> findAllPages() {
+	public Collection<Team> findAllPages() {
 		String findAllDevelopersSql = "SELECT * FROM page";
-		List<Page> pages = new ArrayList<Page>();
+		List<Team> pages = new ArrayList<Team>();
 		Statement statement = null;
 		ResultSet results = null;
 		try {
@@ -71,7 +71,7 @@ public class PageImpl implements PageDao{
 				Date created = java.sql.Date.valueOf(createdS);
 				Date updated = java.sql.Date.valueOf(updatedS);
 				WebsiteImpl webI = new WebsiteImpl();
-				Page page = new Page(webI.findWebsiteById(website_id),id,title,description,created,updated,views);
+				Team page = new Team(webI.findWebsiteById(website_id),id,title,description,created,updated,views);
 				pages.add(page);
 			}
 						
@@ -82,11 +82,11 @@ public class PageImpl implements PageDao{
 	}
 
 	@Override
-	public Page findPageById(int pageId) {
+	public Team findPageById(int pageId) {
 		String findAllDevelopersSql = "SELECT * FROM page WHERE id = "+pageId;
 		Statement statement = null;
 		ResultSet results = null;
-		Page page = null;
+		Team page = null;
 		try {
 			statement = connect.createStatement();
 			results = statement.executeQuery(findAllDevelopersSql);
@@ -104,7 +104,7 @@ public class PageImpl implements PageDao{
 				Date created = java.sql.Date.valueOf(createdS);
 				Date updated = java.sql.Date.valueOf(updatedS);
 				WebsiteImpl webI = new WebsiteImpl();
-				page = new Page(webI.findWebsiteById(website_id),id,title,description,created,updated,views);
+				page = new Team(webI.findWebsiteById(website_id),id,title,description,created,updated,views);
 			}
 			return page;
 		} catch (SQLException e2) {
@@ -114,9 +114,9 @@ public class PageImpl implements PageDao{
 	}
 
 	@Override
-	public Collection<Page> findPagesForWebsite(int websiteId) {
+	public Collection<Team> findPagesForWebsite(int websiteId) {
 		String findAllDevelopersSql = "SELECT * FROM page WHERE website_id ="+websiteId;
-		List<Page> pages = new ArrayList<Page>();
+		List<Team> pages = new ArrayList<Team>();
 		Statement statement = null;
 		ResultSet results = null;
 		try {
@@ -137,7 +137,7 @@ public class PageImpl implements PageDao{
 				Date created = java.sql.Date.valueOf(createdS);
 				Date updated = java.sql.Date.valueOf(updatedS);
 				WebsiteImpl webI = new WebsiteImpl();
-				Page page = new Page(webI.findWebsiteById(website_id),id,title,description,created,updated,views);
+				Team page = new Team(webI.findWebsiteById(website_id),id,title,description,created,updated,views);
 				pages.add(page);
 			}
 						
@@ -148,7 +148,7 @@ public class PageImpl implements PageDao{
 	}
 
 	@Override
-	public int updatePage(int pageId, Page page) {
+	public int updatePage(int pageId, Team page) {
 		String findAllDevelopersSql = "UPDATE page SET title =?, description =?, created =?, updated =?,"+
 				"views =?, website_id=?  WHERE id =?";
 		

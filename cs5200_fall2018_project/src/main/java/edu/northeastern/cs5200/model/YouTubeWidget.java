@@ -7,12 +7,12 @@ import javax.persistence.Table;
 @Table(name ="YouTubeWidget")
 public class YouTubeWidget extends Widget{
 	public YouTubeWidget(int id, String name, int width, int height, int order, String url, 
-			boolean sharable, boolean expendable,Page page) {
+			boolean sharable, boolean expendable,Team page) {
 		this(id, name, width, height, "", "", "", order, url, sharable, expendable, page);
 	}
     
 	public YouTubeWidget(int id, String name, int width, int height, String cssClass, String cssStyle, 
-    		String text, int order, String url, boolean sharable, boolean expendable, Page page){
+    		String text, int order, String url, boolean sharable, boolean expendable, Team page){
         super(id, name, width, height, cssClass, cssStyle, text, order, page);
         super.Type = Type.youtube;
         this.url = url;

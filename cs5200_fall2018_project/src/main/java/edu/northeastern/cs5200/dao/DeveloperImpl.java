@@ -16,13 +16,13 @@ import java.util.Collection;
 import java.util.List;
 
 import edu.northeastern.cs5200.Connect;
-import edu.northeastern.cs5200.model.Developer;
+import edu.northeastern.cs5200.model.Fans;
 
 public class DeveloperImpl implements DeveloperDao {
 	Connection connect = Connect.getConnection();
 
 	@Override
-	public void createDeveloper(Developer developer) {
+	public void createDeveloper(Fans developer) {
 		String findAllDevelopersSql = "INSERT INTO person (firstname,lastname,username,password,email,dob,id) VALUES (?,?,?,?,?,?,?);";
 		String forDev = "INSERT INTO developer (id, developerkey) VALUES (?,?);";
 		
@@ -49,9 +49,9 @@ public class DeveloperImpl implements DeveloperDao {
 	}
 
 	@Override
-	public Collection<Developer> findAllDevelopers() {
+	public Collection<Fans> findAllDevelopers() {
 		String findAllDevelopersSql = "SELECT * FROM person, developer WHERE person.id = developer.id";
-		List<Developer> developers = new ArrayList<Developer>();
+		List<Fans> developers = new ArrayList<Fans>();
 						Statement statement = null;
 						ResultSet results = null;
 						try {
@@ -68,7 +68,7 @@ public class DeveloperImpl implements DeveloperDao {
 								String key = results.getString("developerKey");
 								int id = Integer.parseInt(idS);
 								Date dob = java.sql.Date.valueOf(date);
-								Developer developer = new Developer(id, firstname, lastname, username, password, email, dob, key);
+								Fans developer = new Fans(id, firstname, lastname, username, password, email, dob, key);
 								developers.add(developer);
 							}
 						
@@ -79,11 +79,11 @@ return developers;
 	}
 
 	@Override
-	public Developer findDeveloperById(int developerId) {
-		String findAllDevelopersSql = "SELECT * FROM Developer WHERE id = "+developerId;
+	public Fans findDeveloperById(int developerId) {
+		String findAllDevelopersSql = "SELECT * FROM Fans WHERE id = "+developerId;
 		Statement statement = null;
 		ResultSet results = null;
-		Developer developer = null;
+		Fans developer = null;
 		try {
 			statement = connect.createStatement();
 			results = statement.executeQuery(findAllDevelopersSql);
@@ -98,7 +98,7 @@ return developers;
 				String key = results.getString("developerKey");
 				int id = Integer.parseInt(idS);
 				Date dob = java.sql.Date.valueOf(date);
-				developer = new Developer(id, firstname, lastname, username, password, email, dob, key);			
+				developer = new Fans(id, firstname, lastname, username, password, email, dob, key);			
 			}
 			return developer;
 		} catch (SQLException e2) {
@@ -109,7 +109,7 @@ return developers;
 
 
 	@Override
-	public Developer findDeveloperByUsername(String username) {
+	public Fans findDeveloperByUsername(String username) {
 		String findAllDevelopersSql = "SELECT * FROM person WHERE username = "+username;
 		Statement statement = null;
 		ResultSet results = null;
@@ -128,7 +128,7 @@ return developers;
 			int id = Integer.parseInt(idS);
 			String key = results.getString("developerKey");
 			Date dob = java.sql.Date.valueOf(date);
-			Developer developer = new Developer(id, firstname, lastname, usernameL, password, email, dob, key);
+			Fans developer = new Fans(id, firstname, lastname, usernameL, password, email, dob, key);
 			return developer;
 		} catch (SQLException e2) {
 			// TODO Auto-generated catch block
@@ -137,7 +137,7 @@ return developers;
 		}	}
 
 	@Override
-	public Developer findDeveloperByCredentials(String username, String password) {
+	public Fans findDeveloperByCredentials(String username, String password) {
 		// TODO Auto-generated method stub
 		String findAllDevelopersSql = "SELECT * FROM person WHERE username = "+username+"AND password = "+password;
 		Statement statement = null;
@@ -157,7 +157,7 @@ return developers;
 			int id = Integer.parseInt(idS);
 			String key = results.getString("developerKey");
 			Date dob = java.sql.Date.valueOf(date);
-			Developer developer = new Developer(id, firstname, lastname, usernameL, passwordL, email, dob, key);
+			Fans developer = new Fans(id, firstname, lastname, usernameL, passwordL, email, dob, key);
 			return developer;
 		} catch (SQLException e2) {
 			// TODO Auto-generated catch block
@@ -167,7 +167,7 @@ return developers;
 	}
 
 	@Override
-	public int updateDeveloper(int developerId, Developer developer) {
+	public int updateDeveloper(int developerId, Fans developer) {
 		// TODO Auto-generated method stub
 		
 		String findAllDevelopersSql = "UPDATE person SET firstname =?, lastname =?, username =?, password =?,"+
