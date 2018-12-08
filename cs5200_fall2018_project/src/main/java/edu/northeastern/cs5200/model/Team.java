@@ -15,6 +15,9 @@ public class Team {
 	private int id;
 	private String title;
 	private String description;
+	private Sponsor spon;
+	private Boss boss;
+	private Stadium stadium;
 	@ManyToOne()
 	@JsonIgnore
 	private Fan fans;
@@ -51,6 +54,31 @@ public class Team {
 	public void setFans(Fan fans) {
 		this.fans = fans;
 	}
+
+	public Sponsor getSpon() {
+		return spon;
+	}
+
+	public void setSpon(Sponsor spon) {
+		this.spon = spon;
+	}
+
+	public Boss getBoss() {
+		return boss;
+	}
+
+	public void setBoss(Boss boss) {
+		this.boss = boss;
+	}
+
+	public Stadium getStadium() {
+		return stadium;
+	}
+
+	public void setStadium(Stadium stadium) {
+		this.stadium = stadium;
+	}
+	
 	public Team(Draft website, int id, Fan fans, String description, 
 			Date created, Date updated, int views) {
 		super();
@@ -59,12 +87,4 @@ public class Team {
 		this.title = title;
 		this.description = description;
 	}
-	public Team(int id, String title, String description, 
-			Date created, Date updated, int views) {
-		super();
-		this.id = id;
-		this.title = title;
-		this.description = description;
-	}
-	
 }

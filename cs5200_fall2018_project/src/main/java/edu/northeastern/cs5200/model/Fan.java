@@ -7,17 +7,26 @@ import java.util.List;
 import javax.persistence.*;
 @Entity
 @Table(name = "fans")
-public class Fan extends person{
+public class Fan extends Person{
+
 	@Id  
 	@GeneratedValue
 	   (strategy=GenerationType.IDENTITY)
 	private int id;
 	@OneToMany(mappedBy="fans")
 	private List<Team> followTeam;
-	public void followTeam(Team t)
-	{    this.followTeam.add(t);
-	     if(t.getFans() != this) {
-	        t.setFans(this);
+	public void followTeam(Team team)
+	{    this.followTeam.add(team);
+	     if(team.getFans() != this) {
+	        team.setFans(this);
+	}}
+	
+	@OneToMany(mappedBy="fans")
+	private List<Player> followPlayer;
+	public void followPlayer(Player player)
+	{    this.followPlayer.add(player);
+	     if(player.getFans() != this) {
+	        player.setFans(this);
 	}}
 
 	
