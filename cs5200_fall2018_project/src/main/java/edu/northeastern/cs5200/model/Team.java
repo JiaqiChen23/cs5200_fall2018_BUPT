@@ -19,7 +19,14 @@ public class Team {
 	@JsonIgnore
 	private Fans fans;
 	
-	
+	@OneToMany(mappedBy="team")
+	private List<Draft> drafts;
+	public void drafts(Draft draft)
+	{    this.drafts.add(draft);
+	     if(draft.getTeam() != this) {
+	        draft.setTeam(this);
+	}}
+
 	public int getId() {
 		return id;
 	}
@@ -38,23 +45,19 @@ public class Team {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-	public void setWebsite(Draft website) {
-		if(!website.getContainPage().contains(this))
-			website.getContainPage().add(this);
+	public Fans getFans() {
+		return fans;
 	}
-
-
-	public Team(Draft website, int id, String title, String description, 
+	public void setFans(Fans fans) {
+		this.fans = fans;
+	}
+	public Team(Draft website, int id, Fans fans, String description, 
 			Date created, Date updated, int views) {
 		super();
 		this.id = id;
-		this.website = website;
+		this.fans = fans;
 		this.title = title;
 		this.description = description;
-		this.created = created;
-		this.updated = updated;
-		this.views = views;
 	}
 	public Team(int id, String title, String description, 
 			Date created, Date updated, int views) {
@@ -62,9 +65,6 @@ public class Team {
 		this.id = id;
 		this.title = title;
 		this.description = description;
-		this.created = created;
-		this.updated = updated;
-		this.views = views;
 	}
 	
 }

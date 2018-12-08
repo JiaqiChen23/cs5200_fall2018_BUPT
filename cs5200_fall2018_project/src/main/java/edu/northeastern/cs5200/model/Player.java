@@ -21,13 +21,6 @@ public class Player {
 	{
 		this.id = id;
 		this.name = name;
-		this.width = width;
-		this.height = height;
-		this.cssclass = cssclass;
-		this.cssstyle = cssstyle;
-		this.text = text;
-		this.ordernum = ordernum;
-		this.page = page;
 	}
 		
 		 

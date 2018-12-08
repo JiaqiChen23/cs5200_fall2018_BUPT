@@ -12,7 +12,9 @@ public class Draft {
 	@GeneratedValue
 	private int id;
 	private String name;
-	private String team;
+	@ManyToOne()
+	@JsonIgnore
+	private Team team;
 	private String year;
 	private int order;
 	
@@ -32,11 +34,11 @@ public class Draft {
 		this.name = name;
 	}
 
-	public String getTeam() {
+	public Team getTeam() {
 		return team;
 	}
 
-	public void setTeam(String team) {
+	public void setTeam(Team team) {
 		this.team = team;
 	}
 

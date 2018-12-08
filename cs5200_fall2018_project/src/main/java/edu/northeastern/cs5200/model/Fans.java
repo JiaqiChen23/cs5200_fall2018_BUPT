@@ -16,8 +16,8 @@ public class Fans extends person{
 	private List<Team> followTeam;
 	public void followTeam(Team t)
 	{    this.followTeam.add(t);
-	     if(t.getDeveloper() != this) {
-	        t.setDeveloper(this);
+	     if(t.getFans() != this) {
+	        t.setFans(this);
 	}}
 
 	
@@ -40,7 +40,6 @@ public class Fans extends person{
 		this.password = password;
 		this.email = email;
 		this.dob = dob;
-		this.developerKey = key;
 	}
 	public Fans(String firstname, String lastname, 
 			String username, String password, String email, Date dob, String key) {
@@ -51,7 +50,6 @@ public class Fans extends person{
 		this.password = password;
 		this.email = email;
 		this.dob = dob;
-		this.developerKey = key;
 	}
 
 	public Fans() {
