@@ -39,13 +39,13 @@ public class Team {
 		this.description = description;
 	}
 
-	public void setWebsite(Website website) {
+	public void setWebsite(Draft website) {
 		if(!website.getContainPage().contains(this))
 			website.getContainPage().add(this);
 	}
 
 
-	public Team(Website website, int id, String title, String description, 
+	public Team(Draft website, int id, String title, String description, 
 			Date created, Date updated, int views) {
 		super();
 		this.id = id;

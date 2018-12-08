@@ -16,14 +16,14 @@ import edu.northeastern.cs5200.model.HeadingWidget;
 import edu.northeastern.cs5200.model.HtmlWidget;
 import edu.northeastern.cs5200.model.ImageWidget;
 import edu.northeastern.cs5200.model.Team;
-import edu.northeastern.cs5200.model.Widget;
+import edu.northeastern.cs5200.model.Player;
 import edu.northeastern.cs5200.model.YouTubeWidget;
 
 public class WidgetImpl implements WidgetDao{
 	Connection connect = Connect.getConnection();
 
 	@Override
-	public void createWidgetForPage(int pageId, Widget widget) {
+	public void createWidgetForPage(int pageId, Player widget) {
 		try {
 		String findAllDevelopersSql = "INSERT INTO widget (id, name, width, height, cssClass, cssStyle, text, "
 				 + "ordernum, page_id, dtype, url, sharable, expandable, source, size, html)"
@@ -77,9 +77,9 @@ public class WidgetImpl implements WidgetDao{
 	}
 
 	@Override
-	public Collection<Widget> findAllWidgets() {
+	public Collection<Player> findAllWidgets() {
 		String findAllDevelopersSql = "SELECT * FROM widget";
-		List<Widget> widgets = new ArrayList<Widget>();
+		List<Player> widgets = new ArrayList<Player>();
 		Statement statement = null;
 		ResultSet results = null;
 		try {
@@ -115,7 +115,7 @@ public class WidgetImpl implements WidgetDao{
 				int page_id = Integer.parseInt(page_idS);
 
 				PageImpl PI = new PageImpl();
-				Widget widget = new Widget(id,name,width,height,cssclass,cssstyle,text,ordernum,PI.findPageById(page_id));
+				Player widget = new Player(id,name,width,height,cssclass,cssstyle,text,ordernum,PI.findPageById(page_id));
 				widgets.add(widget);
 			}
 						
@@ -126,11 +126,11 @@ public class WidgetImpl implements WidgetDao{
 	}
 
 	@Override
-	public Widget findWidgetById(int widgetId) {
+	public Player findWidgetById(int widgetId) {
 		String findAllDevelopersSql = "SELECT * FROM widget WHERE id = "+widgetId;
 		Statement statement = null;
 		ResultSet results = null;
-		Widget widget = null;
+		Player widget = null;
 		try {
 			statement = connect.createStatement();
 			results = statement.executeQuery(findAllDevelopersSql);
@@ -153,7 +153,7 @@ public class WidgetImpl implements WidgetDao{
 				int page_id = Integer.parseInt(page_idS);
 	
 				PageImpl PI = new PageImpl();
-				widget = new Widget(id,name,width,height,cssclass,cssstyle,text,ordernum,PI.findPageById(page_id));
+				widget = new Player(id,name,width,height,cssclass,cssstyle,text,ordernum,PI.findPageById(page_id));
 			}
 			return widget;
 		} catch (SQLException e2) {
@@ -163,9 +163,9 @@ public class WidgetImpl implements WidgetDao{
 	}
 
 	@Override
-	public Collection<Widget> findWidgetsForPage(int pageId) {
+	public Collection<Player> findWidgetsForPage(int pageId) {
 		String findAllDevelopersSql = "SELECT * FROM widget WHERE page_id ="+pageId;
-		List<Widget> widgets = new ArrayList<Widget>();
+		List<Player> widgets = new ArrayList<Player>();
 		Statement statement = null;
 		ResultSet results = null;
 		try {
@@ -191,7 +191,7 @@ public class WidgetImpl implements WidgetDao{
 				int page_id = Integer.parseInt(page_idS);
 
 				PageImpl PI = new PageImpl();
-				Widget widget = new Widget(id,name,width,height,cssclass,cssstyle,text,ordernum,PI.findPageById(page_id));
+				Player widget = new Player(id,name,width,height,cssclass,cssstyle,text,ordernum,PI.findPageById(page_id));
 				widgets.add(widget);
 			}
 						
@@ -202,7 +202,7 @@ public class WidgetImpl implements WidgetDao{
 	}
 
 	@Override
-	public int updateWidget(int widgetId, Widget widget) {
+	public int updateWidget(int widgetId, Player widget) {
 		try {
 			
 			

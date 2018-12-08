@@ -13,14 +13,14 @@ import java.util.List;
 
 import edu.northeastern.cs5200.Connect;
 import edu.northeastern.cs5200.model.Fans;
-import edu.northeastern.cs5200.model.Website;
+import edu.northeastern.cs5200.model.Draft;
 
 public class WebsiteImpl implements WebsiteDao{
 
 	Connection connect = Connect.getConnection();
 	
 	@Override
-	public void createWebsiteForDeveloper(int developerId, Website website) {
+	public void createWebsiteForDeveloper(int developerId, Draft website) {
 		String findAllDevelopersSql = "INSERT INTO website (id,name,description,created,updated,visits,developer_id) VALUES (?,?,?,?,?,?,?);";		
 		try {
 			PreparedStatement statement1 = 
@@ -40,9 +40,9 @@ public class WebsiteImpl implements WebsiteDao{
 	}
 
 	@Override
-	public Collection<Website> findAllWebsites() {
+	public Collection<Draft> findAllWebsites() {
 		String findAllDevelopersSql = "SELECT * FROM website";
-		List<Website> websites = new ArrayList<Website>();
+		List<Draft> websites = new ArrayList<Draft>();
 		Statement statement = null;
 		ResultSet results = null;
 		try {
@@ -73,7 +73,7 @@ public class WebsiteImpl implements WebsiteDao{
 				Date created = java.sql.Date.valueOf(createdS);
 				Date updated = java.sql.Date.valueOf(updatedS);
 				DeveloperImpl devI = new DeveloperImpl();
-				Website website = new Website(devI.findDeveloperById(developer_id),id,name,description,created,updated,visits);
+				Draft website = new Draft(devI.findDeveloperById(developer_id),id,name,description,created,updated,visits);
 				websites.add(website);
 			}
 						
@@ -85,9 +85,9 @@ public class WebsiteImpl implements WebsiteDao{
 
 
 	@Override
-	public Collection<Website> findWebsitesForDeveloper(int developerId) {
+	public Collection<Draft> findWebsitesForDeveloper(int developerId) {
 		String findAllDevelopersSql = "SELECT * FROM website WHERE developer_id ="+developerId;
-		List<Website> websites = new ArrayList<Website>();
+		List<Draft> websites = new ArrayList<Draft>();
 		Statement statement = null;
 		ResultSet results = null;
 		try {
@@ -108,7 +108,7 @@ public class WebsiteImpl implements WebsiteDao{
 				Date created = java.sql.Date.valueOf(createdS);
 				Date updated = java.sql.Date.valueOf(updatedS);
 				DeveloperImpl devI = new DeveloperImpl();
-				Website website = new Website(devI.findDeveloperById(developer_id),id,name,description,created,updated,visits);
+				Draft website = new Draft(devI.findDeveloperById(developer_id),id,name,description,created,updated,visits);
 				websites.add(website);
 			}
 						
@@ -119,11 +119,11 @@ public class WebsiteImpl implements WebsiteDao{
 	}
 
 	@Override
-	public Website findWebsiteById(int websiteId) {
+	public Draft findWebsiteById(int websiteId) {
 		String findAllDevelopersSql = "SELECT * FROM website WHERE id = "+websiteId;
 		Statement statement = null;
 		ResultSet results = null;
-		Website website = null;
+		Draft website = null;
 		try {
 			statement = connect.createStatement();
 			results = statement.executeQuery(findAllDevelopersSql);
@@ -141,7 +141,7 @@ public class WebsiteImpl implements WebsiteDao{
 				Date created = java.sql.Date.valueOf(createdS);
 				Date updated = java.sql.Date.valueOf(updatedS);
 				DeveloperImpl devI = new DeveloperImpl();
-				website = new Website(devI.findDeveloperById(developer_id),id,name,description,created,updated,visits);
+				website = new Draft(devI.findDeveloperById(developer_id),id,name,description,created,updated,visits);
 			}
 			return website;
 		} catch (SQLException e2) {
@@ -152,7 +152,7 @@ public class WebsiteImpl implements WebsiteDao{
 	}
 
 	@Override
-	public int updateWebsite(int websiteId, Website website) {
+	public int updateWebsite(int websiteId, Draft website) {
 		String findAllDevelopersSql = "UPDATE website SET name =?, description =?, created =?, updated =?,"+
 				"visits =?, developer_id=?  WHERE id =?";
 		

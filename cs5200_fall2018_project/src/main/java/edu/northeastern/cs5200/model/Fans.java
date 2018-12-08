@@ -8,7 +8,10 @@ import javax.persistence.*;
 @Entity
 @Table(name = "fans")
 public class Fans extends person{
-	
+	@Id  
+	@GeneratedValue
+	   (strategy=GenerationType.IDENTITY)
+	private int id;
 	@OneToMany(mappedBy="fans")
 	private List<Team> followTeam;
 	public void followTeam(Team t)
