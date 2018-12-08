@@ -17,7 +17,7 @@ public class Allstar {
 	
 	@ManyToOne()
 	@JsonIgnore
-	private Fan fan;
+	private Fan fans;
 	
 	@ManyToOne()
 	@JsonIgnore
@@ -31,12 +31,12 @@ public class Allstar {
 		this.id = id;
 	}
 
-	public Fan getFan() {
-		return fan;
+	public Fan getFans() {
+		return fans;
 	}
 
-	public void setFan(Fan fan) {
-		this.fan = fan;
+	public void setFans(Fan fan) {
+		this.fans = fan;
 	}
 
 	public Player getPlayer() {
@@ -47,10 +47,10 @@ public class Allstar {
 		this.player = player;
 	}
 	
-	public Allstar(int id, Fan fan, Player player)
+	public Allstar(int id, Fan fans, Player player)
 	{
 		this.id = id;
-		this.fan = fan;
+		this.fans = fans;
 		this.player = player;
 	}
 }

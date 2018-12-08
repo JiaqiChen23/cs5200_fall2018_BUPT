@@ -26,8 +26,8 @@ public class Fan extends Person{
 	private List<Allstar> voted;
 	public void voted(Allstar allstar)
 	{    this.voted.add(allstar);
-	     if(allstar.getFan() != this) {
-	        allstar.setFan(this);
+	     if(allstar.getFans() != this) {
+	        allstar.setFans(this);
 	}}
 	
 	
