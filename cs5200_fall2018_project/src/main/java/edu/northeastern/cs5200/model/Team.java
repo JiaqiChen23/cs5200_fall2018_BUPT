@@ -17,7 +17,7 @@ public class Team {
 	private String description;
 	@ManyToOne()
 	@JsonIgnore
-	private Fans fans;
+	private Fan fans;
 	
 	@OneToMany(mappedBy="team")
 	private List<Draft> drafts;
@@ -45,13 +45,13 @@ public class Team {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Fans getFans() {
+	public Fan getFans() {
 		return fans;
 	}
-	public void setFans(Fans fans) {
+	public void setFans(Fan fans) {
 		this.fans = fans;
 	}
-	public Team(Draft website, int id, Fans fans, String description, 
+	public Team(Draft website, int id, Fan fans, String description, 
 			Date created, Date updated, int views) {
 		super();
 		this.id = id;

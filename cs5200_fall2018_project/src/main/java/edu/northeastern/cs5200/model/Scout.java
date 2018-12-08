@@ -4,7 +4,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-public class Scouts extends person{
+public class Scout extends person{
 	@Id  
 	@GeneratedValue
 	   (strategy=GenerationType.IDENTITY)

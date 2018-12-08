@@ -7,7 +7,7 @@ import java.util.List;
 import javax.persistence.*;
 @Entity
 @Table(name = "fans")
-public class Fans extends person{
+public class Fan extends person{
 	@Id  
 	@GeneratedValue
 	   (strategy=GenerationType.IDENTITY)
@@ -30,7 +30,7 @@ public class Fans extends person{
 	}
 
 	
-	public Fans(int id, String firstname, String lastname, 
+	public Fan(int id, String firstname, String lastname, 
 			String username, String password, String email, Date dob, String key) {
 		super();
 		this.id = id;
@@ -41,7 +41,7 @@ public class Fans extends person{
 		this.email = email;
 		this.dob = dob;
 	}
-	public Fans(String firstname, String lastname, 
+	public Fan(String firstname, String lastname, 
 			String username, String password, String email, Date dob, String key) {
 		super();
 		this.firstname = firstname;
@@ -52,7 +52,7 @@ public class Fans extends person{
 		this.dob = dob;
 	}
 
-	public Fans() {
+	public Fan() {
 		super();
 	}
 

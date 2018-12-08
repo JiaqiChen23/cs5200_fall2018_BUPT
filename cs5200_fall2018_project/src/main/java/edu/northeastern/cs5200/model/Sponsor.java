@@ -1,9 +1,13 @@
 package edu.northeastern.cs5200.model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
-public class sponsor extends person{
+public class Sponsor {
+
 	@Id  
 	@GeneratedValue
 	   (strategy=GenerationType.IDENTITY)
@@ -21,7 +25,4 @@ public class sponsor extends person{
 	public void setSponsored(String sponsored) {
 		this.sponsored = sponsored;
 	}
-
-
-	
 }
