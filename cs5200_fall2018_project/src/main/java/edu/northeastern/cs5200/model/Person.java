@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Person")
-@Inheritance(strategy=InheritanceType.JOINED)
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 public class Person {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
