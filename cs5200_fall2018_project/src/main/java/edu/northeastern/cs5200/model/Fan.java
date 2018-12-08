@@ -13,13 +13,6 @@ public class Fan extends Person{
 	@GeneratedValue
 	   (strategy=GenerationType.IDENTITY)
 	private int id;
-	@OneToMany(mappedBy="fans")
-	private List<Team> followTeam;
-	public void followTeam(Team team)
-	{    this.followTeam.add(team);
-	     if(team.getFans() != this) {
-	        team.setFans(this);
-	}}
 	
 	@OneToMany(mappedBy="fans")
 	private List<Player> followPlayer;
@@ -28,19 +21,49 @@ public class Fan extends Person{
 	     if(player.getFans() != this) {
 	        player.setFans(this);
 	}}
-
 	
-	public List<Team> getfollowTeam() {
-		return followTeam;
+	@OneToMany(mappedBy="fans")
+	private List<Allstar> voted;
+	public void voted(Allstar allstar)
+	{    this.voted.add(allstar);
+	     if(allstar.getFan() != this) {
+	        allstar.setFan(this);
+	}}
+	
+	
+	public int getId() {
+		return id;
 	}
 
-	public void setfollowTeam(List<Team> followTeam) {
-		this.followTeam = followTeam;
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	
+
+	public List<Player> getFollowPlayer() {
+		return followPlayer;
+	}
+
+
+	public void setFollowPlayer(List<Player> followPlayer) {
+		this.followPlayer = followPlayer;
+	}
+
+
+	public List<Allstar> getVoted() {
+		return voted;
+	}
+
+
+	public void setVoted(List<Allstar> voted) {
+		this.voted = voted;
+	}
+
+
 	public Fan(int id, String firstname, String lastname, 
-			String username, String password, String email, Date dob, String key) {
+			String username, String password, String email, Date dob,
+			List<Player> followPlayer, List<Allstar> voted) {
 		super();
 		this.id = id;
 		this.firstname = firstname;
@@ -49,20 +72,10 @@ public class Fan extends Person{
 		this.password = password;
 		this.email = email;
 		this.dob = dob;
-	}
-	public Fan(String firstname, String lastname, 
-			String username, String password, String email, Date dob, String key) {
-		super();
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.username = username;
-		this.password = password;
-		this.email = email;
-		this.dob = dob;
+		this.followPlayer = followPlayer;
+		this.voted = voted;
 	}
 
-	public Fan() {
-		super();
-	}
+	
 
 }

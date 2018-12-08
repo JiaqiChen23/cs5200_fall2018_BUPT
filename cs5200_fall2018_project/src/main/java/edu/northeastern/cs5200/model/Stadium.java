@@ -36,5 +36,11 @@ public class Stadium {
 	public void setTeam(Team team) {
 		this.team = team;
 	}
-	
+	public Stadium(int id, String name, Team team)
+	{
+		super();
+		this.id = id;
+		this.name = name;
+		this.team = team;
+	}
 }

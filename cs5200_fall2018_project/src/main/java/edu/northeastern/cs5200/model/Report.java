@@ -45,5 +45,12 @@ public class Report {
 	public void setReportbody(String reportbody) {
 		this.reportbody = reportbody;
 	}
-	
+	public Report(int id, Boss boss, Scout scout, String reportbody)
+		{
+			super();
+			this.id = id;
+			this.boss = boss;
+			this.scout = scout;
+			this.reportbody = reportbody;
+		}
 }

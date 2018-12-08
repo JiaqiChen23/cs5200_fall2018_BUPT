@@ -1,5 +1,6 @@
 package edu.northeastern.cs5200.model;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -15,7 +16,6 @@ public class Scout extends Person{
 	@GeneratedValue
 	   (strategy=GenerationType.IDENTITY)
 	private int id;
-	private String name;
 	
 	@OneToMany(mappedBy="scout")
 	private List<Report> ReportCollection;
@@ -26,17 +26,34 @@ public class Scout extends Person{
 	}}
 	
 	
+	public List<Report> getReportCollection() {
+		return ReportCollection;
+	}
+
+
+	public void setReportCollection(List<Report> reportCollection) {
+		ReportCollection = reportCollection;
+	}
+
+
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getName() {
-		return name;
+
+	public Scout(int id, String firstname, String lastname, 
+			String username, String password, String email, Date dob,
+			List<Report> reportCollection) {
+		super();
+		this.id = id;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.dob = dob;
+		ReportCollection = reportCollection;
 	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	
 }

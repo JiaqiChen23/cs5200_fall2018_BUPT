@@ -1,5 +1,7 @@
 package edu.northeastern.cs5200.model;
 
+import java.sql.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -35,6 +37,20 @@ public class Sponsor extends Person{
 		return team;
 	}
 	public void setTeam(Team team) {
+		this.team = team;
+	}
+	public Sponsor(int id, String firstname, String lastname, 
+			String username, String password, String email, Date dob,
+			String sponsored, Team team) {
+		super();
+		this.id = id;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.dob = dob;
+		this.sponsored = sponsored;
 		this.team = team;
 	}
 }
