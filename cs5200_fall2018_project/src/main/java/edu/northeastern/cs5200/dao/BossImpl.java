@@ -11,38 +11,38 @@ import java.util.Collection;
 import java.util.List;
 
 import edu.northeastern.cs5200.Connect;
-import edu.northeastern.cs5200.model.Allstar;
+import edu.northeastern.cs5200.model.Boss;
 import edu.northeastern.cs5200.model.Fan;
-import edu.northeastern.cs5200.model.Player;
 
-public class FanImpl implements FanDao{
+public class BossImpl implements BossDao{
 	Connection connect = Connect.getConnection();
 	
 	@Override
-	public void createFan(Fan fan) {
-		String findAllDevelopersSql = "INSERT INTO person (dtype,id,dob,email,firstname,lastname,password,username) VALUES (?,?,?,?,?,?,?,?);";		
+	public void createBoss(Boss boss) {
+		String findAllDevelopersSql = "INSERT INTO person (dtype,id,dob,email,firstname,lastname,password,username,team_id) VALUES (?,?,?,?,?,?,?,?,?);";		
 		try {
 			PreparedStatement statement1 = 
 					connect.prepareStatement(findAllDevelopersSql);
-			statement1.setString(1, "fan");
-			statement1.setInt(2, fan.getId());
-			statement1.setDate(3, fan.getDob());
-			statement1.setString(4, fan.getEmail());
-			statement1.setString(5, fan.getFirstname());
-			statement1.setString(6, fan.getLastname());
-			statement1.setString(7, fan.getPassword());
-			statement1.setString(8, fan.getUsername());
+			statement1.setString(1, "boss");
+			statement1.setInt(2, boss.getId());
+			statement1.setDate(3, boss.getDob());
+			statement1.setString(4, boss.getEmail());
+			statement1.setString(5, boss.getFirstname());
+			statement1.setString(6, boss.getLastname());
+			statement1.setString(7, boss.getPassword());
+			statement1.setString(8, boss.getUsername());
+			statement1.setInt(9, boss.getTeam().getId());
 			statement1.executeUpdate();
 			
 		} catch (SQLException e2) {
 			e2.printStackTrace();
-		}	
+		}			
 	}
 
 	@Override
-	public Collection<Fan> findAllFans() {
-		String findAllDevelopersSql = "SELECT * FROM person WHERE dtype = 'fan'";
-		List<Fan> fans = new ArrayList<Fan>();
+	public Collection<Boss> findAllBoss() {
+		String findAllDevelopersSql = "SELECT * FROM person WHERE dtype = 'boss'";
+		List<Boss> bosses = new ArrayList<Boss>();
 		Statement statement = null;
 		ResultSet results = null;
 		try {
@@ -57,23 +57,26 @@ public class FanImpl implements FanDao{
 				String Password = results.getString("password");
 				String email = results.getString("email");
 				String dob = results.getString("dob");
+				String teamId = results.getString("team_id");
 				
+				int teamID = Integer.parseInt(teamId);
 				int id1 = Integer.parseInt(idS);
 				Date dob1 = java.sql.Date.valueOf(dob);
-				Fan fan = new Fan();
-				fan = new Fan(id1, Firstname, Lastname, 
-						Username, Password, email, dob1);
-				fans.add(fan);
+				TeamImpl TIMPL = new TeamImpl();
+				Boss boss = null;
+				boss = new Boss(id1, Firstname, Lastname, 
+						Username, Password, email, dob1,TIMPL.findTeamById(teamID));
+				bosses.add(boss);
 			}
 						
 			} catch (SQLException e) {
 					e.printStackTrace();
 			}
-			return fans;
+			return bosses;
 	}
 
 	@Override
-	public Fan findFanById(int id) {
+	public Boss findBossById(int id) {
 		String findAllDevelopersSql = "SELECT * FROM person WHERE id = "+id;
 		Statement statement = null;
 		ResultSet results = null;
@@ -81,7 +84,7 @@ public class FanImpl implements FanDao{
 			statement = connect.createStatement();
 			
 			results = statement.executeQuery(findAllDevelopersSql);
-			Fan fan = new Fan();
+			Boss boss = new Boss();
 			while(results.next()) {
 				String idS = results.getString("id");
 				String Firstname = results.getString("firstname");
@@ -90,13 +93,16 @@ public class FanImpl implements FanDao{
 				String Password = results.getString("password");
 				String email = results.getString("email");
 				String dob = results.getString("dob");
+				String teamId = results.getString("team_id");
 				
+				int teamID = Integer.parseInt(teamId);
 				int id1 = Integer.parseInt(idS);
 				Date dob1 = java.sql.Date.valueOf(dob);
-				fan = new Fan(id1, Firstname, Lastname, 
-						Username, Password, email, dob1);
+				TeamImpl TIMPL = new TeamImpl();
+				boss = new Boss(id1, Firstname, Lastname, 
+						Username, Password, email, dob1,TIMPL.findTeamById(teamID));
 			}
-			return fan;
+			return boss;
 		} catch (SQLException e2) {
 			e2.printStackTrace();
 			return null;
@@ -104,7 +110,7 @@ public class FanImpl implements FanDao{
 	}
 
 	@Override
-	public Fan findFanByCredentials(String username, int password) {
+	public Boss findBossByCredentials(String username, int password) {
 		String findAllDevelopersSql = "SELECT * FROM person WHERE "
 				+ "username='"+username+"'and password='"+password+"'";
 		Statement statement = null;
@@ -113,7 +119,7 @@ public class FanImpl implements FanDao{
 			statement = connect.createStatement();
 			
 			results = statement.executeQuery(findAllDevelopersSql);
-			Fan fan = null;
+			Boss boss = null;
 			while(results.next()) {
 				String idS = results.getString("id");
 				String Firstname = results.getString("firstname");
@@ -122,46 +128,50 @@ public class FanImpl implements FanDao{
 				String Password = results.getString("password");
 				String email = results.getString("email");
 				String dob = results.getString("dob");
+				String teamId = results.getString("team_id");
 				
+				int teamID = Integer.parseInt(teamId);
 				int id1 = Integer.parseInt(idS);
 				Date dob1 = java.sql.Date.valueOf(dob);
-				fan = new Fan(id1, Firstname, Lastname, 
-						Username, Password, email, dob1);
+				TeamImpl TIMPL = new TeamImpl();
+				boss = new Boss(id1, Firstname, Lastname, 
+						Username, Password, email, dob1,TIMPL.findTeamById(teamID));
 			}
-			return fan;
+			return boss;
 		} catch (SQLException e2) {
 			e2.printStackTrace();
 			return null;
 		}
-		}
+	}
 
 	@Override
-	public void updateFanById(int id, Fan fan) {
+	public void updateBossById(int id, Boss boss) {
 		String findAllDevelopersSql = "UPDATE person SET dtype=?,"
 				+ "dob=?,email=?,firstname=?,"
-				+ "lastname=?,password=?,username=?  WHERE id =?";
+				+ "lastname=?,password=?,username=?,team_id=? WHERE id =?";
 		try {
 			PreparedStatement statement = 
 					connect.prepareStatement(findAllDevelopersSql);
-			statement.setString(1, "fan");
-			statement.setDate(2, fan.getDob());
-			statement.setString(3, fan.getEmail());
-			statement.setString(4, fan.getFirstname());
-			statement.setString(5, fan.getLastname());
-			statement.setString(6, fan.getPassword());
-			statement.setString(7, fan.getUsername());
-			statement.setInt(8, id);
+			statement.setString(1, "boss");
+			statement.setDate(2, boss.getDob());
+			statement.setString(3, boss.getEmail());
+			statement.setString(4, boss.getFirstname());
+			statement.setString(5, boss.getLastname());
+			statement.setString(6, boss.getPassword());
+			statement.setString(7, boss.getUsername());
+			statement.setInt(8, boss.getTeam().getId());
+			statement.setInt(9, id);
 
 			statement.executeUpdate();
 		} catch (SQLException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
-		return;		
+		return;			
 	}
 
 	@Override
-	public void deleteFanById(int id) {
+	public void deleteBossById(int id) {
 		String findAllDevelopersSql = "DELETE FROM person WHERE id = ?";		
 		try {
 			PreparedStatement statement = connect.prepareStatement(findAllDevelopersSql);
@@ -170,7 +180,7 @@ public class FanImpl implements FanDao{
 		} catch (SQLException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
-		}		return;
-	}		
+		}		return;		
+	}
 
 }

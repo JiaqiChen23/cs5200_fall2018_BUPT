@@ -18,7 +18,6 @@ public class Sponsor extends Person{
 //	@GeneratedValue
 //	   (strategy=GenerationType.IDENTITY)
 //	private int id;
-	private String sponsored;
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Team team;
 	public int getId() {
@@ -26,12 +25,6 @@ public class Sponsor extends Person{
 	}
 	public void setId(int id) {
 		this.id = id;
-	}
-	public String getSponsored() {
-		return sponsored;
-	}
-	public void setSponsored(String sponsored) {
-		this.sponsored = sponsored;
 	}
 	public Team getTeam() {
 		return team;
@@ -41,7 +34,7 @@ public class Sponsor extends Person{
 	}
 	public Sponsor(int id, String firstname, String lastname, 
 			String username, String password, String email, Date dob,
-			String sponsored, Team team) {
+			Team team) {
 		super();
 		this.id = id;
 		this.firstname = firstname;
@@ -50,7 +43,9 @@ public class Sponsor extends Person{
 		this.password = password;
 		this.email = email;
 		this.dob = dob;
-		this.sponsored = sponsored;
 		this.team = team;
+	}
+	public Sponsor() {
+		super();
 	}
 }

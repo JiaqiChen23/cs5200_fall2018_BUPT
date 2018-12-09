@@ -44,8 +44,7 @@ public class Scout extends Person{
 	}
 
 	public Scout(int id, String firstname, String lastname, 
-			String username, String password, String email, Date dob,
-			List<Report> reportCollection) {
+			String username, String password, String email, Date dob) {
 		super();
 		this.id = id;
 		this.firstname = firstname;
@@ -54,6 +53,10 @@ public class Scout extends Person{
 		this.password = password;
 		this.email = email;
 		this.dob = dob;
-		ReportCollection = reportCollection;
+	}
+
+
+	public Scout() {
+		super();
 	}
 }

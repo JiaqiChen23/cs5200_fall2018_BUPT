@@ -109,19 +109,16 @@ public class Team {
 		this.TeamPlayer = teamPlayer;
 	}
 
-	public Team(Draft website, int id, Fan fans, String title, String description, Sponsor spon,
-			Boss boss, Stadium stadium, int sponsorAmount, 
-			List<Draft> drafts, List<Player> teamPlayer) {
+	public Team(int id, String description, int sponsorAmount, String title) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.description = description;
-		this.spon = spon;
-		this.boss = boss;
-		this.stadium = stadium;
 		this.sponsorAmount = sponsorAmount;
-		this.drafts = drafts;
-		this.TeamPlayer = teamPlayer;
+	}
+
+	public Team() {
+		super();
 	}
 
 }

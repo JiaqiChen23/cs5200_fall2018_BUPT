@@ -50,8 +50,7 @@ public class Boss extends Person{
 		ReportCollection = reportCollection;
 	}
 	public Boss(int id, String firstname, String lastname, 
-			String username, String password, String email, Date dob,
-			String name, Team team, List<Report> reportCollection)
+			String username, String password, String email, Date dob, Team team)
 	{
 		super();
 		this.id = id;
@@ -62,6 +61,9 @@ public class Boss extends Person{
 		this.email = email;
 		this.dob = dob;
 		this.team = team;
-		ReportCollection = reportCollection;
+	}
+
+	public Boss() {
+		super();
 	}
 }

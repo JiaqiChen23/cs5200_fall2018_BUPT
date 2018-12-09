@@ -11,38 +11,37 @@ import java.util.Collection;
 import java.util.List;
 
 import edu.northeastern.cs5200.Connect;
-import edu.northeastern.cs5200.model.Allstar;
 import edu.northeastern.cs5200.model.Fan;
-import edu.northeastern.cs5200.model.Player;
+import edu.northeastern.cs5200.model.Scout;
 
-public class FanImpl implements FanDao{
+public class ScoutImpl implements ScoutDao{
 	Connection connect = Connect.getConnection();
-	
+
 	@Override
-	public void createFan(Fan fan) {
+	public void createScout(Scout scout) {
 		String findAllDevelopersSql = "INSERT INTO person (dtype,id,dob,email,firstname,lastname,password,username) VALUES (?,?,?,?,?,?,?,?);";		
 		try {
 			PreparedStatement statement1 = 
 					connect.prepareStatement(findAllDevelopersSql);
-			statement1.setString(1, "fan");
-			statement1.setInt(2, fan.getId());
-			statement1.setDate(3, fan.getDob());
-			statement1.setString(4, fan.getEmail());
-			statement1.setString(5, fan.getFirstname());
-			statement1.setString(6, fan.getLastname());
-			statement1.setString(7, fan.getPassword());
-			statement1.setString(8, fan.getUsername());
+			statement1.setString(1, "scout");
+			statement1.setInt(2, scout.getId());
+			statement1.setDate(3, scout.getDob());
+			statement1.setString(4, scout.getEmail());
+			statement1.setString(5, scout.getFirstname());
+			statement1.setString(6, scout.getLastname());
+			statement1.setString(7, scout.getPassword());
+			statement1.setString(8, scout.getUsername());
 			statement1.executeUpdate();
 			
 		} catch (SQLException e2) {
 			e2.printStackTrace();
-		}	
+		}		
 	}
 
 	@Override
-	public Collection<Fan> findAllFans() {
+	public Collection<Scout> findAllScouts() {
 		String findAllDevelopersSql = "SELECT * FROM person WHERE dtype = 'fan'";
-		List<Fan> fans = new ArrayList<Fan>();
+		List<Scout> scouts = new ArrayList<Scout>();
 		Statement statement = null;
 		ResultSet results = null;
 		try {
@@ -60,28 +59,28 @@ public class FanImpl implements FanDao{
 				
 				int id1 = Integer.parseInt(idS);
 				Date dob1 = java.sql.Date.valueOf(dob);
-				Fan fan = new Fan();
-				fan = new Fan(id1, Firstname, Lastname, 
+				Scout scout = new Scout();
+				scout = new Scout(id1, Firstname, Lastname, 
 						Username, Password, email, dob1);
-				fans.add(fan);
+				scouts.add(scout);
 			}
 						
 			} catch (SQLException e) {
 					e.printStackTrace();
 			}
-			return fans;
+			return scouts;
 	}
 
 	@Override
-	public Fan findFanById(int id) {
-		String findAllDevelopersSql = "SELECT * FROM person WHERE id = "+id;
+	public Scout findScoutById(int id) {
+		String findAllDevelopersSql = "SELECT * FROM person WHERE dtype = 'scout' AND id = "+id;
 		Statement statement = null;
 		ResultSet results = null;
 		try {
 			statement = connect.createStatement();
 			
 			results = statement.executeQuery(findAllDevelopersSql);
-			Fan fan = new Fan();
+			Scout scout = new Scout();
 			while(results.next()) {
 				String idS = results.getString("id");
 				String Firstname = results.getString("firstname");
@@ -93,10 +92,10 @@ public class FanImpl implements FanDao{
 				
 				int id1 = Integer.parseInt(idS);
 				Date dob1 = java.sql.Date.valueOf(dob);
-				fan = new Fan(id1, Firstname, Lastname, 
+				scout = new Scout(id1, Firstname, Lastname, 
 						Username, Password, email, dob1);
 			}
-			return fan;
+			return scout;
 		} catch (SQLException e2) {
 			e2.printStackTrace();
 			return null;
@@ -104,7 +103,7 @@ public class FanImpl implements FanDao{
 	}
 
 	@Override
-	public Fan findFanByCredentials(String username, int password) {
+	public Scout findScoutByCredentials(String username, int password) {
 		String findAllDevelopersSql = "SELECT * FROM person WHERE "
 				+ "username='"+username+"'and password='"+password+"'";
 		Statement statement = null;
@@ -113,7 +112,7 @@ public class FanImpl implements FanDao{
 			statement = connect.createStatement();
 			
 			results = statement.executeQuery(findAllDevelopersSql);
-			Fan fan = null;
+			Scout scout = null;
 			while(results.next()) {
 				String idS = results.getString("id");
 				String Firstname = results.getString("firstname");
@@ -125,31 +124,31 @@ public class FanImpl implements FanDao{
 				
 				int id1 = Integer.parseInt(idS);
 				Date dob1 = java.sql.Date.valueOf(dob);
-				fan = new Fan(id1, Firstname, Lastname, 
+				scout = new Scout(id1, Firstname, Lastname, 
 						Username, Password, email, dob1);
 			}
-			return fan;
+			return scout;
 		} catch (SQLException e2) {
 			e2.printStackTrace();
 			return null;
 		}
-		}
+	}
 
 	@Override
-	public void updateFanById(int id, Fan fan) {
+	public void updateScoutById(int id, Scout scout) {
 		String findAllDevelopersSql = "UPDATE person SET dtype=?,"
 				+ "dob=?,email=?,firstname=?,"
 				+ "lastname=?,password=?,username=?  WHERE id =?";
 		try {
 			PreparedStatement statement = 
 					connect.prepareStatement(findAllDevelopersSql);
-			statement.setString(1, "fan");
-			statement.setDate(2, fan.getDob());
-			statement.setString(3, fan.getEmail());
-			statement.setString(4, fan.getFirstname());
-			statement.setString(5, fan.getLastname());
-			statement.setString(6, fan.getPassword());
-			statement.setString(7, fan.getUsername());
+			statement.setString(1, "scout");
+			statement.setDate(2, scout.getDob());
+			statement.setString(3, scout.getEmail());
+			statement.setString(4, scout.getFirstname());
+			statement.setString(5, scout.getLastname());
+			statement.setString(6, scout.getPassword());
+			statement.setString(7, scout.getUsername());
 			statement.setInt(8, id);
 
 			statement.executeUpdate();
@@ -157,11 +156,11 @@ public class FanImpl implements FanDao{
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
-		return;		
+		return;	
 	}
 
 	@Override
-	public void deleteFanById(int id) {
+	public void deleteScoutById(int id) {
 		String findAllDevelopersSql = "DELETE FROM person WHERE id = ?";		
 		try {
 			PreparedStatement statement = connect.prepareStatement(findAllDevelopersSql);
@@ -170,7 +169,7 @@ public class FanImpl implements FanDao{
 		} catch (SQLException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
-		}		return;
-	}		
+		}		return;		
+	}
 
 }

@@ -1,5 +1,6 @@
 package edu.northeastern.cs5200.repository;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,8 +10,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.northeastern.cs5200.dao.FanImpl;
+import edu.northeastern.cs5200.dao.SponsorImpl;
 import edu.northeastern.cs5200.model.Allstar;
 import edu.northeastern.cs5200.model.Fan;
+import edu.northeastern.cs5200.model.Sponsor;
+import edu.northeastern.cs5200.model.Team;
 
 @RestController
 public class textController {
@@ -23,10 +27,15 @@ public class textController {
 	{
 		FanImpl fanI = new FanImpl();
 		Allstar a = new Allstar();
+		Team team = new Team();
 		List<Allstar> b = new ArrayList<Allstar>();
 		b.add(a);
 		Fan fan = fanI.findFanById(FId);
-		System.out.println(fan.getVoted());
+		Date date = new Date(1789,2,3);
+		Sponsor sponsor = new Sponsor(1, "abc", "idt", 
+				"idj", "ijsd", "ojosj@ds", date, team);
+		SponsorImpl spim = new SponsorImpl();
+		spim.createSponsor(sponsor);
 		if(fan.getVoted()==null)
 		{
 			return b;
