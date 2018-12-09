@@ -20,7 +20,7 @@ public class FanImpl implements FanDao{
 	
 	@Override
 	public void createFan(Fan fan) {
-		String findAllDevelopersSql = "INSERT INTO person (dtype,id,dob,email,firstname,lastname,password,username) VALUES (?,?,?,?,?,?,?,?);";		
+		String findAllDevelopersSql = "INSERT INTO person (dtype,id,dob,email,firstname,lastname,password,username,type) VALUES (?,?,?,?,?,?,?,?,?);";		
 		try {
 			PreparedStatement statement1 = 
 					connect.prepareStatement(findAllDevelopersSql);
@@ -32,6 +32,7 @@ public class FanImpl implements FanDao{
 			statement1.setString(6, fan.getLastname());
 			statement1.setString(7, fan.getPassword());
 			statement1.setString(8, fan.getUsername());
+			statement1.setString(9, "fan");
 			statement1.executeUpdate();
 			
 		} catch (SQLException e2) {
@@ -139,7 +140,7 @@ public class FanImpl implements FanDao{
 	public void updateFanById(int id, Fan fan) {
 		String findAllDevelopersSql = "UPDATE person SET dtype=?,"
 				+ "dob=?,email=?,firstname=?,"
-				+ "lastname=?,password=?,username=?  WHERE id =?";
+				+ "lastname=?,password=?,username=?,type=?  WHERE id =?";
 		try {
 			PreparedStatement statement = 
 					connect.prepareStatement(findAllDevelopersSql);
@@ -150,7 +151,8 @@ public class FanImpl implements FanDao{
 			statement.setString(5, fan.getLastname());
 			statement.setString(6, fan.getPassword());
 			statement.setString(7, fan.getUsername());
-			statement.setInt(8, id);
+			statement.setString(8, "fan");
+			statement.setInt(9, id);
 
 			statement.executeUpdate();
 		} catch (SQLException e2) {

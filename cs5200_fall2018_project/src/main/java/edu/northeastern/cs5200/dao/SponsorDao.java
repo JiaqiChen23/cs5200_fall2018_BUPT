@@ -14,6 +14,8 @@ public interface SponsorDao {
 	
 	public Sponsor findSponsorByCredentials(String username, int password);
 	
+	public Sponsor findSponsorByTeamId(int id);
+	
 	public void updateSponsorById(int id, Sponsor sponsor);
 	
 	public void deleteSponsorById(int id);

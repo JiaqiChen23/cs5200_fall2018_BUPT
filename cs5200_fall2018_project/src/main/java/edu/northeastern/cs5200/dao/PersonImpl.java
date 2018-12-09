@@ -49,6 +49,7 @@ public class PersonImpl implements PersonDao{
 			results = statement.executeQuery(findAllDevelopersSql);
 			
 			while(results.next()) {
+				String dtype = results.getString("dtype");
 				String idS = results.getString("id");
 				String Firstname = results.getString("firstname");
 				String Lastname = results.getString("lastname");
@@ -60,7 +61,7 @@ public class PersonImpl implements PersonDao{
 				int id1 = Integer.parseInt(idS);
 				Date dob1 = java.sql.Date.valueOf(dob);
 				Person person = new Person();
-				person = new Person(id1, Firstname, Lastname, 
+				person = new Person(dtype,id1, Firstname, Lastname, 
 						Username, Password, email, dob1);
 				persons.add(person);
 			}

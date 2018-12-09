@@ -16,6 +16,8 @@ public interface DraftDao {
 	
 	public Collection<Draft> findDraftsByTeamAndYear(int teamId, int year);
 	
+	public Collection<Draft> findDraftsByYear(int year);
+	
 	public void updateDraftById(int id, Draft draft);
 	
 	public void deleteDraftById(int id);

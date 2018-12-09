@@ -208,4 +208,39 @@ public class DraftImpl implements DraftDao{
 		
 	}
 
+	@Override
+	public Collection<Draft> findDraftsByYear(int year) {
+		String findAllDevelopersSql = "SELECT * FROM draft WHERE year = '"+year+"'";
+		List<Draft> drafts = new ArrayList<Draft>();
+		Statement statement = null;
+		ResultSet results = null;
+		try {
+			statement = connect.createStatement();
+			results = statement.executeQuery(findAllDevelopersSql);
+			
+			while(results.next()) {
+				String idS = results.getString("id");
+				String order = results.getString("order_num");
+				String yearR = results.getString("year");
+				String Playerid = results.getString("player_id");
+				String Teamid = results.getString("team_id");
+				
+				int id = Integer.parseInt(idS);
+				int Pid = Integer.parseInt(Playerid);
+				int Tid = Integer.parseInt(Teamid);
+				int ordernum = Integer.parseInt(order);
+				Draft draft = new Draft();
+				PlayerImpl PIMPL = new PlayerImpl();
+				TeamImpl TIMPL = new TeamImpl();
+				
+				draft = new Draft(id, PIMPL.findPlayerById(Pid),TIMPL.findTeamById(Tid),yearR,ordernum);
+				drafts.add(draft);
+			}
+						
+			} catch (SQLException e) {
+					e.printStackTrace();
+			}
+			return drafts;
+	}
+
 }

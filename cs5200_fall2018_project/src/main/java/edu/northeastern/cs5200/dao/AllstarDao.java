@@ -12,6 +12,10 @@ public interface AllstarDao {
 	
 	public Allstar findAllstarById(int id);
 	
+	public Collection<Allstar> findAllstarByFanId(int id);
+	
+	public Collection<Allstar> findAllstarByPlayerId(int id);
+	
 	public void updateAllstarsById(int id, Allstar allstars);
 	
 	public void deleteAllstarsById(int id);

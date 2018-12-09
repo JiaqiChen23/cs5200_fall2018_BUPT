@@ -20,13 +20,14 @@ public class StadiumImpl implements StadiumDao{
 
 	@Override
 	public void createStadium(Stadium stadium) {
-		String findAllDevelopersSql = "INSERT INTO stadium (id,name,team_id) VALUES (?,?,?);";		
+		String findAllDevelopersSql = "INSERT INTO stadium (id,name,team_id,seats) VALUES (?,?,?,?);";		
 		try {
 			PreparedStatement statement1 = 
 					connect.prepareStatement(findAllDevelopersSql);
 			statement1.setInt(1, stadium.getId());
 			statement1.setString(2, stadium.getName());
 			statement1.setInt(3, stadium.getTeam().getId());
+			statement1.setInt(4, stadium.getSeats());
 			statement1.executeUpdate();
 			
 		} catch (SQLException e2) {
@@ -48,12 +49,14 @@ public class StadiumImpl implements StadiumDao{
 				String idS = results.getString("id");
 				String name = results.getString("name");
 				String Teamid = results.getString("team_id");
+				String SeatsS = results.getString("seats");
 				
 				int id1 = Integer.parseInt(idS);
 				int Tid = Integer.parseInt(Teamid);
+				int Seats = Integer.parseInt(SeatsS);
 				Stadium stadium = new Stadium();
 				TeamImpl TIMPL = new TeamImpl();
-				stadium = new Stadium(id1, name,TIMPL.findTeamById(Tid));
+				stadium = new Stadium(id1, name,TIMPL.findTeamById(Tid),Seats);
 				stadiums.add(stadium);
 			}
 						
@@ -77,11 +80,13 @@ public class StadiumImpl implements StadiumDao{
 				String idS = results.getString("id");
 				String name = results.getString("name");
 				String Teamid = results.getString("team_id");
+				String SeatsS = results.getString("seats");
 				
 				int id1 = Integer.parseInt(idS);
 				int Tid = Integer.parseInt(Teamid);
+				int Seats = Integer.parseInt(SeatsS);
 				TeamImpl TIMPL = new TeamImpl();
-				stadium = new Stadium(id1, name,TIMPL.findTeamById(Tid));
+				stadium = new Stadium(id1, name,TIMPL.findTeamById(Tid),Seats);
 			}
 						
 			} catch (SQLException e) {
@@ -106,10 +111,11 @@ public class StadiumImpl implements StadiumDao{
 				String idS = results.getString("id");
 				String name = results.getString("name");
 				String Teamid = results.getString("team_id");
-				
+				String SeatsS = results.getString("seats");
+				int Seats = Integer.parseInt(SeatsS);
 				int id1 = Integer.parseInt(idS);
 				int Tid1 = Integer.parseInt(Teamid);
-				stadium = new Stadium(id1, name,TIMPL.findTeamById(Tid1));
+				stadium = new Stadium(id1, name,TIMPL.findTeamById(Tid1),Seats);
 			}
 						
 			} catch (SQLException e) {
@@ -121,13 +127,14 @@ public class StadiumImpl implements StadiumDao{
 	@Override
 	public void updateStadiumById(int id, Stadium stadium) {
 		String findAllDevelopersSql = "UPDATE stadium SET "
-				+ "name=?,team_id=?  WHERE id =?";
+				+ "name=?,team_id=?,seats=?  WHERE id =?";
 		try {
 			PreparedStatement statement = 
 					connect.prepareStatement(findAllDevelopersSql);
 			statement.setString(1, stadium.getName());
 			statement.setInt(2, stadium.getTeam().getId());
 			statement.setInt(3, id);
+			statement.setInt(4, stadium.getSeats());
 
 			statement.executeUpdate();
 		} catch (SQLException e2) {

@@ -132,4 +132,70 @@ public class ReportImpl implements ReportDao{
 		}		return;	
 	}
 
+	@Override
+	public Collection<Report> findAllReportByBossId(int id) {
+		String findAllDevelopersSql = "SELECT * FROM report WHERE boss_id="+id;
+		List<Report> reports = new ArrayList<Report>();
+		Statement statement = null;
+		ResultSet results = null;
+		try {
+			statement = connect.createStatement();
+			results = statement.executeQuery(findAllDevelopersSql);
+			
+			while(results.next()) {
+				String idS = results.getString("id");
+				String body = results.getString("reportbody");
+				String Bossid = results.getString("boss_id");
+				String Scoutid = results.getString("scout_id");
+				
+				int id1 = Integer.parseInt(idS);
+				int Bid = Integer.parseInt(Bossid);
+				int Sid = Integer.parseInt(Scoutid);
+				Report report = new Report();
+				BossImpl BIMPL = new BossImpl();
+				ScoutImpl SIMPL = new ScoutImpl();
+				
+				report = new Report(id1, BIMPL.findBossById(Bid),SIMPL.findScoutById(Sid),body);
+				reports.add(report);
+			}
+						
+			} catch (SQLException e) {
+					e.printStackTrace();
+			}
+			return reports;
+	}
+
+	@Override
+	public Collection<Report> findAllReportByScoutId(int id) {
+		String findAllDevelopersSql = "SELECT * FROM report WHERE scout_id="+id;
+		List<Report> reports = new ArrayList<Report>();
+		Statement statement = null;
+		ResultSet results = null;
+		try {
+			statement = connect.createStatement();
+			results = statement.executeQuery(findAllDevelopersSql);
+			
+			while(results.next()) {
+				String idS = results.getString("id");
+				String body = results.getString("reportbody");
+				String Bossid = results.getString("boss_id");
+				String Scoutid = results.getString("scout_id");
+				
+				int id1 = Integer.parseInt(idS);
+				int Bid = Integer.parseInt(Bossid);
+				int Sid = Integer.parseInt(Scoutid);
+				Report report = new Report();
+				BossImpl BIMPL = new BossImpl();
+				ScoutImpl SIMPL = new ScoutImpl();
+				
+				report = new Report(id1, BIMPL.findBossById(Bid),SIMPL.findScoutById(Sid),body);
+				reports.add(report);
+			}
+						
+			} catch (SQLException e) {
+					e.printStackTrace();
+			}
+			return reports;
+	}
+
 }

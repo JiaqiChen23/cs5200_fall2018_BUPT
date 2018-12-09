@@ -19,7 +19,7 @@ public class ScoutImpl implements ScoutDao{
 
 	@Override
 	public void createScout(Scout scout) {
-		String findAllDevelopersSql = "INSERT INTO person (dtype,id,dob,email,firstname,lastname,password,username) VALUES (?,?,?,?,?,?,?,?);";		
+		String findAllDevelopersSql = "INSERT INTO person (dtype,id,dob,email,firstname,lastname,password,username,type) VALUES (?,?,?,?,?,?,?,?);";		
 		try {
 			PreparedStatement statement1 = 
 					connect.prepareStatement(findAllDevelopersSql);
@@ -31,6 +31,7 @@ public class ScoutImpl implements ScoutDao{
 			statement1.setString(6, scout.getLastname());
 			statement1.setString(7, scout.getPassword());
 			statement1.setString(8, scout.getUsername());
+			statement1.setString(9, "scout");
 			statement1.executeUpdate();
 			
 		} catch (SQLException e2) {
@@ -138,7 +139,7 @@ public class ScoutImpl implements ScoutDao{
 	public void updateScoutById(int id, Scout scout) {
 		String findAllDevelopersSql = "UPDATE person SET dtype=?,"
 				+ "dob=?,email=?,firstname=?,"
-				+ "lastname=?,password=?,username=?  WHERE id =?";
+				+ "lastname=?,password=?,username=?,type=?  WHERE id =?";
 		try {
 			PreparedStatement statement = 
 					connect.prepareStatement(findAllDevelopersSql);
@@ -149,7 +150,8 @@ public class ScoutImpl implements ScoutDao{
 			statement.setString(5, scout.getLastname());
 			statement.setString(6, scout.getPassword());
 			statement.setString(7, scout.getUsername());
-			statement.setInt(8, id);
+			statement.setString(8, "scout");
+			statement.setInt(9, id);
 
 			statement.executeUpdate();
 		} catch (SQLException e2) {
