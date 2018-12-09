@@ -92,54 +92,70 @@
 </body>
 
 <script type="text/javascript">
-	var data = [{
-            id: 1,
-            firstName: "Alice",
-            LastName: "aaa",
-            username: "alice",
-            password: "alice",
-            type: "Fan"
-        },{
-            id: 2,
-            firstName: "Bob",
-            LastName: "bbb",
-            username: "bob",
-            password: "alice",
-            type: "Boss"
-        },{
-            id: 3,
-            firstName: "Charlie",
-            LastName: "ccc",
-            username: "charlie",
-            password: "alice",
-            type: "Scout"
-        }];
 
     $(".viewUserBtn").click(function(){
-    	// table head
-    	var html = "";
-    	html += "<tr>"
-    	html +=     "<th>ID</th>"
-    	html +=     "<th>FirstName</th>"
-    	html +=     "<th>LastName</th>"
-        html +=     "<th>Username</th>"
-        html +=     "<th>Password</th>"
-        html +=     "<th>Type</th>"
-        html += "</tr>"
-		$(".userTableHead").html(html)
-		// table body
-        var html2 = "";
-        for( var i = 0; i < data.length; i++ ) {
-            html2 += "<tr>"
-            html2 +=     "<td>" + data[i].id + "</td>"
-            html2 +=     "<td>" + data[i].firstName + "</td>"
-            html2 +=     "<td>" + data[i].lastName + "</td>"
-            html2 +=     "<td>" + data[i].username + "</td>"
-            html2 +=     "<td>" + data[i].password + "</td>"
-            html2 +=     "<td>" + data[i].type + "</td>"
-            html2 += "</tr>"
-        }
-        $(".userTableBody").html(html2)
+    	$.ajax({
+                type: "GET",
+                // async: false,
+                url: "http://localhost:8080/api/user/getAllUsers",
+                dataType: "json",
+                // jsonp: "callback",
+                // jsonpCallback:"handler",
+                success: function (result) {
+                    var data = result
+                    // table head
+			    	var html = "";
+			    	html += "<tr>"
+			    	html +=     "<th>ID</th>"
+			    	html +=     "<th>FirstName</th>"
+			    	html +=     "<th>LastName</th>"
+			        html +=     "<th>Username</th>"
+			        html +=     "<th>Password</th>"
+			        html +=     "<th>Type</th>"
+			        html += "</tr>"
+					$(".userTableHead").html(html)
+					// table body
+			        var html2 = "";
+			        for( var i = 0; i < data.length; i++ ) {
+			            html2 += "<tr>"
+			            html2 +=     "<td>" + data[i].id + "</td>"
+			            html2 +=     "<td>" + data[i].firstname + "</td>"
+			            html2 +=     "<td>" + data[i].lastname + "</td>"
+			            html2 +=     "<td>" + data[i].username + "</td>"
+			            html2 +=     "<td>" + data[i].password + "</td>"
+			            html2 +=     "<td>" + data[i].type + "</td>"
+			            html2 += "</tr>"
+			        }
+			        $(".userTableBody").html(html2)
+                },
+                error: function (e) {
+                    var test = e;
+                }
+            });
+  //   	// table head
+  //   	var html = "";
+  //   	html += "<tr>"
+  //   	html +=     "<th>ID</th>"
+  //   	html +=     "<th>FirstName</th>"
+  //   	html +=     "<th>LastName</th>"
+  //       html +=     "<th>Username</th>"
+  //       html +=     "<th>Password</th>"
+  //       html +=     "<th>Type</th>"
+  //       html += "</tr>"
+		// $(".userTableHead").html(html)
+		// // table body
+  //       var html2 = "";
+  //       for( var i = 0; i < data.length; i++ ) {
+  //           html2 += "<tr>"
+  //           html2 +=     "<td>" + data[i].id + "</td>"
+  //           html2 +=     "<td>" + data[i].firstName + "</td>"
+  //           html2 +=     "<td>" + data[i].lastName + "</td>"
+  //           html2 +=     "<td>" + data[i].username + "</td>"
+  //           html2 +=     "<td>" + data[i].password + "</td>"
+  //           html2 +=     "<td>" + data[i].type + "</td>"
+  //           html2 += "</tr>"
+  //       }
+  //       $(".userTableBody").html(html2)
 	})
 </script>
 </html>
