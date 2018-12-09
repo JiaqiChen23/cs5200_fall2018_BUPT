@@ -12,9 +12,6 @@ public class Player {
 	@GeneratedValue
 	private int id;
 	private String name;
-	@ManyToOne()
-	@JsonIgnore
-	private Fan fans;
 	
 	@ManyToOne()
 	@JsonIgnore
@@ -54,18 +51,11 @@ public class Player {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Fan getFans() {
-		return fans;
-	}
-	public void setFans(Fan fans) {
-		this.fans = fans;
-	}
 	public Player(int id, String name, Fan fan, Team team, List<Allstar> voted)
 	{
 		this.id = id;
 		this.name = name;
 		this.voted = voted;
-		this.fans = fan;
 		this.team = team;
 	}
 		

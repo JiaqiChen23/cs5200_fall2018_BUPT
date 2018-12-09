@@ -12,9 +12,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Connect {
 
 	private static final String DRIVER = "com.mysql.jdbc.Driver";
-	private static final String URL = "jdbc:mysql://assignment.cdgao9scgr84.us-east-2.rds.amazonaws.com:3306";
-	private static final String USER = "charles";
-	private static final String PASSWORD = "password";
+	private static final String URL = "jdbc:mysql://127.0.0。1:3306";
+	private static final String USER = "root";
+	private static final String PASSWORD = "charles123";
 	private static 	java.sql.Connection dbConnection = null;
 
 	public static Connection getConnection(){
