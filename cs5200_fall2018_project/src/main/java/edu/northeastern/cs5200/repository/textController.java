@@ -1,5 +1,6 @@
 package edu.northeastern.cs5200.repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +23,12 @@ public class textController {
 	{
 		FanImpl fanI = new FanImpl();
 		Allstar a = new Allstar();
-		List<Allstar> b = null;
+		List<Allstar> b = new ArrayList<Allstar>();
 		b.add(a);
 		Fan fan = fanI.findFanById(FId);
+		System.out.println(fan.getVoted());
 		if(fan.getVoted()==null)
 		{
-			System.out.println("123131313123123123123");
 			return b;
 		}
 		else

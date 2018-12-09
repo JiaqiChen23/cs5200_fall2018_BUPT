@@ -19,7 +19,7 @@ public class FanImpl implements FanDao{
 	
 	@Override
 	public void createFan(Fan fan) {
-//		String findAllDevelopersSql = "INSERT INTO page (id,title,description,created,updated,views,website_id) VALUES (?,?,?,?,?,?,?);";		
+//		String findAllDevelopersSql = "INSERT INTO fan (id,title,description,created,updated,views,website_id) VALUES (?,?,?,?,?,?,?);";		
 //		try {
 //			PreparedStatement statement1 = 
 //					connect.prepareStatement(findAllDevelopersSql);
@@ -45,11 +45,12 @@ public class FanImpl implements FanDao{
 
 	@Override
 	public Fan findFanById(int id) {
-		String findAllDevelopersSql = "SELECT * FROM person WHERE id = "+id+"and dtype = 'fan'";
+		String findAllDevelopersSql = "SELECT * FROM person WHERE id = "+id;
 		Statement statement = null;
 		ResultSet results = null;
 		try {
 			statement = connect.createStatement();
+			
 			results = statement.executeQuery(findAllDevelopersSql);
 			Fan fan = null;
 			while(results.next()) {
