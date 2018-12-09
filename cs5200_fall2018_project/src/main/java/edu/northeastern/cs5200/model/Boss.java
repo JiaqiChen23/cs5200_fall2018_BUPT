@@ -14,10 +14,10 @@ import javax.persistence.OneToOne;
 
 @Entity
 public class Boss extends Person{
-	@Id  
-	@GeneratedValue
-	   (strategy=GenerationType.IDENTITY)
-	private int id;
+//	@Id  
+//	@GeneratedValue
+//	   (strategy=GenerationType.IDENTITY)
+//	private int id;
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Team team;
 	@OneToMany(mappedBy="boss")

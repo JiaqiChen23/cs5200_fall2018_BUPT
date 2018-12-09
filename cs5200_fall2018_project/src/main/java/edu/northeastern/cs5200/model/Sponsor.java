@@ -14,10 +14,10 @@ import javax.persistence.OneToOne;
 
 public class Sponsor extends Person{
 
-	@Id  
-	@GeneratedValue
-	   (strategy=GenerationType.IDENTITY)
-	private int id;
+//	@Id  
+//	@GeneratedValue
+//	   (strategy=GenerationType.IDENTITY)
+//	private int id;
 	private String sponsored;
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Team team;

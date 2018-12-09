@@ -9,10 +9,10 @@ import javax.persistence.*;
 @Table(name = "fans")
 public class Fan extends Person{
 
-	@Id  
-	@GeneratedValue
-	   (strategy=GenerationType.IDENTITY)
-	private int id;
+//	@Id  
+//	@GeneratedValue
+//	   (strategy=GenerationType.IDENTITY)
+//	private int id;
 	
 	@OneToMany(mappedBy="fans")
 	private List<Allstar> voted;

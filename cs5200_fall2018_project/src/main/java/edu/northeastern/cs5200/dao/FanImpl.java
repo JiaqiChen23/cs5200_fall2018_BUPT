@@ -2,6 +2,7 @@ package edu.northeastern.cs5200.dao;
 
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -18,8 +19,22 @@ public class FanImpl implements FanDao{
 	
 	@Override
 	public void createFan(Fan fan) {
-		// TODO Auto-generated method stub
-		
+//		String findAllDevelopersSql = "INSERT INTO page (id,title,description,created,updated,views,website_id) VALUES (?,?,?,?,?,?,?);";		
+//		try {
+//			PreparedStatement statement1 = 
+//					connect.prepareStatement(findAllDevelopersSql);
+//			statement1.setInt(1, page.getId());
+//			statement1.setString(2, page.getTitle());
+//			statement1.setString(3, page.getDescription());
+//			statement1.setDate(4, page.getCreated());
+//			statement1.setDate(5, page.getUpdated());
+//			statement1.setInt(6, page.getViews());
+//			statement1.setInt(7,websiteId);
+//			statement1.executeUpdate();
+//			
+//		} catch (SQLException e2) {
+//			e2.printStackTrace();
+//		}	
 	}
 
 	@Override
@@ -30,7 +45,7 @@ public class FanImpl implements FanDao{
 
 	@Override
 	public Fan findFanById(int id) {
-		String findAllDevelopersSql = "SELECT * FROM person WHERE id = ? and dtype = 'fan'"+id;
+		String findAllDevelopersSql = "SELECT * FROM person WHERE id = "+id+"and dtype = 'fan'";
 		Statement statement = null;
 		ResultSet results = null;
 		try {

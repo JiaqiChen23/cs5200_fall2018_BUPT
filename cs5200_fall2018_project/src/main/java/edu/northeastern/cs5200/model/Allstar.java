@@ -55,4 +55,7 @@ public class Allstar {
 		this.fans = fans;
 		this.player = player;
 	}
+	public Allstar() {
+		super();
+	}
 }

@@ -12,10 +12,10 @@ import javax.persistence.OneToMany;
 @Entity
 public class Scout extends Person{
 
-	@Id  
-	@GeneratedValue
-	   (strategy=GenerationType.IDENTITY)
-	private int id;
+//	@Id  
+//	@GeneratedValue
+//	   (strategy=GenerationType.IDENTITY)
+//	private int id;
 	
 	@OneToMany(mappedBy="scout")
 	private List<Report> ReportCollection;

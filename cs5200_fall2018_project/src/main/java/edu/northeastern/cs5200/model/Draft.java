@@ -1,37 +1,41 @@
 package edu.northeastern.cs5200.model;
 
-import java.sql.Date;
-import java.util.List;
-
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
+@Table(name ="draft")
 public class Draft {
 	@Id  
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	private String name;
+	
 	@ManyToOne()
 	@JsonIgnore
 	private Team team;
-	private String year;
-	private int order;
 	
+	@ManyToOne()
+	@JsonIgnore
+	private Player player;
+	private String year;
+	private int orderNum;
+	
+	
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+
 	public int getId() {
 		return id;
 	}
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public Team getTeam() {
@@ -51,19 +55,18 @@ public class Draft {
 	}
 
 	public int getOrder() {
-		return order;
+		return orderNum;
 	}
 
 	public void setOrder(int order) {
-		this.order = order;
+		this.orderNum = order;
 	}
 
 	public Draft(int id, String name, Team team, String year, int order) {
 		super();
 		this.id = id;
-		this.name = name;
 		this.team = team;
 		this.year = year;
-		this.order = order;
+		this.orderNum = order;
 	}
 }
