@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.northeastern.cs5200.dao.FanImpl;
+import edu.northeastern.cs5200.dao.PersonImpl;
 import edu.northeastern.cs5200.dao.SponsorImpl;
 import edu.northeastern.cs5200.model.Allstar;
 import edu.northeastern.cs5200.model.Fan;
+import edu.northeastern.cs5200.model.Person;
 import edu.northeastern.cs5200.model.Sponsor;
 import edu.northeastern.cs5200.model.Team;
 
@@ -43,5 +45,12 @@ public class textController {
 		else
 			return fan.getVoted();
 	}
+    @GetMapping("/api/user/getAllUsers")
+    public List<Person> findallPerson() 
+    {
+    	PersonImpl PIMPL = new PersonImpl();
+    	return PIMPL.findAllPerson();
+    }
+    
     
 }
