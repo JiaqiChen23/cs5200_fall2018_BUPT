@@ -21,6 +21,7 @@ public class Person {
 	protected String password;
 	@Column(name = "email", nullable = false)
 	protected String email;
+	protected String type;
 	protected Date dob;
 	public int getId() {
 		return id;
@@ -64,9 +65,10 @@ public class Person {
 	public void setDob(Date dob) {
 		this.dob = dob;
 	}
-	public Person(int id, String firstname, String lastname, 
+	public Person(String type,int id, String firstname, String lastname, 
 			String username, String password, String email, Date dob) {
 		super();
+		this.type = type;
 		this.id = id;
 		this.firstname = firstname;
 		this.lastname = lastname;

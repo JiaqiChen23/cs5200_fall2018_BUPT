@@ -45,7 +45,7 @@ public class AllstarImpl implements AllstarDao{
 			while(results.next()) {
 				String idS = results.getString("id");
 				String Fanid = results.getString("fans_id");
-				String Playerid = results.getString("player_is");
+				String Playerid = results.getString("player_id");
 				
 				int id = Integer.parseInt(idS);
 				int Fid = Integer.parseInt(Fanid);
@@ -77,7 +77,7 @@ public class AllstarImpl implements AllstarDao{
 			while(results.next()) {
 				String idS = results.getString("id");
 				String Fanid = results.getString("fans_id");
-				String Playerid = results.getString("player_is");
+				String Playerid = results.getString("player_id");
 				
 				int id1 = Integer.parseInt(idS);
 				int Fid = Integer.parseInt(Fanid);
@@ -124,6 +124,70 @@ public class AllstarImpl implements AllstarDao{
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}		return;	
+	}
+
+	@Override
+	public Collection<Allstar> findAllstarByFanId(int id) {
+		String findAllDevelopersSql = "SELECT * FROM allstar WHERE fans_id ="+id;
+		List<Allstar> allstars = new ArrayList<Allstar>();
+		Statement statement = null;
+		ResultSet results = null;
+		try {
+			statement = connect.createStatement();
+			results = statement.executeQuery(findAllDevelopersSql);
+			
+			while(results.next()) {
+				String idS = results.getString("id");
+				String Fanid = results.getString("fans_id");
+				String Playerid = results.getString("player_id");
+				
+				int ids = Integer.parseInt(idS);
+				int Fid = Integer.parseInt(Fanid);
+				int Pid = Integer.parseInt(Playerid);
+				Allstar allstar = new Allstar();
+				FanImpl FIMPL = new FanImpl();
+				PlayerImpl PIMPL = new PlayerImpl();
+				
+				allstar = new Allstar(ids, FIMPL.findFanById(Fid),PIMPL.findPlayerById(Pid));
+				allstars.add(allstar);
+			}
+						
+			} catch (SQLException e) {
+					e.printStackTrace();
+			}
+			return allstars;
+	}
+
+	@Override
+	public Collection<Allstar> findAllstarByPlayerId(int id) {
+		String findAllDevelopersSql = "SELECT * FROM allstar WHERE player_id ="+id;
+		List<Allstar> allstars = new ArrayList<Allstar>();
+		Statement statement = null;
+		ResultSet results = null;
+		try {
+			statement = connect.createStatement();
+			results = statement.executeQuery(findAllDevelopersSql);
+			
+			while(results.next()) {
+				String idS = results.getString("id");
+				String Fanid = results.getString("fans_id");
+				String Playerid = results.getString("player_id");
+				
+				int ids = Integer.parseInt(idS);
+				int Fid = Integer.parseInt(Fanid);
+				int Pid = Integer.parseInt(Playerid);
+				Allstar allstar = new Allstar();
+				FanImpl FIMPL = new FanImpl();
+				PlayerImpl PIMPL = new PlayerImpl();
+				
+				allstar = new Allstar(ids, FIMPL.findFanById(Fid),PIMPL.findPlayerById(Pid));
+				allstars.add(allstar);
+			}
+						
+			} catch (SQLException e) {
+					e.printStackTrace();
+			}
+			return allstars;
 	}
 
 }

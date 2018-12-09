@@ -12,6 +12,10 @@ public interface ReportDao {
 	
 	public Report findReportById(int id);
 	
+	public Collection<Report> findAllReportByBossId(int id);
+	
+	public Collection<Report> findAllReportByScoutId(int id);
+	
 	public void updateReportById(int id, Report report);
 	
 	public void deleteReportById(int id);

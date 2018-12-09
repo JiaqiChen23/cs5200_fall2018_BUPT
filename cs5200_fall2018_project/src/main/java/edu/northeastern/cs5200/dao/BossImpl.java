@@ -19,7 +19,7 @@ public class BossImpl implements BossDao{
 	
 	@Override
 	public void createBoss(Boss boss) {
-		String findAllDevelopersSql = "INSERT INTO person (dtype,id,dob,email,firstname,lastname,password,username,team_id) VALUES (?,?,?,?,?,?,?,?,?);";		
+		String findAllDevelopersSql = "INSERT INTO person (dtype,id,dob,email,firstname,lastname,password,username,team_id,type) VALUES (?,?,?,?,?,?,?,?,?,?);";		
 		try {
 			PreparedStatement statement1 = 
 					connect.prepareStatement(findAllDevelopersSql);
@@ -31,7 +31,9 @@ public class BossImpl implements BossDao{
 			statement1.setString(6, boss.getLastname());
 			statement1.setString(7, boss.getPassword());
 			statement1.setString(8, boss.getUsername());
-			statement1.setInt(9, boss.getTeam().getId());
+			statement1.setString(9, "boss");
+			statement1.setInt(10, boss.getTeam().getId());
+			
 			statement1.executeUpdate();
 			
 		} catch (SQLException e2) {
@@ -148,7 +150,7 @@ public class BossImpl implements BossDao{
 	public void updateBossById(int id, Boss boss) {
 		String findAllDevelopersSql = "UPDATE person SET dtype=?,"
 				+ "dob=?,email=?,firstname=?,"
-				+ "lastname=?,password=?,username=?,team_id=? WHERE id =?";
+				+ "lastname=?,password=?,username=?,team_id=?,type=? WHERE id =?";
 		try {
 			PreparedStatement statement = 
 					connect.prepareStatement(findAllDevelopersSql);
@@ -160,7 +162,8 @@ public class BossImpl implements BossDao{
 			statement.setString(6, boss.getPassword());
 			statement.setString(7, boss.getUsername());
 			statement.setInt(8, boss.getTeam().getId());
-			statement.setInt(9, id);
+			statement.setString(9, "boss");
+			statement.setInt(10, id);
 
 			statement.executeUpdate();
 		} catch (SQLException e2) {

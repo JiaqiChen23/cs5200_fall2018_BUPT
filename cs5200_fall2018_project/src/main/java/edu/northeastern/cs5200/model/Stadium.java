@@ -17,7 +17,7 @@ public class Stadium {
 	private String name;
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Team team;
-	
+	private int Seats;
 	public int getId() {
 		return id;
 	}
@@ -36,14 +36,21 @@ public class Stadium {
 	public void setTeam(Team team) {
 		this.team = team;
 	}
-	public Stadium(int id, String name, Team team)
+	public Stadium(int id, String name, Team team, int seats)
 	{
 		super();
 		this.id = id;
 		this.name = name;
 		this.team = team;
+		this.Seats = seats;
 	}
 	public Stadium() {
 		super();
+	}
+	public int getSeats() {
+		return Seats;
+	}
+	public void setSeats(int seats) {
+		Seats = seats;
 	}
 }
