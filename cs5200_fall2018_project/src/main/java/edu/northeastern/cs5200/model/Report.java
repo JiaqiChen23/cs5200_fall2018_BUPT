@@ -53,4 +53,7 @@ public class Report {
 			this.scout = scout;
 			this.reportbody = reportbody;
 		}
+	public Report() {
+		super();
+	}
 }

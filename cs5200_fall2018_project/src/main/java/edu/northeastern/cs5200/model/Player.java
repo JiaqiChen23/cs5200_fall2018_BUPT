@@ -17,6 +17,10 @@ public class Player {
 	@JsonIgnore
 	private Team team;
 	
+	@OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL, 
+	        mappedBy = "player")
+	private Draft draft;
+	
 	@OneToMany(mappedBy="player")
 	private List<Allstar> voted;
 	public void voted(Allstar allstar)
@@ -25,21 +29,16 @@ public class Player {
 	        allstar.setPlayer(this);
 	}}
 	
-	@OneToMany(mappedBy="player")
-	private List<Draft> drafts;
-	public void drafts(Draft draft)
-	{    this.drafts.add(draft);
-	     if(draft.getPlayer() != this) {
-	        draft.setPlayer(this);
-	}}
-	
-	public List<Draft> getDrafts() {
-		return drafts;
+
+	public Draft getDraft() {
+		return draft;
 	}
 
-	public void setDrafts(List<Draft> drafts) {
-		this.drafts = drafts;
+
+	public void setDraft(Draft draft) {
+		this.draft = draft;
 	}
+
 
 	public List<Allstar> getVoted() {
 		return voted;
@@ -67,12 +66,15 @@ public class Player {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Player(int id, String name, Fan fan, Team team, List<Allstar> voted)
+	public Player(int id, String name, Team team)
 	{
 		this.id = id;
 		this.name = name;
-		this.voted = voted;
 		this.team = team;
+	}
+
+	public Player() {
+		super();
 	}
 		
 		 

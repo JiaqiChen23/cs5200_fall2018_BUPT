@@ -43,4 +43,7 @@ public class Stadium {
 		this.name = name;
 		this.team = team;
 	}
+	public Stadium() {
+		super();
+	}
 }

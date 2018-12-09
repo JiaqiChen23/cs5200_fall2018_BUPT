@@ -22,9 +22,9 @@ public class TeamImpl implements TeamDao{
 			PreparedStatement statement1 = 
 					connect.prepareStatement(findAllDevelopersSql);
 			statement1.setInt(1, team.getId());
-			statement1.setString(4, team.getDescription());
-			statement1.setInt(5, team.getSponsorAmount());
-			statement1.setString(6, team.getTitle());
+			statement1.setString(2, team.getDescription());
+			statement1.setInt(3, team.getSponsorAmount());
+			statement1.setString(4, team.getTitle());
 			statement1.executeUpdate();
 			
 		} catch (SQLException e2) {

@@ -11,13 +11,14 @@ public class Draft {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private Player player;
+	
 	@ManyToOne()
 	@JsonIgnore
 	private Team team;
 	
-	@ManyToOne()
-	@JsonIgnore
-	private Player player;
+
 	private String year;
 	private int orderNum;
 	
@@ -62,11 +63,16 @@ public class Draft {
 		this.orderNum = order;
 	}
 
-	public Draft(int id, String name, Team team, String year, int order) {
+	public Draft(int id, Player player, Team team, String year, int order) {
 		super();
 		this.id = id;
 		this.team = team;
 		this.year = year;
+		this.player = player;
 		this.orderNum = order;
+	}
+
+	public Draft() {
+		super();
 	}
 }
