@@ -11,11 +11,12 @@
 	    </div>
     </body>
     <script> 
+        var countSuccess = 0
          $('#button').click(function(){
          	$.ajax({
                 type: "GET",
                 async: false,
-                url: "https://stats.nba.com/stats/commonallplayers?IsOnlyCurrentSeason=1&LeagueID=00&Season=2017-18",
+                url: "https://stats.nba.com/stats/commonallplayers?IsOnlyCurrentSeason=0&LeagueID=00&Season=2017-18",
                 dataType: "jsonp",
                 jsonp: "callback",
                 jsonpCallback:"handler",
@@ -26,7 +27,19 @@
                         var id = data[i][0]
                         var name = data[i][2]
                         var teamid = data[i][7]
-                        console.log(id, name, teamid)
+                        let url = "http://localhost:8080/api/player/create/" + id + "/" + name + "/" + teamid 
+                        $.ajax({
+                            type: "GET",
+                            url: url,
+                            dataType: "json",
+                            success: function(result) {
+                                countSuccess ++;
+                                console.log(countSuccess)
+                            },
+                            error: function(e) {
+                                console.log(e)
+                            }
+                        })
                     }
                 },
                 error: function (e) {
