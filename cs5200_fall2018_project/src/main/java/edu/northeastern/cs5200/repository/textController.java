@@ -65,7 +65,7 @@ public class textController {
     	PlayerImpl PIMPL = new PlayerImpl();
     	Allstar allstar = new Allstar(0,FIMPL.findFanById(FId),PIMPL.findPlayerById(PId));
     	AllstarImpl AIMPL = new AllstarImpl();
-    	AIMPL.updateAllstarsById(allstar.getId(), allstar);
+    	AIMPL.createAllstars(allstar);
 	}
     @GetMapping("/api/fans/{FId}/{PId}/delete")
     public void FanFollowCancel(@PathVariable("FId") int FId,@PathVariable("PId") int PId) 
