@@ -18,13 +18,12 @@ public class AllstarImpl implements AllstarDao{
 
 	@Override
 	public void createAllstars(Allstar allstar) {
-		String findAllDevelopersSql = "INSERT INTO allstar (id,fans_id,player_id) VALUES (?,?,?);";		
+		String findAllDevelopersSql = "INSERT INTO allstar (fans_id,player_id) VALUES (?,?);";		
 		try {
 			PreparedStatement statement1 = 
 					connect.prepareStatement(findAllDevelopersSql);
-			statement1.setInt(1, allstar.getId());
-			statement1.setInt(2, allstar.getFan().getId());
-			statement1.setInt(3, allstar.getPlayer().getId());
+			statement1.setInt(1, allstar.getFan().getId());
+			statement1.setInt(2, allstar.getPlayer().getId());
 			statement1.executeUpdate();
 			
 		} catch (SQLException e2) {

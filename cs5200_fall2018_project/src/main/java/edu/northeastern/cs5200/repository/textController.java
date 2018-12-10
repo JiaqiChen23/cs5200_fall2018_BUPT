@@ -8,6 +8,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.northeastern.cs5200.dao.AllstarImpl;
@@ -17,6 +19,7 @@ import edu.northeastern.cs5200.dao.FanImpl;
 import edu.northeastern.cs5200.dao.PersonImpl;
 import edu.northeastern.cs5200.dao.PlayerImpl;
 import edu.northeastern.cs5200.dao.ReportImpl;
+import edu.northeastern.cs5200.dao.ScoutImpl;
 import edu.northeastern.cs5200.dao.SponsorImpl;
 import edu.northeastern.cs5200.dao.StadiumImpl;
 import edu.northeastern.cs5200.dao.TeamImpl;
@@ -27,6 +30,7 @@ import edu.northeastern.cs5200.model.Fan;
 import edu.northeastern.cs5200.model.Person;
 import edu.northeastern.cs5200.model.Player;
 import edu.northeastern.cs5200.model.Report;
+import edu.northeastern.cs5200.model.Scout;
 import edu.northeastern.cs5200.model.Sponsor;
 import edu.northeastern.cs5200.model.Stadium;
 import edu.northeastern.cs5200.model.Team;
@@ -43,6 +47,22 @@ public class textController {
     	AllstarImpl AIMPL = new AllstarImpl();
     	return AIMPL.findAllstarByFanId(FId);
 	}
+    @GetMapping("/api/fans/{FId}/{PId}")
+    public void FanFollow(@PathVariable("FId") int FId,@PathVariable("PId") int PId) 
+    {
+    	FanImpl FIMPL = new FanImpl();
+    	PlayerImpl PIMPL = new PlayerImpl();
+    	Allstar allstar = new Allstar(0,FIMPL.findFanById(FId),PIMPL.findPlayerById(PId));
+    	AllstarImpl AIMPL = new AllstarImpl();
+    	AIMPL.updateAllstarsById(allstar.getId(), allstar);
+	}
+    @GetMapping("/api/fans/{FId}")
+    public Fan findThisFan(@PathVariable("FId") int FId) 
+    {
+    	FanImpl FIMPL = new FanImpl();
+    	return FIMPL.findFanById(FId);
+	}
+    
     //players in all-star
     @GetMapping("/api/players/{FId}/allstarVote")
     public Collection<Allstar> findAllstarPlayerVoted(@PathVariable("FId") int FId) 
@@ -50,7 +70,14 @@ public class textController {
     	AllstarImpl AIMPL = new AllstarImpl();
     	return AIMPL.findAllstarByPlayerId(FId);
 	}
+    
     //boss
+    @GetMapping("/api/boss/{FId}")
+    public Boss findThisBoss(@PathVariable("FId") int FId) 
+    {
+    	BossImpl BIMPL = new BossImpl();
+    	return BIMPL.findBossById(FId);
+	}
     @GetMapping("/api/Bosses/{FId}/Teams")
     public Team findTeamsByboss(@PathVariable("FId") int FId) 
     {
@@ -79,6 +106,12 @@ public class textController {
 	}
     
     //Scout
+    @GetMapping("/api/Scout/{FId}")
+    public Scout findThisScout(@PathVariable("FId") int FId) 
+    {
+    	ScoutImpl SIMPL = new ScoutImpl();
+    	return SIMPL.findScoutById(FId);
+	}
     @GetMapping("/api/Scout/Drafts/{FId}")
     public Collection<Draft> findDraftByYear(@PathVariable("FId") int FId) 
     {
@@ -92,6 +125,12 @@ public class textController {
     	return RIMPL.findAllReportByScoutId(FId);
 	}
     //Sponsor
+    @GetMapping("/api/sponsor/{FId}")
+    public Sponsor FindThisSponsor(@PathVariable("FId") int FId) 
+    {
+    	SponsorImpl SIMPL = new SponsorImpl();
+    	return SIMPL.findSponsorById(FId);
+	}
     @GetMapping("/api/Sponsor/{FId}/Team")
     public Team findTeamBySponsor(@PathVariable("FId") int FId) 
     {
@@ -138,4 +177,19 @@ public class textController {
     	StadiumImpl SIMPL = new StadiumImpl();
     	return SIMPL.findAllStadium();
     }
+    
+    @GetMapping("/api/player/create/{name}/{tid}")
+    public void CreatePlayer(@PathVariable("name") String name,@PathVariable("tid") int tid) 
+    {
+    	PlayerImpl PIMPL = new PlayerImpl();
+    	TeamImpl TIMPL = new TeamImpl();
+    	Player player = new Player(0,name,TIMPL.findTeamById(tid));
+    	PIMPL.createPlayer(player);
+    	return;
+    }
+    
+    
+    
+    
+    
 }

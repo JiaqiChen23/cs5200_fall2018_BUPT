@@ -18,21 +18,20 @@ public class SponsorImpl implements SponsorDao{
 	Connection connect = Connect.getConnection();
 	@Override
 	public void createSponsor(Sponsor sponsor) {
-		String findAllDevelopersSql = "INSERT INTO person (dtype,id,dob,email,firstname,"
-				+ "lastname,password,username,team_id,type=?) VALUES (?,?,?,?,?,?,?,?,?);";		
+		String findAllDevelopersSql = "INSERT INTO person (dtype,dob,email,firstname,"
+				+ "lastname,password,username,team_id,type=?) VALUES (?,?,?,?,?,?,?,?);";		
 		try {
 			PreparedStatement statement1 = 
 					connect.prepareStatement(findAllDevelopersSql);
 			statement1.setString(1, "sponsor");
-			statement1.setInt(2, sponsor.getId());
-			statement1.setDate(3, sponsor.getDob());
-			statement1.setString(4, sponsor.getEmail());
-			statement1.setString(5, sponsor.getFirstname());
-			statement1.setString(6, sponsor.getLastname());
-			statement1.setString(7, sponsor.getPassword());
-			statement1.setString(8, sponsor.getUsername());
-			statement1.setInt(9, sponsor.getTeam().getId());
-			statement1.setString(10, "scout");
+			statement1.setDate(2, sponsor.getDob());
+			statement1.setString(3, sponsor.getEmail());
+			statement1.setString(4, sponsor.getFirstname());
+			statement1.setString(5, sponsor.getLastname());
+			statement1.setString(6, sponsor.getPassword());
+			statement1.setString(7, sponsor.getUsername());
+			statement1.setInt(8, sponsor.getTeam().getId());
+			statement1.setString(9, "scout");
 			statement1.executeUpdate();
 			
 		} catch (SQLException e2) {
