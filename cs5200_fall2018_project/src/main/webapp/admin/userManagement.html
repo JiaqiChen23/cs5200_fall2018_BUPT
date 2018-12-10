@@ -95,67 +95,47 @@
 
     $(".viewUserBtn").click(function(){
     	$.ajax({
-                type: "GET",
-                // async: false,
-                url: "http://localhost:8080/api/user/getAllUsers",
-                dataType: "json",
-                // jsonp: "callback",
-                // jsonpCallback:"handler",
-                success: function (result) {
-                    var data = result
-                    // table head
-			    	var html = "";
-			    	html += "<tr>"
-			    	html +=     "<th>ID</th>"
-			    	html +=     "<th>FirstName</th>"
-			    	html +=     "<th>LastName</th>"
-			        html +=     "<th>Username</th>"
-			        html +=     "<th>Password</th>"
-			        html +=     "<th>Type</th>"
-			        html += "</tr>"
-					$(".userTableHead").html(html)
-					// table body
-			        var html2 = "";
-			        for( var i = 0; i < data.length; i++ ) {
-			            html2 += "<tr>"
-			            html2 +=     "<td>" + data[i].id + "</td>"
-			            html2 +=     "<td>" + data[i].firstname + "</td>"
-			            html2 +=     "<td>" + data[i].lastname + "</td>"
-			            html2 +=     "<td>" + data[i].username + "</td>"
-			            html2 +=     "<td>" + data[i].password + "</td>"
-			            html2 +=     "<td>" + data[i].type + "</td>"
-			            html2 += "</tr>"
-			        }
-			        $(".userTableBody").html(html2)
-                },
-                error: function (e) {
-                    var test = e;
-                }
-            });
-  //   	// table head
-  //   	var html = "";
-  //   	html += "<tr>"
-  //   	html +=     "<th>ID</th>"
-  //   	html +=     "<th>FirstName</th>"
-  //   	html +=     "<th>LastName</th>"
-  //       html +=     "<th>Username</th>"
-  //       html +=     "<th>Password</th>"
-  //       html +=     "<th>Type</th>"
-  //       html += "</tr>"
-		// $(".userTableHead").html(html)
-		// // table body
-  //       var html2 = "";
-  //       for( var i = 0; i < data.length; i++ ) {
-  //           html2 += "<tr>"
-  //           html2 +=     "<td>" + data[i].id + "</td>"
-  //           html2 +=     "<td>" + data[i].firstName + "</td>"
-  //           html2 +=     "<td>" + data[i].lastName + "</td>"
-  //           html2 +=     "<td>" + data[i].username + "</td>"
-  //           html2 +=     "<td>" + data[i].password + "</td>"
-  //           html2 +=     "<td>" + data[i].type + "</td>"
-  //           html2 += "</tr>"
-  //       }
-  //       $(".userTableBody").html(html2)
+            type: "GET",
+            url: "http://localhost:8080/api/person/getAllPerson",
+            dataType: "json",
+            success: function (result) {
+            	console.log(result)
+                var data = result
+                // table head
+		    	var html = "";
+		    	html += "<tr>"
+		    	html +=     "<th>ID</th>"
+		    	html +=     "<th>Dob</th>"
+		    	html +=     "<th>Email</th>"
+		    	html +=     "<th>FirstName</th>"
+		    	html +=     "<th>LastName</th>"
+		        html +=     "<th>Username</th>"
+		        html +=     "<th>Password</th>"
+		        html +=     "<th>Team</th>"
+		        html +=     "<th>Type</th>"
+		        html += "</tr>"
+				$(".userTableHead").html(html)
+				// table body
+		        var html2 = "";
+		        for( var i = 0; i < data.length; i++ ) {
+		            html2 += "<tr>"
+		            html2 +=     "<td>" + data[i].id + "</td>"
+		            html2 +=     "<td>" + data[i].dob + "</td>"
+		            html2 +=     "<td>" + data[i].email + "</td>"
+		            html2 +=     "<td>" + data[i].firstname + "</td>"
+		            html2 +=     "<td>" + data[i].lastname + "</td>"
+		            html2 +=     "<td>" + data[i].username + "</td>"
+		            html2 +=     "<td>" + data[i].password + "</td>"
+		            html2 +=     "<td>Team if existed</td>"
+		            html2 +=     "<td>" + data[i].type + "</td>"
+		            html2 += "</tr>"
+		        }
+		        $(".userTableBody").html(html2)
+            },
+            error: function (e) {
+                var test = e;
+            }
+        })
 	})
 </script>
 </html>

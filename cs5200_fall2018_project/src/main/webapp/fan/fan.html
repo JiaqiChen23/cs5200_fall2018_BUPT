@@ -58,7 +58,6 @@
 		</div>
 		<div class="myVotingList">
 			<h5>My Voting List</h5>
-			<button class="viewListBtn">View my list</button>
 			<table class="VotingListTable" border="1">
 				<thead class="VotingListHead"></thead>
 				<tbody class="VotingListBody"></tbody>
@@ -140,15 +139,16 @@
             url: url,
             dataType: "json",
             success: function(result){
-            	alert("vote successful!")
+            	alert("vote successful!")  
             },
             error: function(e) {
-                console.log(e)
+            	console.log(e) 
             }
 		})
+		location.reload(true)
 	})
 
-	$(".viewListBtn").click(function(){
+	$(document).ready(function(){
 		var url = "http://localhost:8080/api/fans/" + id + "/allstarVote"
 		$.ajax({
 			type: "GET",
@@ -192,9 +192,10 @@
             	alert("Cancel successful!")
             },
             error: function(e) {
-                console.log(e)
+            	console.log(e)
             }
 		})
+		location.reload(true)
 	})
 </script>
 </html>
