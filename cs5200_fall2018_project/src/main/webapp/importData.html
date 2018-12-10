@@ -28,7 +28,8 @@
                         var name = data[i][2]
                         var teamid = data[i][7]
                         if(teamid != ""){
-                            let url = "http://localhost:8080/api/player/create/" + id + "/" + name + "/" + teamid 
+                            let url = "http://localhost:8080/api/player/create/" + id + "/" + name + "/" + teamid
+                            console(url) 
                             $.ajax({
                                 type: "GET",
                                 url: url,
@@ -42,6 +43,7 @@
                             })
                         } else{
                             let url = "http://localhost:8080/api/player/create/" + id + "/" + name
+                            console.log(url)
                             $.ajax({
                                 type: "GET",
                                 url: url,
@@ -79,6 +81,7 @@
                         var player = data[i][0]
                         var team = data[i][6]
                         let url = "http://localhost:8080/api/draft/create/" + order + "/" + year + "/" + player + "/" + team 
+                        console.log(url)
                         $.ajax({
                                 type: "GET",
                                 url: url,

@@ -87,7 +87,7 @@
     var id = getParams("id")
     var username = getParams("username")
 
-    $(".welcome").text(username)
+    $(".welcome").text("Fan: " + username + ", welcome!")
 
 	$(document).ready(function(){
 		$(".vote").hide();
@@ -170,9 +170,9 @@
 		        var html2 = "";
 		        for(var i=0; i<data.length; i++){
 		        	html2 += "<tr>"
-			        html2 +=     "<td>" + data[i].id + "</td>"
-			        html2 +=     "<td>" + data[i].name + "</td>"
-			        html2 +=     "<td>" + "team name" + "</td>"
+			        html2 +=     "<td>" + data[i].player.id + "</td>"
+			        html2 +=     "<td>" + data[i].player.name + "</td>"
+			        html2 +=     "<td>" + data[i].player.team.title + "</td>"
 			        html2 += "</tr>"
 		        }
 		        $(".VotingListBody").html(html2)
