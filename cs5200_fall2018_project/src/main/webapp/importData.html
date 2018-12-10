@@ -1,0 +1,38 @@
+<html>
+	<head>
+		<title>test</title>
+		<script type="text/javascript" src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+	</head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <body>
+	    <div>
+	        <button id="button">调用API</button>
+	    </div>
+    </body>
+    <script> 
+         $('#button').click(function(){
+         	$.ajax({
+                type: "GET",
+                async: false,
+                url: "https://stats.nba.com/stats/commonallplayers?IsOnlyCurrentSeason=1&LeagueID=00&Season=2017-18",
+                dataType: "jsonp",
+                jsonp: "callback",
+                jsonpCallback:"handler",
+                success: function (result) {
+                    console.log(result.resultSets[0].rowSet);
+                    var data = result.resultSets[0].rowSet
+                    for(var i=0; i<data.length; i++){
+                        var id = data[i][0]
+                        var name = data[i][2]
+                        var teamid = data[i][7]
+                        console.log(id, name, teamid)
+                    }
+                },
+                error: function (e) {
+                    var test = e;
+                }
+            });
+         })
+    </script>
+</html>
