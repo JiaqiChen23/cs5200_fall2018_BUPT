@@ -15,10 +15,8 @@ public class Report {
 	   (strategy=GenerationType.IDENTITY)
 	private int id;
 	@ManyToOne()
-	@JsonIgnore
 	private Boss boss;
 	@ManyToOne()
-	@JsonIgnore
 	private Scout scout;
 	private String reportbody;
 	public int getId() {

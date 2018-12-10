@@ -86,7 +86,7 @@ public class textController {
 	
 	//fans
     @GetMapping("/api/fans/{FId}/allstarVote")
-    public Allstar findAllstarVotedbyFan(@PathVariable("FId") int FId) 
+    public Collection<Allstar> findAllstarVotedbyFan(@PathVariable("FId") int FId) 
     {
     	AllstarImpl AIMPL = new AllstarImpl();
     	return AIMPL.findAllstarByFanId(FId);
@@ -98,9 +98,7 @@ public class textController {
     	PlayerImpl PIMPL = new PlayerImpl();
     	Allstar allstar = new Allstar(0,FIMPL.findFanById(FId),PIMPL.findPlayerById(PId));
     	AllstarImpl AIMPL = new AllstarImpl();
-    	System.out.println(AIMPL.findAllstarByFanId(FId).getId());
-    	if(AIMPL.findAllstarByFanId(FId).getId()==0)
-    		AIMPL.createAllstars(allstar);
+    	AIMPL.createAllstars(allstar);
 	}
     @GetMapping("/api/fans/{FId}/{PId}/delete")
     public void FanFollowCancel(@PathVariable("FId") int FId,@PathVariable("PId") int PId) 
