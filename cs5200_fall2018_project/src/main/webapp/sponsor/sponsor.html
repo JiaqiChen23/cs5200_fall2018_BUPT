@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sponsor</title>
+
+	<script type="text/javascript" src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+
+	<style type="text/css">
+		html{
+			background-image: url("../assets/jordan.jpeg");
+			background-size: 100% 100%;
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+			text-align: center;
+			color: white;
+		}
+		.wrapper{
+			width: 1050px;
+			display: flex;
+		}
+		.team{
+			width: 350px;
+		}
+		.sponsor{
+			width: 350px;
+		}
+		.teamSponsored{
+			width: 350px;
+		}
+		table{
+			margin: 0 auto;
+		}
+	</style>
+</head>
+
+<body>
+	<div>
+		<h1>Sponsor</h1>
+	</div>
+	<div class="wrapper">
+		<div class="team">
+			<h5>Team status List</h5>
+			<table class="teamTable" border="1">
+				<thead class="teamTablelHead"></thead>
+				<tbody class="teamTableBody"></tbody>
+			</table>
+		</div>
+		<div class="sponsor">
+			<h5>Sponsor a team</h5>
+			<div>
+				<p>team id:</p>
+				<input type="text" class="teamId">
+			</div>
+			<div>
+				<p>sponsor amount:</p>
+				<input type="text" class="money">
+			</div>
+			<br>
+			<button class="searchPlayerBtn">Sponsor</button>
+		</div>
+		<div class="teamSponsored">
+			<h5>The team I sponsored</h5>
+			<table class="sponsorTeamTable" border="1">
+				<thead class="sponsorTeamTableHead"></thead>
+				<tbody class="sponsorTeamTableBody"></tbody>
+			</table>
+		</div>
+	</div>
+</body>
+
+<script type="text/javascript">
+	
+</script>
+</html>
