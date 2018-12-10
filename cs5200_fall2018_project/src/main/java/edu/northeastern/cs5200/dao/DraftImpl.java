@@ -210,7 +210,7 @@ public class DraftImpl implements DraftDao{
 
 	@Override
 	public Collection<Draft> findDraftsByYear(int year) {
-		String findAllDevelopersSql = "SELECT * FROM draft WHERE year = '"+year+"'";
+		String findAllDevelopersSql = "SELECT * FROM draft WHERE year = '"+year+"'ORDER BY order_num ASC";
 		List<Draft> drafts = new ArrayList<Draft>();
 		Statement statement = null;
 		ResultSet results = null;
