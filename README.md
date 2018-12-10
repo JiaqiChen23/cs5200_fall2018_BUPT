@@ -13,6 +13,8 @@ Fans：
 
 用fansID查allstar投票：/api/fans/{FId}/allstarVote
 
+fans用姓名查找球员：/api/fans/{name}/player
+
 
 
 用playerID查allstar投票：/api/players/{FId}/allstarVote

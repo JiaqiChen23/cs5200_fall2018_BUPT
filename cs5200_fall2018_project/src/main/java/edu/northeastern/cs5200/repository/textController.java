@@ -82,6 +82,12 @@ public class textController {
     	FanImpl FIMPL = new FanImpl();
     	return FIMPL.findFanById(FId);
 	}
+    @GetMapping("/api/fans/{name}/player")
+    public Player findPlayer(@PathVariable("name") String Pname) 
+    {
+    	PlayerImpl PIMPL = new PlayerImpl();
+    	return PIMPL.findPlayerByName(Pname);
+	}
     
     //players in all-star
     @GetMapping("/api/players/{FId}/allstarVote")

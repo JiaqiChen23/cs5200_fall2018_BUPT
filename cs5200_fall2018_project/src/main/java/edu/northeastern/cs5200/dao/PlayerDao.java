@@ -19,4 +19,6 @@ public interface PlayerDao {
 	public void deletePlayerById(int id);
 
 	void createPlayerNoTeamId(Player player);
+
+	public Player findPlayerByName(String pname);
 }

@@ -166,5 +166,33 @@ public class PlayerImpl implements PlayerDao{
 			e2.printStackTrace();
 		}
 	}
+	@Override
+	public Player findPlayerByName(String pname) {
+		String findAllDevelopersSql = "SELECT * FROM player WHERE name ='"+pname+"'";
+		Statement statement = null;
+		ResultSet results = null;
+		Player player = new Player();
+
+		try {
+			statement = connect.createStatement();
+			results = statement.executeQuery(findAllDevelopersSql);
+			
+			while(results.next()) {
+				String idS = results.getString("id");
+				String name = results.getString("name");
+				String Teamid = results.getString("team_id");
+				
+				int id1 = Integer.parseInt(idS);
+				int Tid = Integer.parseInt(Teamid);
+				TeamImpl TIMPL = new TeamImpl();
+				
+				player = new Player(id1, name, TIMPL.findTeamById(Tid));
+			}
+						
+			} catch (SQLException e) {
+					e.printStackTrace();
+			}
+			return player;
+	}
 
 }
