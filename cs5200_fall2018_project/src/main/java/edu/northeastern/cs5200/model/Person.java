@@ -21,6 +21,7 @@ public class Person {
 	protected String password;
 	@Column(name = "email", nullable = false)
 	protected String email;
+	@Column(name = "type", nullable = false)
 	protected String type;
 	protected Date dob;
 	public int getId() {
