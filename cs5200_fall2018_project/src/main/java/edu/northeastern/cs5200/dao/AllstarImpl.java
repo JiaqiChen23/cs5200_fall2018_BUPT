@@ -189,4 +189,17 @@ public class AllstarImpl implements AllstarDao{
 			return allstars;
 	}
 
+	public void deleteAllstarsByFanId(int fid, int pid) {
+		String findAllDevelopersSql = "DELETE FROM allstar WHERE fans_id = ? AND player_id=?";		
+		try {
+			PreparedStatement statement = connect.prepareStatement(findAllDevelopersSql);
+			statement.setInt(1,fid);
+			statement.setInt(2,pid);
+			statement.executeUpdate();
+		} catch (SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}		return;	
+	}
+
 }

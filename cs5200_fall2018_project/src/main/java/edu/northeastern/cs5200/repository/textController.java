@@ -40,6 +40,17 @@ public class textController {
 	@Autowired
     private textRepository tController;
  
+	//Log in
+	@GetMapping("/api/login/{username}/{password}")
+    public Person getPersonByUP(@PathVariable("username") String username,
+    		@PathVariable("password") String password) 
+    {
+		PersonImpl PIMPL = new PersonImpl();
+    	return PIMPL.findPersonByUP(username,password);
+	}
+	
+	
+	
 	//fans
     @GetMapping("/api/fans/{FId}/allstarVote")
     public Collection<Allstar> findAllstarVotedbyFan(@PathVariable("FId") int FId) 
@@ -55,6 +66,15 @@ public class textController {
     	Allstar allstar = new Allstar(0,FIMPL.findFanById(FId),PIMPL.findPlayerById(PId));
     	AllstarImpl AIMPL = new AllstarImpl();
     	AIMPL.updateAllstarsById(allstar.getId(), allstar);
+	}
+    @GetMapping("/api/fans/{FId}/{PId}/delete")
+    public void FanFollowCancel(@PathVariable("FId") int FId,@PathVariable("PId") int PId) 
+    {
+    	FanImpl FIMPL = new FanImpl();
+    	PlayerImpl PIMPL = new PlayerImpl();
+    	Allstar allstar = new Allstar(0,FIMPL.findFanById(FId),PIMPL.findPlayerById(PId));
+    	AllstarImpl AIMPL = new AllstarImpl();
+    	AIMPL.deleteAllstarsByFanId(FId,PId);
 	}
     @GetMapping("/api/fans/{FId}")
     public Fan findThisFan(@PathVariable("FId") int FId) 
@@ -124,6 +144,7 @@ public class textController {
     	ReportImpl RIMPL = new ReportImpl();
     	return RIMPL.findAllReportByScoutId(FId);
 	}
+    
     //Sponsor
     @GetMapping("/api/sponsor/{FId}")
     public Sponsor FindThisSponsor(@PathVariable("FId") int FId) 
@@ -137,11 +158,25 @@ public class textController {
     	TeamImpl TIMPL = new TeamImpl();
     	return TIMPL.findTeamBySponsorId(FId);
 	}
+    @GetMapping("/api/Sponsor/{sponsorId}/{Teamid}/{amount}")
+    public void SponsorATeam(@PathVariable("sponsorId") int SId,
+    		@PathVariable("Teamid") int Tid, @PathVariable("amount") int amount) 
+    {
+    	TeamImpl TIMPL = new TeamImpl();
+    	SponsorImpl SIMPL = new SponsorImpl();
+    	Sponsor sponsor = SIMPL.findSponsorById(SId);
+    	sponsor.setTeam(TIMPL.findTeamById(Tid));
+    	SIMPL.updateSponsorById(SId, sponsor);
+    	Team team = TIMPL.findTeamById(Tid);
+    	team.setSponsorAmount(amount);
+    	TIMPL.updateTeamById(Tid, team);
+    	return;
+	}
     
     
     
     //全选
-    @GetMapping("/api/user/getAllUsers")
+    @GetMapping("/api/person/getAllPerson")
     public List<Person> findallPerson() 
     {
     	PersonImpl PIMPL = new PersonImpl();

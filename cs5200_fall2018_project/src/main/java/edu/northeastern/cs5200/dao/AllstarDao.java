@@ -16,6 +16,8 @@ public interface AllstarDao {
 	
 	public Collection<Allstar> findAllstarByPlayerId(int id);
 	
+	public void deleteAllstarsByFanId(int fId,int pid);
+	
 	public void updateAllstarsById(int id, Allstar allstars);
 	
 	public void deleteAllstarsById(int id);

@@ -71,5 +71,37 @@ public class PersonImpl implements PersonDao{
 			}
 			return persons;
 	}
+	@Override
+	public Person findPersonByUP(String username, String password) {
+		String findAllDevelopersSql = "SELECT * FROM person WHERE "
+				+ "username='"+username+"'and password='"+password+"'";
+		Statement statement = null;
+		ResultSet results = null;
+		Person person = new Person();
+		try {
+			statement = connect.createStatement();
+			results = statement.executeQuery(findAllDevelopersSql);
+			
+			while(results.next()) {
+				String dtype = results.getString("type");
+				String idS = results.getString("id");
+				String Firstname = results.getString("firstname");
+				String Lastname = results.getString("lastname");
+				String Username = results.getString("username");
+				String Password = results.getString("password");
+				String email = results.getString("email");
+				String dob = results.getString("dob");
+				
+				int id1 = Integer.parseInt(idS);
+				Date dob1 = java.sql.Date.valueOf(dob);
+				person = new Person(dtype,id1, Firstname, Lastname, 
+						Username, Password, email, dob1);
+			}
+						
+			} catch (SQLException e) {
+					e.printStackTrace();
+			}
+			return person;
+	}
 
 }
