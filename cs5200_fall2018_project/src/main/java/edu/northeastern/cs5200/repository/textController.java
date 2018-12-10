@@ -219,6 +219,7 @@ public class textController {
     @GetMapping("/api/players/getAllPlayers")
     public Collection<Player> findallPlayers() 
     {
+    	
     	PlayerImpl PIMPL= new PlayerImpl();
     	return PIMPL.findAllPlayer();
     }

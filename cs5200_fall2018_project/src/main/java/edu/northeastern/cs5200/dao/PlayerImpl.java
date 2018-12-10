@@ -47,6 +47,9 @@ public class PlayerImpl implements PlayerDao{
 				String Teamid = results.getString("team_id");
 				
 				int id = Integer.parseInt(idS);
+				System.out.println(Teamid);
+				if(Teamid==null)
+					Teamid="100";
 				int Tid = Integer.parseInt(Teamid);
 				Player player = new Player();
 				TeamImpl TIMPL = new TeamImpl();
