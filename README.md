@@ -1,6 +1,14 @@
 # cs5200_fall2018_BUPT
 a repository for neu CS5200-fall2018 course project
 
+Admin：
+
+创建用户：/api/admin/addperson/{fn}/{ln}/{un}/{pw}/{dtype}/{dob}/{email}
+
+更新用户：/api/admin/addperson/{id}/{fn}/{ln}/{un}/{pw}/{dtype}/{dob}/{email}
+
+删除用户：/api/admin/{FId}/delete
+
 Fans：
 
 登录：/api/login/{username}/{password}
