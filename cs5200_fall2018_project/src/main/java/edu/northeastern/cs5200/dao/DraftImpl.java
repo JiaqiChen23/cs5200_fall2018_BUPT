@@ -242,5 +242,21 @@ public class DraftImpl implements DraftDao{
 			}
 			return drafts;
 	}
+	@Override
+	public void createDraftNoid(Draft draft) {
+		String findAllDevelopersSql = "INSERT INTO draft (order_num,year,player_id,team_id) VALUES (?,?,?,?);";		
+		try {
+			PreparedStatement statement1 = 
+					connect.prepareStatement(findAllDevelopersSql);
+			statement1.setInt(1, draft.getOrder());
+			statement1.setString(2, draft.getYear());
+			statement1.setInt(3, draft.getPlayer().getId());
+			statement1.setInt(4, draft.getTeam().getId());
+			statement1.executeUpdate();
+			
+		} catch (SQLException e2) {
+			e2.printStackTrace();
+		}	
+	}
 
 }

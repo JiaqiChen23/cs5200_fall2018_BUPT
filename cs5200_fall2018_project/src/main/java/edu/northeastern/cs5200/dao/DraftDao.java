@@ -18,6 +18,8 @@ public interface DraftDao {
 	
 	public Collection<Draft> findDraftsByYear(int year);
 	
+	public void createDraftNoid(Draft draft);
+	
 	public void updateDraftById(int id, Draft draft);
 	
 	public void deleteDraftById(int id);

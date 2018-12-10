@@ -196,16 +196,16 @@ public class textController {
     	PIMPL.createPlayerNoTeamId(player);
     	return;
     }
-    @GetMapping("/api/draft/create/{id}/{order}/{year}/{player}/{team}")
-    public void CreateDraft(@PathVariable("id") int id,@PathVariable("order") int order,
+    @GetMapping("/api/draft/create/{order}/{year}/{player}/{team}")
+    public void CreateDraft(@PathVariable("order") int order,
     		@PathVariable("year") String year,@PathVariable("player") int Pid,@PathVariable("team") int Tid) 
     {
     	PlayerImpl PIMPL = new PlayerImpl();
     	DraftImpl DIMPL = new DraftImpl();
     	TeamImpl TIMPL = new TeamImpl();
     	
-    	Draft draft = new Draft(id,PIMPL.findPlayerById(Pid),TIMPL.findTeamById(Tid), year,order);
-    	DIMPL.createDraft(draft);
+    	Draft draft = new Draft(0,PIMPL.findPlayerById(Pid),TIMPL.findTeamById(Tid), year,order);
+    	DIMPL.createDraftNoid(draft);
     	return;
     }
     
