@@ -99,7 +99,7 @@ public class StadiumImpl implements StadiumDao{
 	public Stadium findStadiumByTeamId(int id) {
 		TeamImpl TIMPL = new TeamImpl();
 		int Tid = TIMPL.findTeamById(id).getId();
-		String findAllDevelopersSql = "SELECT * FROM team WHERE id ="+Tid;
+		String findAllDevelopersSql = "SELECT * FROM stadium WHERE id ="+Tid;
 		Statement statement = null;
 		ResultSet results = null;
 		Stadium stadium = new Stadium();

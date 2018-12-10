@@ -15,6 +15,8 @@ Fans：
 
 fans用姓名查找球员：/api/fans/{name}/player
 
+fans用TeamID查Team：/api/fans/{teamid}/team
+
 
 
 用playerID查allstar投票：/api/players/{FId}/allstarVote
