@@ -13,6 +13,8 @@ boss查报告：/api/Bosses/{FId}/Reports
 
 boss查队伍赞助商：/api/Bosses/{FId}/Sponsor
 
+import data:
+
 创建有ID的player：/api/player/create/{id}/{name}/{tid}
 
 创建没有ID的player：/api/player/create/{name}/{tid}
