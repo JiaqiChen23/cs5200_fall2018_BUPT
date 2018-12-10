@@ -187,6 +187,18 @@ public class textController {
     	PIMPL.createPlayer(player);
     	return;
     }
+    @GetMapping("/api/draft/create/{id}/{order}/{year}/{player}/{team}")
+    public void CreateDraft(@PathVariable("id") int id,@PathVariable("order") int order,
+    		@PathVariable("year") String year,@PathVariable("player") int Pid,@PathVariable("team") int Tid) 
+    {
+    	PlayerImpl PIMPL = new PlayerImpl();
+    	DraftImpl DIMPL = new DraftImpl();
+    	TeamImpl TIMPL = new TeamImpl();
+    	
+    	Draft draft = new Draft(id,PIMPL.findPlayerById(Pid),TIMPL.findTeamById(Tid), year,order);
+    	DIMPL.createDraft(draft);
+    	return;
+    }
     
     
     
