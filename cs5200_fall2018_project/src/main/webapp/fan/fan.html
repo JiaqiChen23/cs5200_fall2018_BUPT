@@ -23,7 +23,7 @@
 			display: flex;
 			color: white;
 		}
-		.palyerDetailTable{
+		table{
 			margin: 0 auto;
 		}
 		.searchPlayer{
@@ -41,70 +41,162 @@
 
 <body>
 	<div>
-		<h1>Fan</h1>
+		<h1 class="welcome">Fan</h1>
 	</div>
 	<div class="fanWrapper">
 		<div class="searchPlayer">
-			<h5>Search a player</h5>
+			<h5>Search a player by id</h5>
 			<input type="text" class="playerName">
-			<button>Search</button>
+			<button class="searchPlayerBtn">Search</button>
 			<br>
 			<br>
-			<table class="palyerDetailTable" border="1">
+			<table class="playerDetailTable" border="1">
 				<thead class="playerDetailHead"></thead>
-				<tbody class="palyerDetailBody"></tbody>
+				<tbody class="playerDetailBody"></tbody>
 			</table>
 			<button class="vote">Vote For this player</button>
 		</div>
 		<div class="myVotingList">
 			<h5>My Voting List</h5>
 			<button class="viewListBtn">View my list</button>
-			<table class="VotingListTable">
+			<table class="VotingListTable" border="1">
 				<thead class="VotingListHead"></thead>
 				<tbody class="VotingListBody"></tbody>
 			</table>
 			<div>
 				<h5>Cancel Voting</h5>
 				<p>ID</p>
-				<input type="text" class="id">
-				<button class="deleteUserBtn">Cancel Voting</button>
+				<input type="text" class="cancelId">
+				<button class="cancelVotingBtn">Cancel Voting</button>
 			</div>
 		</div>
 	</div>
 </body>
 
 <script type="text/javascript">
-	var data = {
-		id: 17,
-		name: "Steve Curry",
-		team: "Goden State Warriors"
-	}
+
+	function getParams(key) {
+        var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) {
+            return unescape(r[2]);
+        }
+        return null;
+    };
+
+    var id = getParams("id")
+    var username = getParams("username")
+
+    $(".welcome").text(username)
 
 	$(document).ready(function(){
 		$(".vote").hide();
-		$(".cancelVote").hide();
 	})
 
-	$(".searchPlayer").click(function(){
-		$(".vote").show();
-		$(".cancelVote").show();
+	var playerId = 0
 
-		var html = "";
-    	html += "<tr>"
-    	html +=     "<th>ID</th>"
-    	html +=     "<th>Name</th>"
-    	html +=     "<th>Team</th>"
-        html += "</tr>"
-		$(".playerDetailHead").html(html)
-		// table body
-        var html2 = "";
-        
-        html2 += "<tr>"
-        html2 +=     "<td>" + data.id + "</td>"
-        html2 +=     "<td>" + data.name + "</td>"
-        html2 +=     "<td>" + data.team + "</td>"
-        html2 += "</tr>"
-        $(".palyerDetailBody").html(html2)
+	$(".searchPlayerBtn").click(function(){
+		var playerName = $(".playerName").val()
+		console.log(playerName)
+
+		$(".vote").show();
+
+		var url = "http://localhost:8080/api/fans/" + playerName + "/player"
+		$.ajax({
+			type: "GET",
+            url: url,
+            dataType: "json",
+            success: function(result){
+            	var data = result
+            	playerId = data.id
+
+            	// var url2 = "http://localhost:8080/api/fans/" + data.teamid!!!!!! + "/team"                   	
+            	var html = "";
+		    	html += "<tr>"
+		    	html +=     "<th>ID</th>"
+		    	html +=     "<th>Name</th>"
+		    	html +=     "<th>Team</th>"
+		        html += "</tr>"
+				$(".playerDetailHead").html(html)
+				// table body
+		        var html2 = "";
+		        
+		        html2 += "<tr>"
+		        html2 +=     "<td>" + data.id + "</td>"
+		        html2 +=     "<td>" + data.name + "</td>"
+		        html2 +=     "<td>" + "team name" + "</td>"
+		        html2 += "</tr>"
+		        $(".playerDetailBody").html(html2)
+            },
+            error: function(e) {
+                console.log(e)
+            }
+		})
+	})
+
+	$(".vote").click(function(){
+		var url = "http://localhost:8080/api/fans/" + id + "/" + playerId
+		console.log(url)
+		$.ajax({
+			type: "GET",
+            url: url,
+            dataType: "json",
+            success: function(result){
+            	alert("vote successful!")
+            },
+            error: function(e) {
+                console.log(e)
+            }
+		})
+	})
+
+	$(".viewListBtn").click(function(){
+		var url = "http://localhost:8080/api/fans/" + id + "/allstarVote"
+		$.ajax({
+			type: "GET",
+            url: url,
+            dataType: "json",
+            success: function(result){
+            	var data = result
+            	console.log(data)
+            	var html = "";
+		    	html += "<tr>"
+		    	html +=     "<th>ID</th>"
+		    	html +=     "<th>Name</th>"
+		    	html +=     "<th>Team</th>"
+		        html += "</tr>"
+				$(".VotingListHead").html(html)
+				// table body
+		        var html2 = "";
+		        for(var i=0; i<data.length; i++){
+		        	html2 += "<tr>"
+			        html2 +=     "<td>" + data[i].id + "</td>"
+			        html2 +=     "<td>" + data[i].name + "</td>"
+			        html2 +=     "<td>" + "team name" + "</td>"
+			        html2 += "</tr>"
+		        }
+		        $(".VotingListBody").html(html2)
+            },
+            error: function(e) {
+                console.log(e)
+            }
+		})
+	})
+
+	$(".cancelVotingBtn").click(function(){
+		var pid = $(".cancelId").val()
+		url = "http://localhost:8080/api/fans/" + id + "/" + pid + "/delete"
+		$.ajax({
+			type: "GET",
+            url: url,
+            dataType: "json",
+            success: function(result){
+            	alert("Cancel successful!")
+            },
+            error: function(e) {
+                console.log(e)
+            }
+		})
 	})
 </script>
 </html>

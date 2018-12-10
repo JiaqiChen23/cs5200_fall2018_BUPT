@@ -114,6 +114,12 @@
 		            dataType: "json",
 		            success: function(result2) {
 		            	var data2 = result2
+		            	if (data.sponsor_amount == undefined) {
+		            		data.sponsor_amount = 0
+		            	}
+		            	if (data2.username == undefined) {
+		            		data2.username = "none"
+		            	}
 		            	// team
 						var html = "";
 				    	html += "<tr>"
@@ -163,9 +169,9 @@
 		        var html4 = "";
 		        
 		        html4 += "<tr>"
-		        html4 +=     "<td>" + data2.id + "</td>"
-		        html4 +=     "<td>" + data2.name + "</td>"
-		        html4 +=     "<td>" + data2.seats + "</td>"
+		        html4 +=     "<td>" + data.id + "</td>"
+		        html4 +=     "<td>" + data.name + "</td>"
+		        html4 +=     "<td>" + data.seats + "</td>"
 		        html4 += "</tr>"
 		        $(".stadiumTableBody").html(html4)
             },
@@ -194,9 +200,9 @@
 		        var html6 = "";
 		        for(var i=0; i<data.length; i++){
 		        	html6 += "<tr>"
-			        html6 +=     "<td>" + data3.id + "</td>"
-			        html6 +=     "<td>" + data3.scout + "</td>"
-			        html6 +=     "<td>" + data3.reportbody + "</td>"
+			        html6 +=     "<td>" + data[i].id + "</td>"
+			        html6 +=     "<td>" + data[i].scout + "</td>"
+			        html6 +=     "<td>" + data[i].reportbody + "</td>"
 			        html6 += "</tr>"
 		        }
 		        $(".reportTableBody").html(html6)

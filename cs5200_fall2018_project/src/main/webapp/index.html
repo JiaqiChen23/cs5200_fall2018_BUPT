@@ -55,14 +55,36 @@
 		var password = $(".password").val()
 
 		// check credentials
-		var url 
+		var url = "http://localhost:8080/api/login/" + username + "/" + password
 		$.ajax({
 			type: "GET",
 	        url: url,
 	        dataType: "json",
 	        success: function(result) {
+	        	console.log(result)
+	        	var id = result.id
+	        	var username = result.username
 	        	var type = result.type
-	        	alert(type)
+	        	switch(type){
+	        		case "admin":
+	        			window.location.href="./admin/admin.html"; 
+	        			break;
+	        		case "fan":
+	        			window.location.href="./fan/fan.html?id=" + id + "&username=" + username; 
+	        			break;
+	        		case "boss":
+	        			window.location.href="./boss/boss.html?id=" + id + "&username=" + username; 
+	        			break;
+	        		case "scout":
+	        			window.location.href="./scout/scout.html?id=" + id + "&username=" + username; 
+	        			break;
+	        		case "sponsor":
+	        			window.location.href="./sponsor/sponsor.html?id=" + id + "&username=" + username; 
+	        			break;
+	        		default:
+	        			alert("Wrong username or password!")
+	        			break;
+	        	}
 	        },
 	        error: function(e) {
                 console.log(e)
