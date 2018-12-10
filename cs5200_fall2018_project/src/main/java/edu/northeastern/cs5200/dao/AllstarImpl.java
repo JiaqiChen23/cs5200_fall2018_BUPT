@@ -146,7 +146,6 @@ public class AllstarImpl implements AllstarDao{
 				Allstar allstar = new Allstar();
 				FanImpl FIMPL = new FanImpl();
 				PlayerImpl PIMPL = new PlayerImpl();
-				
 				allstar = new Allstar(ids, FIMPL.findFanById(Fid),PIMPL.findPlayerById(Pid));
 				allstars.add(allstar);
 			}

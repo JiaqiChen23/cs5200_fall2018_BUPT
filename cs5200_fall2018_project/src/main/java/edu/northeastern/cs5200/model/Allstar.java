@@ -17,8 +17,8 @@ public class Allstar {
 	private Fan fans;
 	
 	@ManyToOne()
-	@JsonIgnore
 	private Player player;
+	
  	public int getId() {
 		return id;
 	}
