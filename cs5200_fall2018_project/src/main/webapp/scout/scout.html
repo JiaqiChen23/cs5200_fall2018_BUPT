@@ -48,7 +48,7 @@
 
 <body>
 	<div>
-		<h1>Scout</h1>
+		<h1 class="welcome">Scout</h1>
 	</div>
 	<div class="searchWrapper">
 		<div class="player">
@@ -65,7 +65,7 @@
 		<div class="draft">
 			<h5>Search draft by year</h5>
 			<input type="text" class="draftYear">
-			<button>Search</button>
+			<button class="searchDraftBtn">Search</button>
 			<br>
 			<br>
 			<table class="draftTable" border="1">
@@ -105,29 +105,90 @@
 </body>
 
 <script type="text/javascript">
-	var data = {
-		id: 17,
-		name: "Steve Curry",
-		team: "Goden State Warriors"
-	}
+
+	function getParams(key) {
+        var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) {
+            return unescape(r[2]);
+        }
+        return null;
+    };
+
+    var id = getParams("id")
+    var username = getParams("username")
+
+    $(".welcome").text("Fan: " + username + ", welcome!")
+
+    $(document).ready(function(){
+		$(".vote").hide();
+	})
 
 	$(".searchPlayerBtn").click(function(){
-		var html = "";
-    	html += "<tr>"
-    	html +=     "<th>ID</th>"
-    	html +=     "<th>Name</th>"
-    	html +=     "<th>Team</th>"
-        html += "</tr>"
-		$(".playerDetailHead").html(html)
-		// table body
-        var html2 = "";
-        
-        html2 += "<tr>"
-        html2 +=     "<td>" + data.id + "</td>"
-        html2 +=     "<td>" + data.name + "</td>"
-        html2 +=     "<td>" + data.team + "</td>"
-        html2 += "</tr>"
-        $(".palyerDetailBody").html(html2)
+		var playerName = $(".playerName").val()
+		var url = "http://localhost:8080/api/fans/" + playerName + "/player"
+		console.log(url)
+		$.ajax({
+			type: "GET",
+            url: url,
+            dataType: "json",
+            success: function(result){
+            	var data = result
+            	var html = "";
+		    	html += "<tr>"
+		    	html +=     "<th>ID</th>"
+		    	html +=     "<th>Name</th>"
+		    	html +=     "<th>Team</th>"
+		        html += "</tr>"
+				$(".playerDetailHead").html(html)
+				// table body
+		        var html2 = "";
+		        
+		        html2 += "<tr>"
+		        html2 +=     "<td>" + data.id + "</td>"
+		        html2 +=     "<td>" + data.name + "</td>"
+		        html2 +=     "<td>" + data.team.title + "</td>"
+		        html2 += "</tr>"
+        		$(".palyerDetailBody").html(html2)
+            },
+            error: function(e) {
+                console.log(e)
+            }
+		})
+	})
+
+	$(".searchDraftBtn").click(function(){
+		var draftYear = $(".draftYear").val()
+		var url = "http://localhost:8080/api/Scout/Drafts/" + draftYear
+		console.log(url)
+		$.ajax({
+			type: "GET",
+            url: url,
+            dataType: "json",
+            success: function(result){
+            	console.log(result)
+    //         	var data = result
+    //         	var html = "";
+		  //   	html += "<tr>"
+		  //   	html +=     "<th>ID</th>"
+		  //   	html +=     "<th>Name</th>"
+		  //   	html +=     "<th>Team</th>"
+		  //       html += "</tr>"
+				// $(".playerDetailHead").html(html)
+				// // table body
+		  //       var html2 = "";
+		        
+		  //       html2 += "<tr>"
+		  //       html2 +=     "<td>" + data.id + "</td>"
+		  //       html2 +=     "<td>" + data.name + "</td>"
+		  //       html2 +=     "<td>" + data.team.title + "</td>"
+		  //       html2 += "</tr>"
+    //     		$(".palyerDetailBody").html(html2)
+            },
+            error: function(e) {
+                console.log(e)
+            }
+		})
 	})
 </script>
 </html>

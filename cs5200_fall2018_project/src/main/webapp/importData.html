@@ -80,9 +80,10 @@
                         var year = data[i][2]
                         var player = data[i][0]
                         var team = data[i][6]
-                        let url = "http://localhost:8080/api/draft/create/" + order + "/" + year + "/" + player + "/" + team 
-                        console.log(url)
-                        $.ajax({
+                        if(team != ""){
+                            let url = "http://localhost:8080/api/draft/create/" + order + "/" + year + "/" + player + "/" + team 
+                            console.log(url)
+                            $.ajax({
                                 type: "GET",
                                 url: url,
                                 dataType: "json",
@@ -93,6 +94,7 @@
                                     console.log(e)
                                 }
                             })
+                        }
                     }
                 },
                 error: function (e) {

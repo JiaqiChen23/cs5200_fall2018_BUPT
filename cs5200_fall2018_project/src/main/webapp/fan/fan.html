@@ -110,7 +110,6 @@
             	var data = result
             	playerId = data.id
 
-            	// var url2 = "http://localhost:8080/api/fans/" + data.teamid!!!!!! + "/team"                   	
             	var html = "";
 		    	html += "<tr>"
 		    	html +=     "<th>ID</th>"
@@ -120,11 +119,10 @@
 				$(".playerDetailHead").html(html)
 				// table body
 		        var html2 = "";
-		        
 		        html2 += "<tr>"
 		        html2 +=     "<td>" + data.id + "</td>"
 		        html2 +=     "<td>" + data.name + "</td>"
-		        html2 +=     "<td>" + "team name" + "</td>"
+		        html2 +=     "<td>" + data.team.title + "</td>"
 		        html2 += "</tr>"
 		        $(".playerDetailBody").html(html2)
             },
