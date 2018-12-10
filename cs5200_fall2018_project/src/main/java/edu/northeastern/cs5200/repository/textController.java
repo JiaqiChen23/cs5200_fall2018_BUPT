@@ -49,7 +49,40 @@ public class textController {
     	return PIMPL.findPersonByUP(username,password);
 	}
 	
-	
+	//Admin
+	@GetMapping("/api/admin/addperson/{fn}/{ln}/{un}/{pw}/{dtype}/{dob}/{email}")
+    public void Createperson(@PathVariable("fn") String firstname,
+    		@PathVariable("ln") String lastname,@PathVariable("un") String username,
+    		@PathVariable("pw") String password,@PathVariable("dtype") String dtype,
+    		@PathVariable("dob") String dob,@PathVariable("email") String email) 
+    {
+		Date dob1 = java.sql.Date.valueOf(dob);
+		PersonImpl PIMPL = new PersonImpl();
+		Person person = new Person(dtype, 0, firstname, lastname, 
+				username, password, email, dob1);
+		PIMPL.createPerson(person, dtype);
+    	return;
+	}
+	@GetMapping("/api/admin/addperson/{id}/{fn}/{ln}/{un}/{pw}/{dtype}/{dob}/{email}")
+    public void updatePersonById(@PathVariable("id") int id,
+    		@PathVariable("fn") String firstname,
+    		@PathVariable("ln") String lastname,@PathVariable("un") String username,
+    		@PathVariable("pw") String password,@PathVariable("dtype") String dtype,
+    		@PathVariable("dob") String dob,@PathVariable("email") String email) 
+    {
+		Date dob1 = java.sql.Date.valueOf(dob);
+		PersonImpl PIMPL = new PersonImpl();
+		Person person = new Person(dtype, id, firstname, lastname, 
+				username, password, email, dob1);
+		PIMPL.updatePersonById(id,person);
+    	return;
+	}
+	@GetMapping("/api/admin/{FId}/delete")
+    public void Deleteperson(@PathVariable("FId") int FId) 
+    {
+    	PersonImpl PIMPL = new PersonImpl();
+    	PIMPL.deletePersonById(FId);
+	}
 	
 	//fans
     @GetMapping("/api/fans/{FId}/allstarVote")

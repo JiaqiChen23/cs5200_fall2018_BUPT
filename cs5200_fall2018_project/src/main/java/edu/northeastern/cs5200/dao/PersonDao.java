@@ -11,4 +11,8 @@ public interface PersonDao {
 	public Collection<Person> findAllPerson();
 
 	public Person findPersonByUP(String username, String password);
+	
+	public void deletePersonById(int id);
+
+	public void updatePersonById(int id, Person person);
 }

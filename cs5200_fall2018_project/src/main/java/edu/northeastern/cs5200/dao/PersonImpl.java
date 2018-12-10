@@ -19,12 +19,12 @@ public class PersonImpl implements PersonDao{
 
 	@Override
 	public void createPerson(Person person,String dtype) {
-		String findAllDevelopersSql = "INSERT INTO person (dtype,id,dob,email,firstname,lastname,password,username) VALUES (?,?,?,?,?,?,?,?);";		
+		String findAllDevelopersSql = "INSERT INTO person (dtype,type,dob,email,firstname,lastname,password,username) VALUES (?,?,?,?,?,?,?,?);";		
 		try {
 			PreparedStatement statement1 = 
 					connect.prepareStatement(findAllDevelopersSql);
 			statement1.setString(1, dtype);
-			statement1.setInt(2, person.getId());
+			statement1.setString(2, dtype);
 			statement1.setDate(3, person.getDob());
 			statement1.setString(4, person.getEmail());
 			statement1.setString(5, person.getFirstname());
@@ -103,6 +103,45 @@ public class PersonImpl implements PersonDao{
 					e.printStackTrace();
 			}
 			return person;
+	}
+
+	@Override
+	public void deletePersonById(int id) {
+		String findAllDevelopersSql = "DELETE FROM person WHERE id = ?";		
+		try {
+			PreparedStatement statement = connect.prepareStatement(findAllDevelopersSql);
+			statement.setInt(1,id);
+			statement.executeUpdate();
+		} catch (SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}		return;	
+	}
+	
+	@Override
+	public void updatePersonById(int id, Person person) {
+		String findAllDevelopersSql = "UPDATE person SET dtype=?,"
+				+ "dob=?,email=?,firstname=?,"
+				+ "lastname=?,password=?,username=?,type=?  WHERE id =?";
+		try {
+			PreparedStatement statement = 
+					connect.prepareStatement(findAllDevelopersSql);
+			statement.setString(1, person.getType());
+			statement.setDate(2, person.getDob());
+			statement.setString(3, person.getEmail());
+			statement.setString(4, person.getFirstname());
+			statement.setString(5, person.getLastname());
+			statement.setString(6, person.getPassword());
+			statement.setString(7, person.getUsername());
+			statement.setString(8, person.getType());
+			statement.setInt(9, id);
+
+			statement.executeUpdate();
+		} catch (SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		return;	
 	}
 
 }
