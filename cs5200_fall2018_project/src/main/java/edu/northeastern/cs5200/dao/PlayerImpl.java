@@ -81,6 +81,8 @@ public class PlayerImpl implements PlayerDao{
 				String Teamid = results.getString("team_id");
 				
 				int id1 = Integer.parseInt(idS);
+				if(Teamid==null)
+					Teamid="100";
 				int Tid = Integer.parseInt(Teamid);
 				TeamImpl TIMPL = new TeamImpl();
 				
@@ -186,6 +188,8 @@ public class PlayerImpl implements PlayerDao{
 				String Teamid = results.getString("team_id");
 				
 				int id1 = Integer.parseInt(idS);
+				if(Teamid==null)
+					Teamid="100";
 				int Tid = Integer.parseInt(Teamid);
 				TeamImpl TIMPL = new TeamImpl();
 				
