@@ -14,7 +14,6 @@ public class Player {
 	private String name;
 	
 	@ManyToOne()
-	@JsonIgnore
 	private Team team;
 	
 	@OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL, 
