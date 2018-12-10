@@ -49,6 +49,8 @@ Sponsor：
 
 赞助球队：/api/Sponsor/{sponsorId}/{Teamid}/{amount}
 
+取消赞助：/api/Sponsor/{Sid}/cancel
+
 Select All：
 
 全部用户：/api/person/getAllPerson

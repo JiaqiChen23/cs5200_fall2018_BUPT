@@ -30,8 +30,8 @@ public class SponsorImpl implements SponsorDao{
 			statement1.setString(5, sponsor.getLastname());
 			statement1.setString(6, sponsor.getPassword());
 			statement1.setString(7, sponsor.getUsername());
-			statement1.setInt(8, sponsor.getTeam().getId());
-			statement1.setString(9, "scout");
+			statement1.setInt(8, 100);
+			statement1.setString(9, "sponsor");
 			statement1.executeUpdate();
 			
 		} catch (SQLException e2) {
@@ -160,7 +160,7 @@ public class SponsorImpl implements SponsorDao{
 			statement.setString(6, sponsor.getPassword());
 			statement.setString(7, sponsor.getUsername());
 			statement.setInt(8, sponsor.getTeam().getId());
-			statement.setString(9, "scout");
+			statement.setString(9, "sponsor");
 			statement.setInt(10, id);
 
 			statement.executeUpdate();

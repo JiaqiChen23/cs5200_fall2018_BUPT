@@ -50,8 +50,10 @@ public class TeamImpl implements TeamDao{
 				
 				int id1 = Integer.parseInt(idS);
 				int sponamount = Integer.parseInt(sponsoramount);
+				SponsorImpl SIMPL = new SponsorImpl();
 				Team team = new Team();
 				team = new Team(id1, Description, sponamount,Title);
+				team.setSpon(SIMPL.findSponsorByTeamId(id1));
 				teams.add(team);
 			}
 						
@@ -148,7 +150,7 @@ public class TeamImpl implements TeamDao{
 
 	@Override
 	public void updateTeamById(int id, Team team) {
-		String findAllDevelopersSql = "UPDATE person SET "
+		String findAllDevelopersSql = "UPDATE team SET "
 				+ "description=?,sponsor_amount=?,title=?  WHERE id =?";
 		try {
 			PreparedStatement statement = 

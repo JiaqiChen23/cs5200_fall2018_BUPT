@@ -176,6 +176,9 @@ public class textController {
     {
     	TeamImpl TIMPL = new TeamImpl();
     	SponsorImpl SIMPL = new SponsorImpl();
+    	System.out.println(SIMPL.findSponsorById(SId).getTeam().getId());
+    	if(SIMPL.findSponsorById(SId).getTeam().getId()==100)
+    	{
     	Sponsor sponsor = SIMPL.findSponsorById(SId);
     	sponsor.setTeam(TIMPL.findTeamById(Tid));
     	SIMPL.updateSponsorById(SId, sponsor);
@@ -183,8 +186,21 @@ public class textController {
     	team.setSponsorAmount(amount);
     	TIMPL.updateTeamById(Tid, team);
     	return;
+    	}
 	}
-    
+    @GetMapping("/api/Sponsor/{Sid}/cancel")
+    public void CancelSponsor(@PathVariable("Sid") int SId) 
+    {
+    	TeamImpl TIMPL = new TeamImpl();
+    	SponsorImpl SIMPL = new SponsorImpl();
+    	Team team = TIMPL.findTeamBySponsorId(SId);
+    	team.setSponsorAmount(0);
+    	TIMPL.updateTeamById(team.getId(), team);
+    	Sponsor sponsor = SIMPL.findSponsorById(SId);
+    	sponsor.setTeam(TIMPL.findTeamById(100));
+    	SIMPL.updateSponsorById(SId, sponsor);
+    	return;
+	}
     
     
     //全选
