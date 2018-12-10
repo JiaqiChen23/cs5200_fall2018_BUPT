@@ -17,12 +17,13 @@ public class PlayerImpl implements PlayerDao{
 	Connection connect = Connect.getConnection();
 	@Override
 	public void createPlayer(Player player) {
-		String findAllDevelopersSql = "INSERT INTO player (name,team_id) VALUES (?,?);";		
+		String findAllDevelopersSql = "INSERT INTO player (id,name,team_id) VALUES (?,?,?);";		
 		try {
 			PreparedStatement statement1 = 
 					connect.prepareStatement(findAllDevelopersSql);
-			statement1.setString(1, player.getName());
-			statement1.setInt(2, player.getTeam().getId());
+			statement1.setInt(1, player.getId());
+			statement1.setString(2, player.getName());
+			statement1.setInt(3, player.getTeam().getId());
 			statement1.executeUpdate();
 			
 		} catch (SQLException e2) {
