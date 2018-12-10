@@ -187,7 +187,7 @@ public class SponsorImpl implements SponsorDao{
 
 	@Override
 	public Sponsor findSponsorByTeamId(int id) {
-		String findAllDevelopersSql = "SELECT * FROM person WHERE dtype=sponsor AND team_id="+id;
+		String findAllDevelopersSql = "SELECT * FROM person WHERE dtype='sponsor' AND team_id="+id;
 		Statement statement = null;
 		ResultSet results = null;
 		try {
