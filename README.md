@@ -49,6 +49,8 @@ Scout按年查询Draft：/api/Scout/Drafts/{FId}
 
 查询Scout所有Report：/api/Scout/{FId}/Report
 
+Scout写Report：/api/Scout/{FId}/{BId}/{ReportBody}
+
 Sponsor：
 
 查询当前Sponsor：/api/sponsor/{FId}

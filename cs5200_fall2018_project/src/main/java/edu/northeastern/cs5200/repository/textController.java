@@ -86,19 +86,21 @@ public class textController {
 	
 	//fans
     @GetMapping("/api/fans/{FId}/allstarVote")
-    public Collection<Allstar> findAllstarVotedbyFan(@PathVariable("FId") int FId) 
+    public Allstar findAllstarVotedbyFan(@PathVariable("FId") int FId) 
     {
     	AllstarImpl AIMPL = new AllstarImpl();
     	return AIMPL.findAllstarByFanId(FId);
 	}
     @GetMapping("/api/fans/{FId}/{PId}")
-    public void FanFollow(@PathVariable("FId") int FId,@PathVariable("PId") int PId) 
+    public void FanVote(@PathVariable("FId") int FId,@PathVariable("PId") int PId) 
     {
     	FanImpl FIMPL = new FanImpl();
     	PlayerImpl PIMPL = new PlayerImpl();
     	Allstar allstar = new Allstar(0,FIMPL.findFanById(FId),PIMPL.findPlayerById(PId));
     	AllstarImpl AIMPL = new AllstarImpl();
-    	AIMPL.createAllstars(allstar);
+    	System.out.println(AIMPL.findAllstarByFanId(FId).getId());
+    	if(AIMPL.findAllstarByFanId(FId).getId()==0)
+    		AIMPL.createAllstars(allstar);
 	}
     @GetMapping("/api/fans/{FId}/{PId}/delete")
     public void FanFollowCancel(@PathVariable("FId") int FId,@PathVariable("PId") int PId) 
@@ -188,6 +190,18 @@ public class textController {
     {
     	ReportImpl RIMPL = new ReportImpl();
     	return RIMPL.findAllReportByScoutId(FId);
+	}
+    @GetMapping("/api/Scout/{FId}/{BId}/{ReportBody}")
+    public void writeReport(@PathVariable("FId") int Sid,@PathVariable("BId") int Bid,
+    		@PathVariable("ReportBody") String Body) 
+    {
+    	ReportImpl RIMPL = new ReportImpl();
+    	ScoutImpl SIMPL = new ScoutImpl();
+    	BossImpl BIMPL = new BossImpl();
+    	Report report = new Report(0, BIMPL.findBossById(Bid), 
+    			SIMPL.findScoutById(Sid), Body);
+    	RIMPL.createReport(report);
+    	return;
 	}
     
     //Sponsor

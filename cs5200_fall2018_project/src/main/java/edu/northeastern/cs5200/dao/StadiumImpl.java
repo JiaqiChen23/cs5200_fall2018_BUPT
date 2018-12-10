@@ -97,12 +97,11 @@ public class StadiumImpl implements StadiumDao{
 
 	@Override
 	public Stadium findStadiumByTeamId(int id) {
-		TeamImpl TIMPL = new TeamImpl();
-		int Tid = TIMPL.findTeamById(id).getId();
-		String findAllDevelopersSql = "SELECT * FROM stadium WHERE id ="+Tid;
+		String findAllDevelopersSql = "SELECT * FROM stadium WHERE team_id ="+id;
 		Statement statement = null;
 		ResultSet results = null;
 		Stadium stadium = new Stadium();
+		TeamImpl TIMPL = new TeamImpl();
 		try {
 			statement = connect.createStatement();
 			results = statement.executeQuery(findAllDevelopersSql);
@@ -115,6 +114,7 @@ public class StadiumImpl implements StadiumDao{
 				int Seats = Integer.parseInt(SeatsS);
 				int id1 = Integer.parseInt(idS);
 				int Tid1 = Integer.parseInt(Teamid);
+				
 				stadium = new Stadium(id1, name,TIMPL.findTeamById(Tid1),Seats);
 			}
 						

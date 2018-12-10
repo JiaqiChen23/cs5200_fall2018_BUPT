@@ -12,7 +12,7 @@ public interface AllstarDao {
 	
 	public Allstar findAllstarById(int id);
 	
-	public Collection<Allstar> findAllstarByFanId(int id);
+	public Allstar findAllstarByFanId(int id);
 	
 	public Collection<Allstar> findAllstarByPlayerId(int id);
 	

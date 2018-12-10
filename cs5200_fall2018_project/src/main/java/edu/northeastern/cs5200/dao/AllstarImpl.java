@@ -126,11 +126,12 @@ public class AllstarImpl implements AllstarDao{
 	}
 
 	@Override
-	public Collection<Allstar> findAllstarByFanId(int id) {
+	public Allstar findAllstarByFanId(int id) {
 		String findAllDevelopersSql = "SELECT * FROM allstar WHERE fans_id ="+id;
-		List<Allstar> allstars = new ArrayList<Allstar>();
 		Statement statement = null;
 		ResultSet results = null;
+		Allstar allstar = new Allstar();
+
 		try {
 			statement = connect.createStatement();
 			results = statement.executeQuery(findAllDevelopersSql);
@@ -143,17 +144,15 @@ public class AllstarImpl implements AllstarDao{
 				int ids = Integer.parseInt(idS);
 				int Fid = Integer.parseInt(Fanid);
 				int Pid = Integer.parseInt(Playerid);
-				Allstar allstar = new Allstar();
 				FanImpl FIMPL = new FanImpl();
 				PlayerImpl PIMPL = new PlayerImpl();
 				allstar = new Allstar(ids, FIMPL.findFanById(Fid),PIMPL.findPlayerById(Pid));
-				allstars.add(allstar);
 			}
 						
 			} catch (SQLException e) {
 					e.printStackTrace();
 			}
-			return allstars;
+			return allstar;
 	}
 
 	@Override

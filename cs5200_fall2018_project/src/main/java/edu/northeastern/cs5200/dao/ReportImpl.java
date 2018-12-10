@@ -18,14 +18,13 @@ public class ReportImpl implements ReportDao{
 
 	@Override
 	public void createReport(Report report) {
-		String findAllDevelopersSql = "INSERT INTO stadium (id,reportbody,boss_id,scout_id) VALUES (?,?,?,?);";		
+		String findAllDevelopersSql = "INSERT INTO report (reportbody,boss_id,scout_id) VALUES (?,?,?);";		
 		try {
 			PreparedStatement statement1 = 
 					connect.prepareStatement(findAllDevelopersSql);
-			statement1.setInt(1, report.getId());
-			statement1.setString(2, report.getReportbody());
-			statement1.setInt(3, report.getBoss().getId());
-			statement1.setInt(4, report.getScout().getId());
+			statement1.setString(1, report.getReportbody());
+			statement1.setInt(2, report.getBoss().getId());
+			statement1.setInt(3, report.getScout().getId());
 			statement1.executeUpdate();
 			
 		} catch (SQLException e2) {
