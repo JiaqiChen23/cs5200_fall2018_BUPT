@@ -16,7 +16,6 @@
 		}
 		.searchWrapper{
 			width: 1050px;
-			height: 300px;
 			display: flex;
 		}
 		.player{
@@ -39,6 +38,10 @@
 		.report{
 			width: 500px;
 			border: 1px solid white;
+		}
+		.reportContent{
+			width: 300px;
+			height: 150px;
 		}
 		table{
 			margin: 0 auto;
@@ -90,7 +93,7 @@
 			</div>
 			<div>
 				<p>Report</p>
-				<textarea class="reortContent"></textarea>
+				<textarea class="reportContent"></textarea>
 			</div>
 			<button class="sendReportBtn">send report</button>
 		</div>
@@ -121,9 +124,69 @@
     $(".welcome").text("Fan: " + username + ", welcome!")
 
     $(document).ready(function(){
-		$(".vote").hide();
+		var url = "http://localhost:8080/api/bosses/getAllBosses"
+		console.log(url)
+		$.ajax({
+			type: "GET",
+            url: url,
+            dataType: "json",
+            success: function(result){
+            	console.log(result)
+            	var data = result
+            	var html = "";
+		    	html += "<tr>"
+		    	html +=     "<th>BossID</th>"
+		    	html +=     "<th>Name</th>"
+		    	html +=     "<th>Team</th>"
+		        html += "</tr>"
+				$(".bossTableHead").html(html)
+				// table body
+		        var html2 = "";
+		        for(var i=0; i<data.length; i++){
+		        	html2 += "<tr>"
+			        html2 +=     "<td>" + data[i].id + "</td>"
+			        html2 +=     "<td>" + data[i].username + "</td>"
+			        html2 +=     "<td>" + data[i].team.title + "</td>"
+			        html2 += "</tr>"
+		        }
+        		$(".bossTableBody").html(html2)
+            },
+            error: function(e) {
+                console.log(e)
+            }
+		})
+
+		var url2 = "http://localhost:8080/api/Scout/" + id + "/Report"
+		$.ajax({
+			type: "GET",
+            url: url2,
+            dataType: "json",
+            success: function(result){
+            	console.log(result)
+    //         	var data = result
+    //         	var html = "";
+		  //   	html += "<tr>"
+		  //   	html +=     "<th>BossID</th>"
+		  //   	html +=     "<th>reportContent</th>"
+		  //       html += "</tr>"
+				// $(".bossTableHead").html(html)
+				// // table body
+		  //       var html2 = "";
+		  //       for(var i=0; i<data.length; i++){
+		  //       	html2 += "<tr>"
+			 //        html2 +=     "<td>" + data[i].id + "</td>"
+			 //        html2 +=     "<td>" + data[i].id + "</td>"
+			 //        html2 += "</tr>"
+		  //       }
+    //     		$(".bossTableBody").html(html2)
+            },
+            error: function(e) {
+                console.log(e)
+            }
+		})
 	})
 
+    // search player by name
 	$(".searchPlayerBtn").click(function(){
 		var playerName = $(".playerName").val()
 		var url = "http://localhost:8080/api/fans/" + playerName + "/player"
@@ -157,6 +220,7 @@
 		})
 	})
 
+	// search draft by year
 	$(".searchDraftBtn").click(function(){
 		var draftYear = $(".draftYear").val()
 		var url = "http://localhost:8080/api/Scout/Drafts/" + draftYear
@@ -167,28 +231,68 @@
             dataType: "json",
             success: function(result){
             	console.log(result)
-    //         	var data = result
-    //         	var html = "";
-		  //   	html += "<tr>"
-		  //   	html +=     "<th>ID</th>"
-		  //   	html +=     "<th>Name</th>"
-		  //   	html +=     "<th>Team</th>"
-		  //       html += "</tr>"
-				// $(".playerDetailHead").html(html)
-				// // table body
-		  //       var html2 = "";
-		        
-		  //       html2 += "<tr>"
-		  //       html2 +=     "<td>" + data.id + "</td>"
-		  //       html2 +=     "<td>" + data.name + "</td>"
-		  //       html2 +=     "<td>" + data.team.title + "</td>"
-		  //       html2 += "</tr>"
-    //     		$(".palyerDetailBody").html(html2)
+            	var data = result
+            	var html = "";
+		    	html += "<tr>"
+		    	html +=     "<th>Order</th>"
+		    	html +=     "<th>Name</th>"
+		    	html +=     "<th>Team</th>"
+		        html += "</tr>"
+				$(".draftTableHead").html(html)
+				// table body
+		        var html2 = "";
+		        for(var i=0; i<data.length; i++){
+		        	html2 += "<tr>"
+			        html2 +=     "<td>" + data[i].order + "</td>"
+			        html2 +=     "<td>" + data[i].player.name + "</td>"
+			        html2 +=     "<td>" + data[i].player.team.title + "</td>"
+			        html2 += "</tr>"
+		        }
+        		$(".draftTableBody").html(html2)
             },
             error: function(e) {
                 console.log(e)
             }
 		})
 	})
+
+	$(".sendReportBtn").click(function(){
+		var bossId = $(".bossId").val()
+		var reportContent = $(".reportContent").val()
+		console.log(bossId, reportContent)
+		// var url = "http://localhost:8080/api/Scout/Drafts/"
+		// console.log(url)
+		// $.ajax({
+		// 	type: "GET",
+  //           url: url,
+  //           dataType: "json",
+  //           success: function(result){
+  //           	console.log(result)
+  //           	var data = result
+  //           	var html = "";
+		//     	html += "<tr>"
+		//     	html +=     "<th>Order</th>"
+		//     	html +=     "<th>Name</th>"
+		//     	html +=     "<th>Team</th>"
+		//         html += "</tr>"
+		// 		$(".draftTableHead").html(html)
+		// 		// table body
+		//         var html2 = "";
+		//         for(var i=0; i<data.length; i++){
+		//         	html2 += "<tr>"
+		// 	        html2 +=     "<td>" + data[i].order + "</td>"
+		// 	        html2 +=     "<td>" + data[i].player.name + "</td>"
+		// 	        html2 +=     "<td>" + data[i].player.team.title + "</td>"
+		// 	        html2 += "</tr>"
+		//         }
+  //       		$(".draftTableBody").html(html2)
+  //           },
+  //           error: function(e) {
+  //               console.log(e)
+  //           }
+		// })
+	})
+
+
 </script>
 </html>
