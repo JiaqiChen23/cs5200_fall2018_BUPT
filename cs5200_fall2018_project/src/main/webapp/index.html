@@ -53,11 +53,28 @@
 	$(".loginBtn").click(function(){
 		var username = $(".username").val()
 		var password = $(".password").val()
-		if (username == "admin" && password == "admin") {
-			window.location.href="./admin/admin.html?id=1"; 
-		} else{
-			alert("wrong username or password")
-		}
+
+		// check credentials
+		var url 
+		$.ajax({
+			type: "GET",
+	        url: url,
+	        dataType: "json",
+	        success: function(result) {
+	        	var type = result.type
+	        	alert(type)
+	        },
+	        error: function(e) {
+                console.log(e)
+            }
+		})
+
+		// if (username == "admin" && password == "admin") {
+		// 	window.location.href="./admin/admin.html"; 
+		// }
+		// else{
+		// 	alert("wrong username or password")
+		// }
 		
 	})
 </script>

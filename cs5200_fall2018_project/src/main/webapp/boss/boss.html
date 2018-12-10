@@ -39,10 +39,7 @@
 		.stadium{
 			width: 350px;
 		}
-		.teamTable{
-			margin: 0 auto;
-		}
-		.stadiumTable{
+		table{
 			margin: 0 auto;
 		}
 	</style>
@@ -50,7 +47,7 @@
 
 <body>
 	<div>
-		<h1>Boss</h1>
+		<h1 class="welcome">Boss</h1>
 	</div>
 	<div class="boss">
 		<div class="teamManagementWrapper">
@@ -86,81 +83,129 @@
 </body>
 
 <script type="text/javascript">
-	var data = {
-		id: 1,
-		title: "Lakers",
-		sponsor_amount: 100000,
-		sponsor: "Nike"
-	}
 
-	var data2 = {
-		id: 1,
-		name: "Staples Center",
-		seats: 20000
-	}
-
-	var data3 = {
-		id: 1,
-		scout: "aaa",
-		reportbody: "Player A is a talented player, great shooter, great defenser."
-	}
+	function getParams(key) {
+        var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) {
+            return unescape(r[2]);
+        }
+        return null;
+    };
 
 	$(document).ready(function(){
-		// team
-		var html = "";
-    	html += "<tr>"
-    	html +=     "<th>ID</th>"
-    	html +=     "<th>Title</th>"
-    	html +=     "<th>Sponsor Amount</th>"
-    	html +=		"<th>Sponsor</th>"
-        html += "</tr>"
-		$(".teamTableHead").html(html)
-		// table body
-        var html2 = "";
-        
-        html2 += "<tr>"
-        html2 +=     "<td>" + data.id + "</td>"
-        html2 +=     "<td>" + data.title + "</td>"
-        html2 +=     "<td>" + data.sponsor_amount + "</td>"
-        html2 +=     "<td>" + data.sponsor + "</td>"
-        html2 += "</tr>"
-        $(".teamTableBody").html(html2)
 
-        // stadium
-        var html3 = "";
-    	html3 += "<tr>"
-    	html3 +=     "<th>ID</th>"
-    	html3 +=     "<th>Name</th>"
-    	html3 +=     "<th>Seats</th>"
-        html3 += "</tr>"
-		$(".stadiumTableHead").html(html3)
-		// table body
-        var html4 = "";
-        
-        html4 += "<tr>"
-        html4 +=     "<td>" + data2.id + "</td>"
-        html4 +=     "<td>" + data2.name + "</td>"
-        html4 +=     "<td>" + data2.seats + "</td>"
-        html4 += "</tr>"
-        $(".stadiumTableBody").html(html4)
+		var id = getParams("id");
+		var username = getParams("username")
+		$(".welcome").text("Boss: " + username + ", welcome!")
+
+		// team
+		var url1 = "http://localhost:8080/api/Bosses/" + id + "/Teams"
+		$.ajax({
+            type: "GET",
+            url: url1,
+            dataType: "json",
+            success: function(result) {
+            	var data = result
+            	var url2 = "http://localhost:8080/api/Bosses/" + id + "/Sponsor";
+            	$.ajax({
+            		type: "GET",
+		            url: url2,
+		            dataType: "json",
+		            success: function(result2) {
+		            	var data2 = result2
+		            	// team
+						var html = "";
+				    	html += "<tr>"
+				    	html +=     "<th>ID</th>"
+				    	html +=     "<th>Title</th>"
+				    	html +=     "<th>Sponsor Amount</th>"
+				    	html +=		"<th>Sponsor</th>"
+				        html += "</tr>"
+						$(".teamTableHead").html(html)
+						// table body
+				        var html2 = "";
+				        html2 += "<tr>"
+				        html2 +=     "<td>" + data.id + "</td>"
+				        html2 +=     "<td>" + data.title + "</td>"
+				        html2 +=     "<td>" + data.sponsor_amount + "</td>"
+				        html2 +=     "<td>" + data2.username + "</td>"
+				        html2 += "</tr>"
+				        $(".teamTableBody").html(html2)
+		            },
+		            error: function(e) {
+		                console.log(e)
+		            }
+            	})
+            },
+            error: function(e) {
+                console.log(e)
+            }
+        })
+
+		// stadium
+		var url3 = "http://localhost:8080/api/Bosses/" + id + "/Stadium"
+		$.ajax({
+    		type: "GET",
+            url: url3,
+            dataType: "json",
+            success: function(result) {
+            	var data = result
+            	// stadium
+		        var html3 = "";
+		    	html3 += "<tr>"
+		    	html3 +=     "<th>ID</th>"
+		    	html3 +=     "<th>Name</th>"
+		    	html3 +=     "<th>Seats</th>"
+		        html3 += "</tr>"
+				$(".stadiumTableHead").html(html3)
+				// table body
+		        var html4 = "";
+		        
+		        html4 += "<tr>"
+		        html4 +=     "<td>" + data2.id + "</td>"
+		        html4 +=     "<td>" + data2.name + "</td>"
+		        html4 +=     "<td>" + data2.seats + "</td>"
+		        html4 += "</tr>"
+		        $(".stadiumTableBody").html(html4)
+            },
+            error: function(e) {
+                console.log(e)
+            }
+        })
 
         // report
-        var html5 = "";
-    	html5 += "<tr>"
-    	html5 +=     "<th>ID</th>"
-    	html5 +=     "<th>Scout</th>"
-    	html5 +=     "<th>Report Content</th>"
-        html5 += "</tr>"
-		$(".reportTableHead").html(html5)
-		// table body
-        var html6 = "";
+        var url4 = "http://localhost:8080/api/Bosses/" + id + "/Reports"
+		$.ajax({
+    		type: "GET",
+            url: url4,
+            dataType: "json",
+            success: function(result) {
+            	var data = result
+            	// report
+		        var html5 = "";
+		    	html5 += "<tr>"
+		    	html5 +=     "<th>ID</th>"
+		    	html5 +=     "<th>Scout</th>"
+		    	html5 +=     "<th>Report Content</th>"
+		        html5 += "</tr>"
+				$(".reportTableHead").html(html5)
+				// table body
+		        var html6 = "";
+		        for(var i=0; i<data.length; i++){
+		        	html6 += "<tr>"
+			        html6 +=     "<td>" + data3.id + "</td>"
+			        html6 +=     "<td>" + data3.scout + "</td>"
+			        html6 +=     "<td>" + data3.reportbody + "</td>"
+			        html6 += "</tr>"
+		        }
+		        $(".reportTableBody").html(html6)
+            },
+            error: function(e) {
+                console.log(e)
+            }
+        })
         
-        html6 += "<tr>"
-        html6 +=     "<td>" + data3.id + "</td>"
-        html6 +=     "<td>" + data3.scout + "</td>"
-        html6 +=     "<td>" + data3.reportbody + "</td>"
-        html6 += "</tr>"
-        $(".reportTableBody").html(html6)
 	})
 </script>
 </html>
