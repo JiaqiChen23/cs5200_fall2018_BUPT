@@ -84,6 +84,7 @@ public class PersonImpl implements PersonDao{
 			
 			while(results.next()) {
 				String dtype = results.getString("type");
+				System.out.println(dtype);
 				String idS = results.getString("id");
 				String Firstname = results.getString("firstname");
 				String Lastname = results.getString("lastname");

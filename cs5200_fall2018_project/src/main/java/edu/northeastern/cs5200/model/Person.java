@@ -24,6 +24,13 @@ public class Person {
 	@Column(name = "type", nullable = false)
 	protected String type;
 	protected Date dob;
+	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	public int getId() {
 		return id;
 	}
