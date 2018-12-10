@@ -17,6 +17,6 @@ import data:
 
 创建有ID的player：/api/player/create/{id}/{name}/{tid}
 
-创建没有ID的player：/api/player/create/{name}/{tid}
+创建没有TeamID的player：/api/player/create/{id}/{name}
 
 创建draft：/api/draft/create/{id}/{order}/{year}/{player}/{team}

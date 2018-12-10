@@ -188,13 +188,12 @@ public class textController {
     	PIMPL.createPlayer(player);
     	return;
     }
-    @GetMapping("/api/player/create/{name}/{tid}")
-    public void CreatePlayerNoId(@PathVariable("name") String name,@PathVariable("tid") int tid) 
+    @GetMapping("/api/player/create/{id}/{name}")
+    public void CreatePlayerNoId(@PathVariable("id") int id, @PathVariable("name") String name) 
     {
     	PlayerImpl PIMPL = new PlayerImpl();
-    	TeamImpl TIMPL = new TeamImpl();
-    	Player player = new Player(0,name,TIMPL.findTeamById(tid));
-    	PIMPL.createPlayerAutoId(player);
+    	Player player = new Player(id,name,null);
+    	PIMPL.createPlayerNoTeamId(player);
     	return;
     }
     @GetMapping("/api/draft/create/{id}/{order}/{year}/{player}/{team}")

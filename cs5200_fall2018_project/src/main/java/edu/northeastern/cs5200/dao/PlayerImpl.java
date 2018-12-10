@@ -153,13 +153,13 @@ public class PlayerImpl implements PlayerDao{
 	}
 
 	@Override
-	public void createPlayerAutoId(Player player) {
-		String findAllDevelopersSql = "INSERT INTO player (name,team_id) VALUES (?,?);";		
+	public void createPlayerNoTeamId(Player player) {
+		String findAllDevelopersSql = "INSERT INTO player (id,name) VALUES (?,?);";		
 		try {
 			PreparedStatement statement1 = 
 					connect.prepareStatement(findAllDevelopersSql);
-			statement1.setString(1, player.getName());
-			statement1.setInt(2, player.getTeam().getId());
+			statement1.setInt(1, player.getId());
+			statement1.setString(2, player.getName());
 			statement1.executeUpdate();
 			
 		} catch (SQLException e2) {

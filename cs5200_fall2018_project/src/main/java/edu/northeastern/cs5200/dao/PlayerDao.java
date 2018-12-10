@@ -18,5 +18,5 @@ public interface PlayerDao {
 	
 	public void deletePlayerById(int id);
 
-	void createPlayerAutoId(Player player);
+	void createPlayerNoTeamId(Player player);
 }
