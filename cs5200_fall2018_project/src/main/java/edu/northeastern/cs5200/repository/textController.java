@@ -178,6 +178,7 @@ public class textController {
     	return SIMPL.findAllStadium();
     }
     
+    //import data
     @GetMapping("/api/player/create/{id}/{name}/{tid}")
     public void CreatePlayer(@PathVariable("id") int id,@PathVariable("name") String name,@PathVariable("tid") int tid) 
     {
@@ -185,6 +186,15 @@ public class textController {
     	TeamImpl TIMPL = new TeamImpl();
     	Player player = new Player(id,name,TIMPL.findTeamById(tid));
     	PIMPL.createPlayer(player);
+    	return;
+    }
+    @GetMapping("/api/player/create/{name}/{tid}")
+    public void CreatePlayerNoId(@PathVariable("name") String name,@PathVariable("tid") int tid) 
+    {
+    	PlayerImpl PIMPL = new PlayerImpl();
+    	TeamImpl TIMPL = new TeamImpl();
+    	Player player = new Player(0,name,TIMPL.findTeamById(tid));
+    	PIMPL.createPlayerAutoId(player);
     	return;
     }
     @GetMapping("/api/draft/create/{id}/{order}/{year}/{player}/{team}")

@@ -12,3 +12,9 @@ boss查体育馆：/api/Bosses/{FId}/Stadium
 boss查报告：/api/Bosses/{FId}/Reports
 
 boss查队伍赞助商：/api/Bosses/{FId}/Sponsor
+
+创建有ID的player：/api/player/create/{id}/{name}/{tid}
+
+创建没有ID的player：/api/player/create/{name}/{tid}
+
+创建draft：/api/draft/create/{id}/{order}/{year}/{player}/{team}

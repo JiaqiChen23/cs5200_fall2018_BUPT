@@ -17,4 +17,6 @@ public interface PlayerDao {
 	public void updatePlayerById(int id, Player player);
 	
 	public void deletePlayerById(int id);
+
+	void createPlayerAutoId(Player player);
 }
