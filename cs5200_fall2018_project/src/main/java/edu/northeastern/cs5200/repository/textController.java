@@ -83,6 +83,12 @@ public class textController {
     	PersonImpl PIMPL = new PersonImpl();
     	PIMPL.deletePersonById(FId);
 	}
+	@GetMapping("/api/admin/{PId}/person")
+    public Person findPersonbyid(@PathVariable("PId") int PId) 
+    {
+    	PersonImpl PIMPL = new PersonImpl();
+    	return PIMPL.findPersonById(PId);
+	}
 	
 	//fans
     @GetMapping("/api/fans/{FId}/allstarVote")

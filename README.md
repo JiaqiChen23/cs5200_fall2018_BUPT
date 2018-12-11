@@ -9,6 +9,8 @@ Admin：
 
 删除用户：/api/admin/{FId}/delete
 
+用PersonID 查找Person：/api/admin/{PId}/person
+
 Fans：
 
 登录：/api/login/{username}/{password}

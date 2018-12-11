@@ -11,6 +11,7 @@ import java.util.Collection;
 import java.util.List;
 
 import edu.northeastern.cs5200.Connect;
+import edu.northeastern.cs5200.model.Boss;
 import edu.northeastern.cs5200.model.Fan;
 import edu.northeastern.cs5200.model.Person;
 
@@ -142,6 +143,39 @@ public class PersonImpl implements PersonDao{
 			e2.printStackTrace();
 		}
 		return;	
+	}
+
+	@Override
+	public Person findPersonById(int id) {
+		String findAllDevelopersSql = "SELECT * FROM person WHERE id = "+id;
+		Statement statement = null;
+		ResultSet results = null;
+		try {
+			statement = connect.createStatement();
+			
+			results = statement.executeQuery(findAllDevelopersSql);
+			Person person = new Person();
+			while(results.next()) {
+				String type = results.getString("type");
+				String idS = results.getString("id");
+				String Firstname = results.getString("firstname");
+				String Lastname = results.getString("lastname");
+				String Username = results.getString("username");
+				String Password = results.getString("password");
+				String email = results.getString("email");
+				String dob = results.getString("dob");
+				String teamId = results.getString("team_id");
+				
+				int id1 = Integer.parseInt(idS);
+				Date dob1 = java.sql.Date.valueOf(dob);
+				person = new Person(type, id1, Firstname, Lastname, 
+						Username, Password, email, dob1);
+			}
+			return person;
+		} catch (SQLException e2) {
+			e2.printStackTrace();
+			return null;
+		}
 	}
 
 }
