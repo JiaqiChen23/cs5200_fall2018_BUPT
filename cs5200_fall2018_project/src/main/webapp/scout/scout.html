@@ -121,7 +121,7 @@
     var id = getParams("id")
     var username = getParams("username")
 
-    $(".welcome").text("Fan: " + username + ", welcome!")
+    $(".welcome").text("Scout: " + username + ", welcome!")
 
     $(document).ready(function(){
 		var url = "http://localhost:8080/api/bosses/getAllBosses"
@@ -163,22 +163,22 @@
             dataType: "json",
             success: function(result){
             	console.log(result)
-    //         	var data = result
-    //         	var html = "";
-		  //   	html += "<tr>"
-		  //   	html +=     "<th>BossID</th>"
-		  //   	html +=     "<th>reportContent</th>"
-		  //       html += "</tr>"
-				// $(".bossTableHead").html(html)
-				// // table body
-		  //       var html2 = "";
-		  //       for(var i=0; i<data.length; i++){
-		  //       	html2 += "<tr>"
-			 //        html2 +=     "<td>" + data[i].id + "</td>"
-			 //        html2 +=     "<td>" + data[i].id + "</td>"
-			 //        html2 += "</tr>"
-		  //       }
-    //     		$(".bossTableBody").html(html2)
+            	var data = result
+            	var html = "";
+		    	html += "<tr>"
+		    	html +=     "<th>BossID</th>"
+		    	html +=     "<th>reportContent</th>"
+		        html += "</tr>"
+				$(".reportTableHead").html(html)
+				// table body
+		        var html2 = "";
+		        for(var i=0; i<data.length; i++){
+		        	html2 += "<tr>"
+			        html2 +=     "<td>" + data[i].boss.id + "</td>"
+			        html2 +=     "<td>" + data[i].reportbody + "</td>"
+			        html2 += "</tr>"
+		        }
+        		$(".reportTableBody").html(html2)
             },
             error: function(e) {
                 console.log(e)
@@ -259,38 +259,20 @@
 	$(".sendReportBtn").click(function(){
 		var bossId = $(".bossId").val()
 		var reportContent = $(".reportContent").val()
-		console.log(bossId, reportContent)
-		// var url = "http://localhost:8080/api/Scout/Drafts/"
-		// console.log(url)
-		// $.ajax({
-		// 	type: "GET",
-  //           url: url,
-  //           dataType: "json",
-  //           success: function(result){
-  //           	console.log(result)
-  //           	var data = result
-  //           	var html = "";
-		//     	html += "<tr>"
-		//     	html +=     "<th>Order</th>"
-		//     	html +=     "<th>Name</th>"
-		//     	html +=     "<th>Team</th>"
-		//         html += "</tr>"
-		// 		$(".draftTableHead").html(html)
-		// 		// table body
-		//         var html2 = "";
-		//         for(var i=0; i<data.length; i++){
-		//         	html2 += "<tr>"
-		// 	        html2 +=     "<td>" + data[i].order + "</td>"
-		// 	        html2 +=     "<td>" + data[i].player.name + "</td>"
-		// 	        html2 +=     "<td>" + data[i].player.team.title + "</td>"
-		// 	        html2 += "</tr>"
-		//         }
-  //       		$(".draftTableBody").html(html2)
-  //           },
-  //           error: function(e) {
-  //               console.log(e)
-  //           }
-		// })
+		
+		var url = "/api/Scout/" + id +"/" + bossId + "/" + reportContent
+		console.log(url)
+		$.ajax({
+			type: "GET",
+            url: url,
+            dataType: "json",
+            success: function(result){
+            	console.log("success")
+            },
+            error: function(e) {
+                console.log(e)
+            }
+		})
 
 		location.reload(true)
 	})

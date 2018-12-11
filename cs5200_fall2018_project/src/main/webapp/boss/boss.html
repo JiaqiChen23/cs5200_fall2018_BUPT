@@ -191,8 +191,8 @@
             	// report
 		        var html5 = "";
 		    	html5 += "<tr>"
-		    	html5 +=     "<th>ID</th>"
-		    	html5 +=     "<th>Scout</th>"
+		    	html5 +=     "<th>Scout ID</th>"
+		    	html5 +=     "<th>Scout Name</th>"
 		    	html5 +=     "<th>Report Content</th>"
 		        html5 += "</tr>"
 				$(".reportTableHead").html(html5)
@@ -200,8 +200,8 @@
 		        var html6 = "";
 		        for(var i=0; i<data.length; i++){
 		        	html6 += "<tr>"
-			        html6 +=     "<td>" + data[i].id + "</td>"
-			        html6 +=     "<td>" + data[i].scout + "</td>"
+			        html6 +=     "<td>" + data[i].scout.id + "</td>"
+			        html6 +=     "<td>" + data[i].scout.username+ "</td>"
 			        html6 +=     "<td>" + data[i].reportbody + "</td>"
 			        html6 += "</tr>"
 		        }

@@ -54,31 +54,35 @@
 					<div>
 						<h5>Create and Update User</h5>
 						<p>ID</p>
-						<input type="text">
+						<input type="text" class="id">
+						<button class="getPersonBtn">Sync data</button><br>
+						<p>Dob</p>
+						<input type="text" class="dob">
+						<p>Email</p>
+						<input type="text" class="email">
 						<p>FirstName</p>
-						<input type="text"><br>
+						<input type="text" class="firstname"><br>
 						<p>LastName</p>
-						<input type="text"><br>
+						<input type="text" class="lastname"><br>
 						<p>Username</p>
-						<input type="text"><br>
+						<input type="text" class="username"><br>
 						<p>Password</p>
-						<input type="text"><br>
+						<input type="text" class="password"><br>
 						<p>Type</p>
-						<input type="text">
+						<input type="text" class="type">
 						<button class="createUserBtn">Create User</button>
 						<button class="updateUserBtn">Update User</button>
 					</div>
 					<div>
 						<h5>Delete User</h5>
 						<p>ID</p>
-						<input type="text" class="id">
+						<input type="text" class="deleteid">
 						<button class="deleteUserBtn">Delete User</button>
 					</div>
 				</div>
 			</div>
 			<div class="viewMethod">
 				<h5>View Users</h5>
-				<button class="viewUserBtn">View Users</button>
 				<br>
 				<br>
 				<table class="userTable" border="1">
@@ -93,7 +97,100 @@
 
 <script type="text/javascript">
 
-    $(".viewUserBtn").click(function(){
+	$(".createUserBtn").click(function(){
+		// var id = $(".id").val()
+		var dob = $(".dob").val()
+		var email = $(".email").val()
+		var firstname = $(".firstname").val()
+		var lastname = $(".lastname").val()
+		var username = $(".username").val()
+		var password = $(".password").val()
+		var type = $(".type").val()
+
+		var url = "http://localhost:8080/api/admin/addperson/" + firstname + "/" + lastname + "/" + username + "/" + password + "/" + type + "/" + dob + "/" + email
+		$.ajax({
+            type: "GET",
+            url: url,
+            dataType: "json",
+            success: function (result) {
+            	console.log("success")
+            },
+            error: function (e) {
+                var test = e;
+            }
+        })
+        location.reload(true)
+	})
+
+	$(".getPersonBtn").click(function(){
+		var id = $(".id").val()
+
+		var url = "http://localhost:8080//api/admin/" + id + "/person"
+		$.ajax({
+            type: "GET",
+            url: url,
+            dataType: "json",
+            success: function (result) {
+            	var data = result
+            	console.log(data)
+            	$(".dob").val(data.dob)
+				$(".email").val(data.email)
+				$(".firstname").val(data.firstname)
+				$(".lastname").val(data.lastname)
+				$(".username").val(data.username)
+				$(".password").val(data.password)
+				$(".type").val(data.type)
+            },
+            error: function (e) {
+                var test = e;
+            }
+        })
+	})
+
+	$(".updateUserBtn").click(function(){
+		var id = $(".id").val()
+		var dob = $(".dob").val()
+		var email = $(".email").val()
+		var firstname = $(".firstname").val()
+		var lastname = $(".lastname").val()
+		var username = $(".username").val()
+		var password = $(".password").val()
+		var type = $(".type").val()
+
+		var url = "http://localhost:8080/api/admin/addperson/" + id + "/" + firstname + "/" + lastname + "/" + username + "/" + password + "/" + type + "/" + dob + "/" + email
+		$.ajax({
+            type: "GET",
+            url: url,
+            dataType: "json",
+            success: function (result) {
+            	console.log("success")
+            },
+            error: function (e) {
+                var test = e;
+            }
+        })
+        location.reload(true)
+	})
+
+	$(".deleteUserBtn").click(function(){
+		var id = $(".deleteid").val()
+
+		var url = "http://localhost:8080/api/admin/" + id + "/delete"
+		$.ajax({
+            type: "GET",
+            url: url,
+            dataType: "json",
+            success: function (result) {
+            	console.log("success")
+            },
+            error: function (e) {
+                var test = e;
+            }
+        })
+        location.reload(true)
+	})
+
+    $(".document").ready(function(){
     	$.ajax({
             type: "GET",
             url: "http://localhost:8080/api/person/getAllPerson",
@@ -111,7 +208,6 @@
 		    	html +=     "<th>LastName</th>"
 		        html +=     "<th>Username</th>"
 		        html +=     "<th>Password</th>"
-		        html +=     "<th>Team</th>"
 		        html +=     "<th>Type</th>"
 		        html += "</tr>"
 				$(".userTableHead").html(html)
@@ -126,7 +222,6 @@
 		            html2 +=     "<td>" + data[i].lastname + "</td>"
 		            html2 +=     "<td>" + data[i].username + "</td>"
 		            html2 +=     "<td>" + data[i].password + "</td>"
-		            html2 +=     "<td>Team if existed</td>"
 		            html2 +=     "<td>" + data[i].type + "</td>"
 		            html2 += "</tr>"
 		        }
