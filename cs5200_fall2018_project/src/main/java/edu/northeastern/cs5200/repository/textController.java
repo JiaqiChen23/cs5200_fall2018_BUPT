@@ -196,10 +196,15 @@ public class textController {
     	ReportImpl RIMPL = new ReportImpl();
     	ScoutImpl SIMPL = new ScoutImpl();
     	BossImpl BIMPL = new BossImpl();
-    	Report report = new Report(0, BIMPL.findBossById(Bid), 
-    			SIMPL.findScoutById(Sid), Body);
-    	RIMPL.createReport(report);
-    	return;
+    	System.out.println(BIMPL.findBossById(Bid).getId());
+    	if(BIMPL.findBossById(Bid)!=null)
+    	{
+    		Report report = new Report(0, BIMPL.findBossById(Bid), 
+        			SIMPL.findScoutById(Sid), Body);
+        	RIMPL.createReport(report);
+        	return;
+    	}
+    	
 	}
     
     //Sponsor

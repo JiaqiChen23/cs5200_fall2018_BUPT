@@ -79,7 +79,7 @@ public class BossImpl implements BossDao{
 
 	@Override
 	public Boss findBossById(int id) {
-		String findAllDevelopersSql = "SELECT * FROM person WHERE id = "+id;
+		String findAllDevelopersSql = "SELECT * FROM person WHERE dtype = 'boss' AND id = "+id;
 		Statement statement = null;
 		ResultSet results = null;
 		try {
