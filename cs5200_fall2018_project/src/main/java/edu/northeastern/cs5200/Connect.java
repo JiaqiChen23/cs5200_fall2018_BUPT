@@ -14,7 +14,7 @@ public class Connect {
 	private static final String DRIVER = "com.mysql.jdbc.Driver";
 	private static final String URL = "jdbc:mysql://127.0.0.1:3306/newschema";
 	private static final String USER = "root";
-	private static final String PASSWORD = "";
+	private static final String PASSWORD = "charles123";
 	private static 	java.sql.Connection dbConnection = null;
 
 	public static Connection getConnection(){
