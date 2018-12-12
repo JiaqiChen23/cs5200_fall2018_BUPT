@@ -31,6 +31,10 @@
 			margin: 20px;
 			width: 100px;
 		}
+		.anonymousBtn{
+			margin: 20px;
+			width: 150px;
+		}
 	</style>
 </head>
 
@@ -46,6 +50,7 @@
 			<input class="password" type="password">
 		</div>	
 		<button class="loginBtn">Login</button>
+		<button class="anonymousBtn">Anonymous User</button>
 	</div>
 </body>
 
@@ -90,14 +95,10 @@
                 console.log(e)
             }
 		})
+	})
 
-		// if (username == "admin" && password == "admin") {
-		// 	window.location.href="./admin/admin.html"; 
-		// }
-		// else{
-		// 	alert("wrong username or password")
-		// }
-		
+	$(".anonymousBtn").click(function(){
+		window.location.href="./anonymous/anonymous.html"; 
 	})
 </script>
 </html>

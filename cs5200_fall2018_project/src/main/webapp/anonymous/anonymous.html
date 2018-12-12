@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Fan</title>
+
+	<script type="text/javascript" src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+
+	<style type="text/css">
+		html{
+			background-image: url("../assets/jordan.jpeg");
+			background-size: 100% 100%;
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+			text-align: center;
+		}
+		h1{
+			color: white;
+		}
+		.fanWrapper{
+			position: absolute;
+			width: 1300px;
+			margin: 0 auto;
+			display: flex;
+			color: white;
+		}
+		table{
+			margin: 0 auto;
+		}
+		.searchPlayer{
+			margin: 0 auto;
+			width: 500px;
+		}
+		p{
+			width: 100px;
+			display: inline-block;
+		}
+	</style>
+</head>
+
+<body>
+	<div>
+		<h1 class="welcome">Anonymous User</h1>
+	</div>
+	<div class="fanWrapper">
+		<div class="searchPlayer">
+			<h5>Search a player by id</h5>
+			<input type="text" class="playerName">
+			<button class="searchPlayerBtn">Search</button>
+			<br>
+			<br>
+			<table class="playerDetailTable" border="1">
+				<thead class="playerDetailHead"></thead>
+				<tbody class="playerDetailBody"></tbody>
+			</table>
+		</div>
+	</div>
+</body>
+
+<script type="text/javascript">
+
+	$(".searchPlayerBtn").click(function(){
+		var playerName = $(".playerName").val()
+		console.log(playerName)
+
+		var url = "http://localhost:8080/api/fans/" + playerName + "/player"
+		$.ajax({
+			type: "GET",
+            url: url,
+            dataType: "json",
+            success: function(result){
+            	var data = result
+            	playerId = data.id
+
+            	var html = "";
+		    	html += "<tr>"
+		    	html +=     "<th>ID</th>"
+		    	html +=     "<th>Name</th>"
+		    	html +=     "<th>Team</th>"
+		        html += "</tr>"
+				$(".playerDetailHead").html(html)
+				// table body
+		        var html2 = "";
+		        html2 += "<tr>"
+		        html2 +=     "<td>" + data.id + "</td>"
+		        html2 +=     "<td>" + data.name + "</td>"
+		        html2 +=     "<td>" + data.team.title + "</td>"
+		        html2 += "</tr>"
+		        $(".playerDetailBody").html(html2)
+            },
+            error: function(e) {
+                console.log(e)
+            }
+		})
+	})
+</script>
+</html>

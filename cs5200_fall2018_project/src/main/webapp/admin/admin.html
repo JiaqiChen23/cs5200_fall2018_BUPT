@@ -24,22 +24,17 @@
 		<h1>Admin</h1>
 	</div>
 	<button class="userBtn">User Management</button>
-	
+	<button class="teamBtn">View Team</button>
 </body>
 
 <script type="text/javascript">
 
-	function getParams(key) {
-        var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
-        var r = window.location.search.substr(1).match(reg);
-        if (r != null) {
-            return unescape(r[2]);
-        }
-        return null;
-    };
-
 	$(".userBtn").click(function(){
 		window.location.href="./userManagement.html";
+	})
+
+	$(".teamBtn").click(function(){
+		window.location.href="./viewTeam.html";
 	})
 </script>
 </html>

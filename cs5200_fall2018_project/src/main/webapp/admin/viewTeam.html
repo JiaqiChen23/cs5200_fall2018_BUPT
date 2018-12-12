@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>User Management</title>
+
+	<script type="text/javascript" src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+
+	<style type="text/css">
+		html{
+			background-image: url("../assets/jordan.jpeg");
+			background-size: 100% 100%;
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+			text-align: center;
+			color: white;
+		}
+		h1{
+			color: white;
+		}
+		table{
+			margin: 0 auto;
+		}
+	</style>
+</head>
+
+<body>
+	<div>
+		<h1>Admin</h1>
+	</div>
+	<div class="user">
+		<h2>View Team</h2>
+		<div>
+			<h5>Team status List</h5>
+			<table class="teamTable" border="1">
+				<thead class="teamTablelHead"></thead>
+				<tbody class="teamTableBody"></tbody>
+			</table>
+		</div>
+	</div>
+	
+</body>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		var url = "http://localhost:8080/api/teams/getAllTeams"
+		console.log(url)
+		$.ajax({
+			type: "GET",
+            url: url,
+            dataType: "json",
+            success: function(result){
+            	console.log(result)
+            	var data = result
+            	var html = "";
+		    	html += "<tr>"
+		    	html +=     "<th>ID</th>"
+		    	html +=     "<th>Team </th>"
+		    	html +=     "<th>Sponsor</th>"
+		        html += "</tr>"
+				$(".teamTablelHead").html(html)
+				// table body
+		        var html2 = "";
+		        for(var i=0; i<data.length; i++){
+		        	if(data[i].id != 100){
+		        		html2 += "<tr>"
+				        html2 +=     "<td>" + data[i].id + "</td>"
+				        html2 +=     "<td>" + data[i].title + "</td>"
+				        html2 +=     "<td>" + data[i].spon.username + "</td>"
+				        html2 += "</tr>"
+		        	}
+		        }
+		        $(".teamTableBody").html(html2)
+            },
+            error: function(e) {
+                console.log(e)
+            }
+        })
+	})
+</script>
+</html>
